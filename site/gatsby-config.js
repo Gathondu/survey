@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Review taking app`,
+    description: `Take review from customers for different company services.`,
+    author: `@gathondu`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
@@ -28,6 +28,14 @@ module.exports = {
         // theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "CompanyType",
+        fieldName: "company",
+        url: "http://localhost:3000/graphql",
       },
     },
   ],
