@@ -1,23 +1,31 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "survey",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A customer review taking app",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Denis Gathondu <denis.gathondu@yahoo.com>",
   "dependencies": {
+    "formik": "^2.2.9",
     "gatsby": "^4.24.3",
+    "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-image": "^2.24.0",
     "gatsby-plugin-manifest": "^4.24.0",
     "gatsby-plugin-sharp": "^4.24.0",
     "gatsby-source-filesystem": "^4.24.0",
     "gatsby-source-graphql": "^4.24.0",
     "gatsby-transformer-sharp": "^4.24.0",
+    "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "autoprefixer": "^10.4.12",
+    "gatsby-plugin-postcss": "^5.24.0",
+    "postcss": "^8.4.17",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8"
   },
   "keywords": [
     "gatsby"

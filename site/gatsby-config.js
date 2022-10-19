@@ -3,7 +3,17 @@ module.exports = {
     title: `Review taking app`,
     description: `Take review from customers for different company services.`,
     author: `@gathondu`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    menuLinks: [
+      {
+        name: "Home",
+        link: "/",
+      },
+      {
+        name: "Companies",
+        link: "/companies",
+      },
+    ],
+    trailingSlash: "never",
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -16,18 +26,13 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-postcss`,
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: `gatsby-plugin-typescript`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        // This will impact how browsers show your PWA/website
-        // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        isTSX: true,
+        jsxPragma: `jsx`,
+        allExtensions: true,
       },
     },
     {
@@ -36,6 +41,18 @@ module.exports = {
         typeName: "CompanyType",
         fieldName: "company",
         url: "http://localhost:3000/graphql",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          "@src": "src",
+          "@components": "src/components",
+          "@pages": "src/pages",
+          "@styles": "src/styles",
+        },
+        extensions: ["js", "jsx", "ts", "tsx"],
       },
     },
   ],
