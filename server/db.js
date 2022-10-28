@@ -1,19 +1,25 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const uri = process.env.DB_STRING;
 
-mongoose.connect(
-  process.env.DB_STRING,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+let _db;
+
+module.exports = {
+  connectToServer: function (callback) {
+    mongoose.connect(
+      uri,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        autoCreate: true,
+      },
+      function (error) {
+        return callback(error);
+      }
+    );
+    _db = mongoose.connection;
+    console.log("Connected to MONGODB.");
   },
-  err => {
-    if (err) console.log(err)
-    else console.log("connected to database")
-  }
-)
-
-const db = mongoose.connection
-
-db.on("error", console.error.bind(console, "MongoDB connection error:"))
-
-module.exports = db
+  getDb: function () {
+    return _db;
+  },
+};
