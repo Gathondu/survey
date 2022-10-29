@@ -1,8 +1,8 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import { QueryClient, QueryClientProvider, QueryCache } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -14,12 +14,15 @@ const client = new QueryClient({
   },
 });
 
-const cache = new QueryCache();
-const root = createRoot(document.getElementById("root"));
+// const cache = new QueryCache();
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={client} queryCache={cache}>
+    <QueryClientProvider client={client}>
       <Router>
         <App />
       </Router>

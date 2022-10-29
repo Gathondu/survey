@@ -1,0 +1,9 @@
+query Companies {
+  companies {
+    id
+    name
+    location
+    website
+    url
+  }
+}

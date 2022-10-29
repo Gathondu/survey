@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Box, Toolbar, Typography, Container } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
-import Companies from "components/Company";
+import Companies from "./components/Company";
 
 const App = () => {
   return (

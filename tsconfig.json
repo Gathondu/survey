@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
+  },
+  "include": ["src/**/*", "react-app-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "src/**/*.spec.ts"],
+  "baseUrl": "./src",
+  "paths": {
+    "@src/*": ["./src/*"],
+    "@components/*": ["./src/components/*"],
+    "@gql/*": ["./src/gql/*"]
+  },
+  "types": ["react/next", "react-dom/next"]
+}
