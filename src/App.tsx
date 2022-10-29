@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Box, Toolbar, Typography, Container } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
-import Companies from "./components/Company";
+import { Companies, CompanyForm } from "@components/Company";
 
 const App = () => {
   return (
@@ -19,6 +19,7 @@ const App = () => {
         <Box>
           <Routes>
             <Route path="/companies" element={<Companies />} />
+            <Route path="/company/new" element={<CompanyForm />} />
           </Routes>
         </Box>
       </Container>

@@ -1,7 +1,6 @@
 import React from "react";
-// import { Formik, Form } from "formik";
 import { Typography } from "@mui/material";
-import { useCompaniesQuery } from "../../utils/graphql/graphql";
+import { useCompaniesQuery } from "@utils/graphql";
 
 const Companies = () => {
   const { data, isLoading, error } = useCompaniesQuery();
@@ -9,9 +8,6 @@ const Companies = () => {
   return (
     <div>
       <Typography variant="h5">Companies</Typography>
-      {/* <Formik>
-        <Form></Form>
-      </Formik> */}
     </div>
   );
 };

@@ -1,0 +1,19 @@
+query Companies {
+  companies {
+    id
+    name
+    location
+    website
+    url
+  }
+}
+
+mutation addCompany($name: String!, $location: String!, $website: String!) {
+  addCompany(name: $name, location: $location, website: $website) {
+    id
+    name
+    location
+    website
+    url
+  }
+}
