@@ -1,6 +1,4 @@
-const mongoose = require("mongoose")
-
-const Schema = mongoose.Schema
+import { Schema, InferSchemaType, model } from "mongoose";
 
 const ReviewSchema = new Schema({
   rating: {
@@ -17,10 +15,12 @@ const ReviewSchema = new Schema({
   },
   customer: { type: Schema.Types.ObjectId, ref: "Customer" },
   reviewedOn: { type: Date, default: Date.now() },
-})
+});
 
 ReviewSchema.virtual("url").get(function () {
-  return `/review/${this._id}`
-})
+  return `/review/${this._id}`;
+});
 
-module.exports = mongoose.model("Review", ReviewSchema, "reviews")
+export type ReviewType = InferSchemaType<typeof ReviewSchema>;
+
+export const Review = model("Review", ReviewSchema);

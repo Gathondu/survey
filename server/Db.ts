@@ -1,25 +1,26 @@
-const mongoose = require("mongoose");
-const uri = process.env.DB_STRING;
+import { connect, connection, ConnectOptions } from "mongoose";
 
-let _db;
+let _db: any;
 
-module.exports = {
-  connectToServer: function (callback) {
-    mongoose.connect(
+const Database = {
+  connectToServer: function (uri: string, callback: any) {
+    connect(
       uri,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         autoCreate: true,
-      },
+      } as ConnectOptions,
       function (error) {
         return callback(error);
       }
     );
-    _db = mongoose.connection;
+    _db = connection;
     console.log("Connected to MONGODB.");
   },
   getDb: function () {
     return _db;
   },
 };
+
+export default Database;

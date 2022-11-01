@@ -1,11 +1,18 @@
-require("dotenv").config({ path: "../.env" });
-const express = require("express");
-const { graphqlHTTP } = require("express-graphql");
-const schema = require("./schema");
-const db = require("./db");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const port = process.env.PORT || 5000;
+/* eslint-disable import/first */
+import * as dotenv from "dotenv";
+dotenv.config({ path: "../.env" });
+
+import express from "express";
+import { graphqlHTTP } from "express-graphql";
+import cors, { CorsOptions } from "cors";
+import bodyParser from "body-parser";
+
+import Schema from "./Schema.js";
+import Database from "./Db.js";
+
+const port: number | string = process.env.SERVER_PORT || 5000;
+
+const uri: string = process.env.DB_STRING || "";
 
 const app = express();
 
@@ -13,7 +20,7 @@ const domains = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
 const whitelist = domains.split(",").map((domain) => domain.trim());
 
 const corsOptions = {
-  origin: function (origin, callback) {
+  origin: function (origin: string, callback: any): void {
     if (!origin || whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -22,7 +29,7 @@ const corsOptions = {
   },
   credentials: true,
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptions as CorsOptions));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -35,18 +42,19 @@ app.use((req, res, next) => {
   );
   next();
 });
+
 app.use(bodyParser.json());
 app.use(
   "/api",
   graphqlHTTP({
-    schema,
+    schema: Schema,
     pretty: true,
     graphiql: true,
   })
 );
 
 app.listen(port, () => {
-  db.connectToServer(function (err) {
+  Database.connectToServer(uri, function (err: string): void {
     if (err) console.log(`MONGODB ERROR: ${err}`);
   });
   console.log(`Server runnning on port: ${port}`);

@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
-
-const Schema = mongoose.Schema;
+import { Schema, InferSchemaType, model } from "mongoose";
 
 const CustomerSchema = new Schema({
   firstName: { type: String, required: true, maxLength: 20 },
@@ -8,6 +6,7 @@ const CustomerSchema = new Schema({
   phone: { type: Number, required: true },
   email: String,
   promotions: Boolean,
+  hidden: Boolean,
 });
 
 CustomerSchema.virtual("url").get(function () {
@@ -30,4 +29,6 @@ CustomerSchema.virtual("fullDetails").get(function () {
   }
 });
 
-module.exports = mongoose.model("Customer", CustomerSchema, "customers");
+export type CustomerType = InferSchemaType<typeof CustomerSchema>;
+
+export const Customer = model("Customer", CustomerSchema);
