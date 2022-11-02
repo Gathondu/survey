@@ -1,4 +1,6 @@
-import { connect, connection, ConnectOptions } from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
+
+const { connect, connection } = mongoose;
 
 let _db: any;
 

@@ -1,7 +1,6 @@
-import React from "react";
 import { Formik, Field } from "formik";
 import { Typography, Button } from "@mui/material";
-import { useAddCompanyMutation } from "@utils/graphql";
+import { useAddCompanyMutation } from "@utils/Graphql";
 
 const CompanyForm = () => {
   const { mutate: addCompany } = useAddCompanyMutation({
