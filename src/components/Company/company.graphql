@@ -8,6 +8,16 @@ query Companies {
   }
 }
 
+query Company($id: ID) {
+  company(id: $id) {
+    id
+    name
+    location
+    website
+    url
+  }
+}
+
 mutation addCompany($name: String!, $location: String!, $website: String!) {
   addCompany(name: $name, location: $location, website: $website) {
     id

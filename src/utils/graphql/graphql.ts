@@ -51,6 +51,13 @@ export type CompaniesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CompaniesQuery = { __typename?: 'RootQueryType', companies?: Array<{ __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null } | null> | null };
 
+export type CompanyQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type CompanyQuery = { __typename?: 'RootQueryType', company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null } | null };
+
 export type AddCompanyMutationVariables = Exact<{
   name: Scalars['String'];
   location: Scalars['String'];
@@ -82,6 +89,29 @@ export const useCompaniesQuery = <
     useQuery<CompaniesQuery, TError, TData>(
       variables === undefined ? ['Companies'] : ['Companies', variables],
       fetchData<CompaniesQuery, CompaniesQueryVariables>(CompaniesDocument, variables),
+      options
+    );
+export const CompanyDocument = `
+    query Company($id: ID) {
+  company(id: $id) {
+    id
+    name
+    location
+    website
+    url
+  }
+}
+    `;
+export const useCompanyQuery = <
+      TData = CompanyQuery,
+      TError = unknown
+    >(
+      variables?: CompanyQueryVariables,
+      options?: UseQueryOptions<CompanyQuery, TError, TData>
+    ) =>
+    useQuery<CompanyQuery, TError, TData>(
+      variables === undefined ? ['Company'] : ['Company', variables],
+      fetchData<CompanyQuery, CompanyQueryVariables>(CompanyDocument, variables),
       options
     );
 export const AddCompanyDocument = `

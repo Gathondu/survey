@@ -1,6 +1,6 @@
-import { AppBar, Box, Toolbar, Typography, Container } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
-import { Companies, CompanyForm } from "@components/Company";
+import { Companies, CompanyForm, Company } from "@components/Company";
 import { SideNavRoutes } from "@utils/Routes";
 import { SideNav } from "@components/Navigation";
 
@@ -17,9 +17,8 @@ const App = () => {
         `,
         gridTemplateColumns: "250px 1fr",
         gridTemplateRows: "auto",
-        gap: 1,
+        columnGap: 1,
         width: "100%",
-        heigth: "100vh",
       }}
     >
       <Box sx={{ flexGrow: 1, gridArea: "Header" }}>
@@ -34,6 +33,7 @@ const App = () => {
       <Box
         sx={{
           gridArea: "Nav",
+          height: "100vh",
         }}
       >
         <SideNav routes={SideNavRoutes} />
@@ -41,14 +41,16 @@ const App = () => {
       <Box
         sx={{
           gridArea: "Content",
+          backgroundColor: "#E7EBF0",
+          padding: "3rem",
+          height: "100vh",
         }}
       >
-        <Container maxWidth="lg">
-          <Routes>
-            <Route path="/companies" element={<Companies />} />
-            <Route path="/company/new" element={<CompanyForm />} />
-          </Routes>
-        </Container>
+        <Routes>
+          <Route path="/company/:id" element={<Company />} />
+          <Route path="/companies" element={<Companies />} />
+          <Route path="/company/new" element={<CompanyForm />} />
+        </Routes>
       </Box>
     </Box>
   );
