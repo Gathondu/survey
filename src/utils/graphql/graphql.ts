@@ -28,6 +28,7 @@ export type Branch = {
 export type Company = {
   __typename?: 'Company';
   branches?: Maybe<Array<Maybe<Branch>>>;
+  hidden?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['ID']>;
   location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -68,21 +69,28 @@ export type RootQueryType = {
 };
 
 
+export type RootQueryTypeCompaniesArgs = {
+  recordsToGet?: InputMaybe<Scalars['String']>;
+};
+
+
 export type RootQueryTypeCompanyArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
-export type CompaniesQueryVariables = Exact<{ [key: string]: never; }>;
+export type CompaniesQueryVariables = Exact<{
+  recordsToGet: Scalars['String'];
+}>;
 
 
-export type CompaniesQuery = { __typename?: 'RootQueryType', companies?: Array<{ __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null } | null> | null };
+export type CompaniesQuery = { __typename?: 'RootQueryType', companies?: Array<{ __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null } | null> | null } | null> | null };
 
 export type CompanyQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CompanyQuery = { __typename?: 'RootQueryType', company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null } | null };
+export type CompanyQuery = { __typename?: 'RootQueryType', company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null } | null> | null } | null };
 
 export type AddCompanyMutationVariables = Exact<{
   name: Scalars['String'];
@@ -91,17 +99,22 @@ export type AddCompanyMutationVariables = Exact<{
 }>;
 
 
-export type AddCompanyMutation = { __typename?: 'Mutation', addCompany?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null } | null };
+export type AddCompanyMutation = { __typename?: 'Mutation', addCompany?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null } | null> | null } | null };
 
 
 export const CompaniesDocument = `
-    query Companies {
-  companies {
+    query Companies($recordsToGet: String!) {
+  companies(recordsToGet: $recordsToGet) {
     id
     name
     location
     website
     url
+    hidden
+    branches {
+      id
+      name
+    }
   }
 }
     `;
@@ -109,11 +122,11 @@ export const useCompaniesQuery = <
       TData = CompaniesQuery,
       TError = unknown
     >(
-      variables?: CompaniesQueryVariables,
+      variables: CompaniesQueryVariables,
       options?: UseQueryOptions<CompaniesQuery, TError, TData>
     ) =>
     useQuery<CompaniesQuery, TError, TData>(
-      variables === undefined ? ['Companies'] : ['Companies', variables],
+      ['Companies', variables],
       fetchData<CompaniesQuery, CompaniesQueryVariables>(CompaniesDocument, variables),
       options
     );
@@ -125,6 +138,11 @@ export const CompanyDocument = `
     location
     website
     url
+    hidden
+    branches {
+      id
+      name
+    }
   }
 }
     `;
@@ -148,6 +166,11 @@ export const AddCompanyDocument = `
     location
     website
     url
+    hidden
+    branches {
+      id
+      name
+    }
   }
 }
     `;

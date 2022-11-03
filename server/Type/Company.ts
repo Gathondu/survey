@@ -3,6 +3,7 @@ import {
   GraphQLString,
   GraphQLID,
   GraphQLList,
+  GraphQLBoolean,
 } from "graphql";
 import { Branch } from "../Model/Branch.js";
 import { BranchType } from "./Branch.js";
@@ -15,6 +16,7 @@ export const CompanyType = new GraphQLObjectType({
     location: { type: GraphQLString },
     website: { type: GraphQLString },
     url: { type: GraphQLString },
+    hidden: { type: GraphQLBoolean },
     branches: {
       type: new GraphQLList(BranchType),
       resolve(_: any, obj: any) {

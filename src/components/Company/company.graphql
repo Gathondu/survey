@@ -1,10 +1,15 @@
-query Companies {
-  companies {
+query Companies($recordsToGet: String!) {
+  companies(recordsToGet: $recordsToGet) {
     id
     name
     location
     website
     url
+    hidden
+    branches {
+      id
+      name
+    }
   }
 }
 
@@ -15,6 +20,11 @@ query Company($id: ID) {
     location
     website
     url
+    hidden
+    branches {
+      id
+      name
+    }
   }
 }
 
@@ -25,5 +35,10 @@ mutation addCompany($name: String!, $location: String!, $website: String!) {
     location
     website
     url
+    hidden
+    branches {
+      id
+      name
+    }
   }
 }

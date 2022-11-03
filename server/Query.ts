@@ -6,7 +6,7 @@ import {
   ReviewType,
 } from "./Type/index.js";
 import { Branch, Company, Customer, Employee, Review } from "./Model/index.js";
-import { GraphQLID, GraphQLList } from "graphql";
+import { GraphQLID, GraphQLList, GraphQLString } from "graphql";
 
 const models: any = {
   branch: Branch,
@@ -34,7 +34,15 @@ export const Record = (model: string) => ({
 
 export const Records = (model: string) => ({
   type: new GraphQLList(types[model]),
-  resolve() {
-    return models[model].find({});
+  args: { recordsToGet: { type: GraphQLString } },
+  resolve(_: any, args: any) {
+    switch (args.recordsToGet) {
+      case "active":
+        return models[model].find({ hidden: false });
+      case "deleted":
+        return models[model].find({ hidden: true });
+      default:
+        return models[model].find({});
+    }
   },
 });

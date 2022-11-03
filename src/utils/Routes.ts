@@ -1,10 +1,82 @@
 import type { Routes } from "@utils/Types";
-import { AddBusinessOutlined, StoreOutlined } from "@mui/icons-material";
+import {
+  AddBusinessOutlined,
+  StoreOutlined,
+  BusinessOutlined,
+  BadgeOutlined,
+  SupportAgentOutlined,
+  PeopleAltOutlined,
+  ReviewsOutlined,
+} from "@mui/icons-material";
 
 export const SideNavRoutes: Routes[] = [
   {
     header: "Company",
     icon: StoreOutlined,
+    links: [
+      {
+        title: "New",
+        icon: AddBusinessOutlined,
+        link: "/company/new",
+      },
+      {
+        title: "All",
+        icon: AddBusinessOutlined,
+        link: "/companies",
+      },
+    ],
+  },
+  {
+    header: "Branches",
+    icon: BusinessOutlined,
+    links: [
+      {
+        title: "New",
+        icon: AddBusinessOutlined,
+        link: "/company/new",
+      },
+      {
+        title: "All",
+        icon: AddBusinessOutlined,
+        link: "/companies",
+      },
+    ],
+  },
+  {
+    header: "Employees",
+    icon: StoreOutlined,
+    links: [
+      {
+        title: "New",
+        icon: SupportAgentOutlined,
+        link: "/company/new",
+      },
+      {
+        title: "All",
+        icon: BadgeOutlined,
+        link: "/companies",
+      },
+    ],
+  },
+  {
+    header: "Customers",
+    icon: StoreOutlined,
+    links: [
+      {
+        title: "New",
+        icon: PeopleAltOutlined,
+        link: "/company/new",
+      },
+      {
+        title: "All",
+        icon: AddBusinessOutlined,
+        link: "/companies",
+      },
+    ],
+  },
+  {
+    header: "Review",
+    icon: ReviewsOutlined,
     links: [
       {
         title: "New",

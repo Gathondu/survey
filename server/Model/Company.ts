@@ -4,7 +4,7 @@ const CompanySchema = new Schema({
   name: { type: String, required: true, maxLength: 100 },
   location: { type: String, required: true, maxLength: 100 },
   website: { type: String },
-  hidden: Boolean,
+  hidden: { type: Boolean, default: false },
 });
 
 CompanySchema.virtual("url").get(function () {

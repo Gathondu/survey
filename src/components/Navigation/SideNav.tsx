@@ -11,9 +11,17 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import type { Routes, Route } from "@utils/Type";
 
 const SideNav: FC<{ routes: Routes[] }> = ({ routes }): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<string[]>([]);
   const navigate = useNavigate();
-  const handleClick = () => setIsOpen(!isOpen);
+  const handleClick = (parentIndex: number, header: string) => {
+    const index = `${parentIndex}-${header}`;
+
+    if (isOpen.includes(index)) {
+      setIsOpen(isOpen.filter((ind) => ind !== index));
+    } else {
+      setIsOpen([...isOpen, index]);
+    }
+  };
   const handleNavigation = (url: string): void => {
     navigate(url);
   };
@@ -25,24 +33,29 @@ const SideNav: FC<{ routes: Routes[] }> = ({ routes }): JSX.Element => {
       }}
       component="nav"
     >
-      {routes.map((route: Routes, index: number) => {
+      {routes.map((route: Routes, parentIndex: number) => {
         const { header, icon: Icon, links } = route;
         return (
-          <div key={`${index}-${header}`}>
-            <ListItemButton onClick={handleClick}>
+          <div key={`${parentIndex}-${header}`}>
+            <ListItemButton onClick={() => handleClick(parentIndex, header)}>
               <ListItemIcon>
                 {/* @ts-ignore */}
                 <Icon />
               </ListItemIcon>
               <ListItemText primary={header} />
-              {links.length > 0 && isOpen ? <ExpandLess /> : <ExpandMore />}
+              {links.length > 0 &&
+              isOpen.includes(`${parentIndex}-${header}`) ? (
+                <ExpandLess />
+              ) : (
+                <ExpandMore />
+              )}
             </ListItemButton>
             {links.length > 0 &&
               links?.map((link: Route, index: number) => {
                 const { title, icon: Icon, link: url } = link;
                 return (
                   <Collapse
-                    in={isOpen}
+                    in={isOpen.includes(`${parentIndex}-${header}`)}
                     timeout="auto"
                     unmountOnExit
                     key={`${index}-${title}`}

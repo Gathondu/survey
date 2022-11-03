@@ -18,7 +18,7 @@ const Database = {
       }
     );
     _db = connection;
-    console.log("Connected to MONGODB.");
+    console.log(`Connected to MONGODB!`);
   },
   getDb: function () {
     return _db;
