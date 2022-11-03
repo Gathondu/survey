@@ -1,10 +1,10 @@
 import type { Routes } from "@utils/Types";
-import { AddBusinessOutlined, BusinessOutlined } from "@mui/icons-material";
+import { AddBusinessOutlined, StoreOutlined } from "@mui/icons-material";
 
 export const SideNavRoutes: Routes[] = [
   {
     header: "Company",
-    icon: BusinessOutlined,
+    icon: StoreOutlined,
     links: [
       {
         title: "New",

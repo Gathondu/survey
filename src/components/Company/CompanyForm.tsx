@@ -4,6 +4,11 @@ import FormField from "@components/FormField";
 import { Button } from "@mui/material";
 import { useAddCompanyMutation } from "@utils/Graphql";
 import { useSnackbar } from "notistack";
+import {
+  GpsFixedOutlined,
+  AddBusinessOutlined,
+  HttpOutlined,
+} from "@mui/icons-material";
 
 const validationSchema = yup.object({
   name: yup.string().required("Company name is required"),
@@ -52,6 +57,7 @@ const CompanyForm = () => {
           variant="standard"
           formik={formik}
           fullWidth
+          Icon={AddBusinessOutlined}
         />
         <FormField
           name="location"
@@ -59,6 +65,7 @@ const CompanyForm = () => {
           variant="standard"
           formik={formik}
           fullWidth
+          Icon={GpsFixedOutlined}
         />
         <FormField
           name="website"
@@ -66,6 +73,7 @@ const CompanyForm = () => {
           variant="standard"
           formik={formik}
           fullWidth
+          Icon={HttpOutlined}
         />
         <Button
           sx={{

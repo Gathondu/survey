@@ -1,18 +1,8 @@
-import { Tooltip, IconButton, Box, TextField } from "@mui/material";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import { Box, TextField } from "@mui/material";
 
 const FormField = ({ ...props }: any) => {
-  const {
-    label,
-    readOnly,
-    tooltip,
-    tooltipWidthClass,
-    fullWidth,
-    Icon,
-    variant,
-    name,
-    formik,
-  }: any = props;
+  const { label, readOnly, fullWidth, Icon, variant, name, formik }: any =
+    props;
 
   const { errors, touched, values, handleChange, handleBlur } = formik;
 
@@ -20,22 +10,11 @@ const FormField = ({ ...props }: any) => {
     <Box
       sx={{
         display: "flex",
-        alignItems: "flex-end",
+        alignItems: "center",
+        mb: 2,
       }}
     >
-      {Icon && <Icon />}
-      {tooltip && (
-        <Tooltip
-          className={tooltipWidthClass}
-          title={tooltip}
-          id={name}
-          placement="right"
-        >
-          <IconButton>
-            <QuestionMarkIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      <Icon sx={{ mr: 2 }} />
       <TextField
         inputProps={{
           readOnly,
