@@ -6,6 +6,7 @@ const EmployeeSchema = new Schema({
   lastName: { type: String, required: true, maxLength: 20 },
   employeeId: { type: String, required: true },
   branch: { type: Schema.Types.ObjectId, ref: "Branch", required: true },
+  hidden: Boolean,
 });
 
 EmployeeSchema.virtual("fullName").get(function () {
@@ -15,11 +16,6 @@ EmployeeSchema.virtual("fullName").get(function () {
 EmployeeSchema.virtual("fullId").get(function () {
   return `${this.firstName} ${this.lastName} ${this.employeeId}`;
 });
-
-// EmployeeSchema.virtual("employer").get(function () {
-//   const company = Company.findOne();
-//   return `${this.branch.company.name}: ${this.branch.name}`;
-// });
 
 EmployeeSchema.virtual("url").get(function () {
   return `/employee/${this._id}`;

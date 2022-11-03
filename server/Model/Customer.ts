@@ -3,6 +3,7 @@ import { Schema, InferSchemaType, model } from "mongoose";
 const CustomerSchema = new Schema({
   firstName: { type: String, required: true, maxLength: 20 },
   lastName: { type: String, maxLength: 20 },
+  countryCode: { type: String, maxLength: 4 },
   phone: { type: Number, required: true },
   email: String,
   promotions: Boolean,
@@ -18,14 +19,20 @@ CustomerSchema.virtual("fullName").get(function () {
     ? `${this.firstName} ${this.lastName}`
     : `${this.firstName}`;
 });
+CustomerSchema.virtual("phoneNumber").get(function () {
+  return `${this.countryCode}${this.phone}`;
+});
 
 CustomerSchema.virtual("fullDetails").get(function () {
   if (this.lastName && this.email) {
-    return `${this.firstName} ${this.lastName}: PhoneNumber +254${this.phone} Email: ${this.email}`;
+    /* @ts-ignore */
+    return `${this.firstName} ${this.lastName}: PhoneNumber ${this.phoneNumber} Email: ${this.email}`;
   } else if (!this.lastName && this.email) {
-    return `${this.firstName}: PhoneNumber +254${this.phone} Email: ${this.email}`;
+    /* @ts-ignore */
+    return `${this.firstName}: PhoneNumber ${this.phoneNumber} Email: ${this.email}`;
   } else {
-    return `${this.firstName}: PhoneNumber +254${this.phone}`;
+    /* @ts-ignore */
+    return `${this.firstName}: PhoneNumber ${this.phoneNumber}`;
   }
 });
 

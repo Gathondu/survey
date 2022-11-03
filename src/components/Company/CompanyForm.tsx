@@ -1,38 +1,83 @@
-import { Formik, Field } from "formik";
-import { Typography, Button } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import FormField from "@components/FormField";
+import { Button } from "@mui/material";
 import { useAddCompanyMutation } from "@utils/Graphql";
+import { useSnackbar } from "notistack";
+
+const validationSchema = yup.object({
+  name: yup.string().required("Company name is required"),
+  location: yup.string(),
+  website: yup.string(),
+});
 
 const CompanyForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const { mutate: addCompany } = useAddCompanyMutation({
-    onSuccess: (data) => console.log(data),
+    onSuccess: (data: any, error: any) => {
+      const { addCompany: company } = data;
+
+      if (company) {
+        enqueueSnackbar(`${company.name} created sucessfully`, {
+          variant: "success",
+        });
+      }
+    },
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      location: "",
+      website: "",
+    },
+    validationSchema,
+    onSubmit: (values) =>
+      addCompany({
+        name: values.name,
+        location: values.location,
+        website: values.website,
+      }),
   });
 
   return (
-    <div>
-      <Typography variant="h5">Companies</Typography>
-      <Formik
-        initialValues={{
-          name: "",
-          location: "",
-          website: "",
-        }}
-        onSubmit={(values) =>
-          addCompany({
-            name: values.name,
-            location: values.location,
-            website: values.website,
-          })
-        }
+    <div style={{ textAlign: "center" }}>
+      <form
+        style={{ width: "50%", display: "inline-block" }}
+        onSubmit={formik.handleSubmit}
       >
-        {(props) => (
-          <form onSubmit={props.handleSubmit}>
-            <Field name="name" />
-            <Field name="location" />
-            <Field name="website" />
-            <Button type="submit">Submit</Button>
-          </form>
-        )}
-      </Formik>
+        <FormField
+          name="name"
+          label="Name"
+          variant="standard"
+          formik={formik}
+          fullWidth
+        />
+        <FormField
+          name="location"
+          label="Location"
+          variant="standard"
+          formik={formik}
+          fullWidth
+        />
+        <FormField
+          name="website"
+          label="Website"
+          variant="standard"
+          formik={formik}
+          fullWidth
+        />
+        <Button
+          sx={{
+            mt: 2,
+          }}
+          color="primary"
+          variant="contained"
+          type="submit"
+        >
+          Add Company
+        </Button>
+      </form>
     </div>
   );
 };

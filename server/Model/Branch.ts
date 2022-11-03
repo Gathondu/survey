@@ -4,10 +4,8 @@ const BranchSchema = new Schema({
   name: { type: String, required: true, maxLength: 100 },
   location: { type: String, required: true, maxLength: 100 },
   company: { type: Schema.Types.ObjectId, ref: "Company", required: true },
+  employees: { type: [{ type: Schema.Types.ObjectId, ref: "Employee" }] },
   hidden: Boolean,
-  meta: {
-    employees: Number,
-  },
 });
 
 BranchSchema.virtual("url").get(function () {

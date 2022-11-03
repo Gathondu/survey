@@ -14,13 +14,39 @@ export type Scalars = {
   Float: number;
 };
 
+export type Branch = {
+  __typename?: 'Branch';
+  company?: Maybe<Company>;
+  employees?: Maybe<Array<Maybe<Employee>>>;
+  hidden?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['ID']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
 export type Company = {
   __typename?: 'Company';
+  branches?: Maybe<Array<Maybe<Branch>>>;
   id?: Maybe<Scalars['ID']>;
   location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
+};
+
+export type Employee = {
+  __typename?: 'Employee';
+  branch?: Maybe<Branch>;
+  employeeId?: Maybe<Scalars['String']>;
+  employer?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  fullId?: Maybe<Scalars['String']>;
+  fullname?: Maybe<Scalars['String']>;
+  hidden?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['ID']>;
+  lastName?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {

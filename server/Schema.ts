@@ -1,19 +1,19 @@
-import * as Queries from "./Query/index.js";
-import * as Mutations from "./Mutation/index.js";
+import { Record, Records } from "./Query.js";
+import { AddRecord } from "./Mutation.js";
 import { GraphQLObjectType, GraphQLSchema } from "graphql";
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    company: Queries.CompanyQuery,
-    companies: Queries.CompaniesQuery,
+    company: Record("company"),
+    companies: Records("company"),
   },
 });
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    addCompany: Mutations.AddCompany,
+    addCompany: AddRecord("company"),
   },
 });
 
