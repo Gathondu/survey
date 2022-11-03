@@ -33,12 +33,12 @@ export const SideNavRoutes: Routes[] = [
       {
         title: "New",
         icon: AddBusinessOutlined,
-        link: "/company/new",
+        link: "/branch/new",
       },
       {
         title: "All",
         icon: AddBusinessOutlined,
-        link: "/companies",
+        link: "/branches",
       },
     ],
   },

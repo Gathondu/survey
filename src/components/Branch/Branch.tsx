@@ -1,20 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useCompanyQuery } from "@utils/Graphql";
+import { useBranchQuery } from "@utils/Graphql";
 import {
   Box,
   Card,
   CardActionArea,
   CardContent,
-  Button,
   Typography,
 } from "@mui/material";
-import { AddBusinessOutlined } from "@mui/icons-material";
 
-const Company = () => {
+const Branch = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, isLoading, isError, error } = useCompanyQuery({ id });
+  const { data, isLoading, isError, error } = useBranchQuery({ id });
 
   if (isLoading || !data) {
     return <Typography>Loading</Typography>;
@@ -23,35 +21,23 @@ const Company = () => {
     console.error(error);
     return <Typography>Error</Typography>;
   }
-  const { company } = data;
+  const { branch } = data;
   return (
     <Box>
-      <Card
-        sx={{
-          mb: 2,
-        }}
-        key={`${company?.id}`}
-      >
-        <CardActionArea onClick={() => navigate(`${company?.url}`)}>
+      <Card key={`${branch?.id}`}>
+        <CardActionArea onClick={() => navigate(`${branch?.url}`)}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {company?.name}
+              {branch?.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {company?.location}
+              {branch?.location}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-      <Button
-        variant="contained"
-        startIcon={<AddBusinessOutlined />}
-        onClick={() => navigate(`/company/${id}/branch/new`)}
-      >
-        Add Branch
-      </Button>
     </Box>
   );
 };
 
-export default Company;
+export default Branch;

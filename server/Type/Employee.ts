@@ -16,8 +16,8 @@ export const EmployeeType = new GraphQLObjectType({
     employeeId: { type: GraphQLString },
     branch: {
       type: BranchType,
-      resolve(_: any, obj: any) {
-        return Branch.findById(obj.id);
+      resolve(obj: any) {
+        return Branch.findById(obj.branch);
       },
     },
     url: { type: GraphQLString },
@@ -26,7 +26,7 @@ export const EmployeeType = new GraphQLObjectType({
     fullId: { type: GraphQLString },
     employer: {
       type: GraphQLString,
-      resolve(_: any, obj: any) {
+      resolve(obj: any) {
         return `${obj.branch.company.name}: ${obj.branch.name}`;
       },
     },

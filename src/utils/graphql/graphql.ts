@@ -52,7 +52,15 @@ export type Employee = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addBranch?: Maybe<Branch>;
   addCompany?: Maybe<Company>;
+};
+
+
+export type MutationAddBranchArgs = {
+  company: Scalars['ID'];
+  location: Scalars['String'];
+  name: Scalars['String'];
 };
 
 
@@ -64,8 +72,20 @@ export type MutationAddCompanyArgs = {
 
 export type RootQueryType = {
   __typename?: 'RootQueryType';
+  branch?: Maybe<Branch>;
+  branches?: Maybe<Array<Maybe<Branch>>>;
   companies?: Maybe<Array<Maybe<Company>>>;
   company?: Maybe<Company>;
+};
+
+
+export type RootQueryTypeBranchArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type RootQueryTypeBranchesArgs = {
+  recordsToGet?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -77,6 +97,29 @@ export type RootQueryTypeCompaniesArgs = {
 export type RootQueryTypeCompanyArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
+
+export type BranchesQueryVariables = Exact<{
+  recordsToGet: Scalars['String'];
+}>;
+
+
+export type BranchesQuery = { __typename?: 'RootQueryType', branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null> | null };
+
+export type BranchQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type BranchQuery = { __typename?: 'RootQueryType', branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null };
+
+export type AddBranchMutationVariables = Exact<{
+  name: Scalars['String'];
+  location: Scalars['String'];
+  company: Scalars['ID'];
+}>;
+
+
+export type AddBranchMutation = { __typename?: 'Mutation', addBranch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null };
 
 export type CompaniesQueryVariables = Exact<{
   recordsToGet: Scalars['String'];
@@ -102,6 +145,96 @@ export type AddCompanyMutationVariables = Exact<{
 export type AddCompanyMutation = { __typename?: 'Mutation', addCompany?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null } | null> | null } | null };
 
 
+export const BranchesDocument = `
+    query Branches($recordsToGet: String!) {
+  branches(recordsToGet: $recordsToGet) {
+    id
+    name
+    location
+    url
+    hidden
+    company {
+      id
+      name
+    }
+    employees {
+      id
+      fullname
+    }
+  }
+}
+    `;
+export const useBranchesQuery = <
+      TData = BranchesQuery,
+      TError = unknown
+    >(
+      variables: BranchesQueryVariables,
+      options?: UseQueryOptions<BranchesQuery, TError, TData>
+    ) =>
+    useQuery<BranchesQuery, TError, TData>(
+      ['Branches', variables],
+      fetchData<BranchesQuery, BranchesQueryVariables>(BranchesDocument, variables),
+      options
+    );
+export const BranchDocument = `
+    query Branch($id: ID) {
+  branch(id: $id) {
+    id
+    name
+    location
+    url
+    hidden
+    company {
+      id
+      name
+    }
+    employees {
+      id
+      fullname
+    }
+  }
+}
+    `;
+export const useBranchQuery = <
+      TData = BranchQuery,
+      TError = unknown
+    >(
+      variables?: BranchQueryVariables,
+      options?: UseQueryOptions<BranchQuery, TError, TData>
+    ) =>
+    useQuery<BranchQuery, TError, TData>(
+      variables === undefined ? ['Branch'] : ['Branch', variables],
+      fetchData<BranchQuery, BranchQueryVariables>(BranchDocument, variables),
+      options
+    );
+export const AddBranchDocument = `
+    mutation addBranch($name: String!, $location: String!, $company: ID!) {
+  addBranch(name: $name, location: $location, company: $company) {
+    id
+    name
+    location
+    url
+    hidden
+    company {
+      id
+      name
+    }
+    employees {
+      id
+      fullname
+    }
+  }
+}
+    `;
+export const useAddBranchMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddBranchMutation, TError, AddBranchMutationVariables, TContext>) =>
+    useMutation<AddBranchMutation, TError, AddBranchMutationVariables, TContext>(
+      ['addBranch'],
+      (variables?: AddBranchMutationVariables) => fetchData<AddBranchMutation, AddBranchMutationVariables>(AddBranchDocument, variables)(),
+      options
+    );
 export const CompaniesDocument = `
     query Companies($recordsToGet: String!) {
   companies(recordsToGet: $recordsToGet) {

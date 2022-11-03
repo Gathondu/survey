@@ -16,14 +16,14 @@ export const ReviewType = new GraphQLObjectType({
     comment: { type: GraphQLString },
     employee: {
       type: EmployeeType,
-      resolve(_: any, obj: any) {
-        Employee.findById(obj.id);
+      resolve(obj: any) {
+        Employee.findById(obj.employee);
       },
     },
     customer: {
       type: CustomerType,
-      resolve(_: any, obj: any) {
-        Customer.findById(obj.id);
+      resolve(obj: any) {
+        Customer.findById(obj.customer);
       },
     },
     reviewedOn: { type: Date },

@@ -6,7 +6,7 @@ import {
   ReviewType,
 } from "./Type/index.js";
 import { Branch, Company, Customer, Employee, Review } from "./Model/index.js";
-import { GraphQLNonNull, GraphQLString } from "graphql";
+import { GraphQLID, GraphQLNonNull, GraphQLString } from "graphql";
 
 const models: any = {
   branch: Branch,
@@ -29,6 +29,11 @@ const args: any = {
     name: { type: new GraphQLNonNull(GraphQLString) },
     location: { type: new GraphQLNonNull(GraphQLString) },
     website: { type: GraphQLString },
+  },
+  branch: {
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    location: { type: new GraphQLNonNull(GraphQLString) },
+    company: { type: new GraphQLNonNull(GraphQLID) },
   },
 };
 

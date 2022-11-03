@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import FormField from "@components/FormField";
+import { Field } from "@components/Form";
 import { Button } from "@mui/material";
 import { useAddCompanyMutation } from "@utils/Graphql";
 import { useSnackbar } from "notistack";
@@ -51,7 +51,7 @@ const CompanyForm = () => {
         style={{ width: "50%", display: "inline-block" }}
         onSubmit={formik.handleSubmit}
       >
-        <FormField
+        <Field
           name="name"
           label="Name"
           variant="standard"
@@ -59,7 +59,7 @@ const CompanyForm = () => {
           fullWidth
           Icon={AddBusinessOutlined}
         />
-        <FormField
+        <Field
           name="location"
           label="Location"
           variant="standard"
@@ -67,7 +67,7 @@ const CompanyForm = () => {
           fullWidth
           Icon={GpsFixedOutlined}
         />
-        <FormField
+        <Field
           name="website"
           label="Website"
           variant="standard"

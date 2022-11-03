@@ -7,6 +7,8 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     company: Record("company"),
     companies: Records("company"),
+    branch: Record("branch"),
+    branches: Records("branch"),
   },
 });
 
@@ -14,6 +16,7 @@ const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     addCompany: AddRecord("company"),
+    addBranch: AddRecord("branch"),
   },
 });
 

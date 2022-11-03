@@ -16,13 +16,13 @@ export const BranchType = new GraphQLObjectType({
     location: { type: GraphQLString },
     company: {
       type: CompanyType,
-      resolve(_: any, obj: any) {
-        return Company.findById(obj.id);
+      resolve(obj: any) {
+        return Company.findById(obj.company);
       },
     },
     employees: {
       type: new GraphQLList(EmployeeType),
-      resolve(_: any, obj: any) {
+      resolve(obj: any) {
         return Employee.find({ branch: obj.id });
       },
     },

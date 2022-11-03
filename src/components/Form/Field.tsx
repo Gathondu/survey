@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
 
-const FormField = ({ ...props }: any) => {
+const Field = ({ ...props }: any) => {
   const { label, readOnly, fullWidth, Icon, variant, name, formik }: any =
     props;
 
@@ -33,4 +33,4 @@ const FormField = ({ ...props }: any) => {
   );
 };
 
-export default FormField;
+export default Field;

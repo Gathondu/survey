@@ -1,0 +1,53 @@
+query Branches($recordsToGet: String!) {
+  branches(recordsToGet: $recordsToGet) {
+    id
+    name
+    location
+    url
+    hidden
+    company {
+      id
+      name
+    }
+    employees {
+      id
+      fullname
+    }
+  }
+}
+
+query Branch($id: ID) {
+  branch(id: $id) {
+    id
+    name
+    location
+    url
+    hidden
+    company {
+      id
+      name
+    }
+    employees {
+      id
+      fullname
+    }
+  }
+}
+
+mutation addBranch($name: String!, $location: String!, $company: ID!) {
+  addBranch(name: $name, location: $location, company: $company) {
+    id
+    name
+    location
+    url
+    hidden
+    company {
+      id
+      name
+    }
+    employees {
+      id
+      fullname
+    }
+  }
+}

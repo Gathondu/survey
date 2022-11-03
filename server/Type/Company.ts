@@ -19,7 +19,7 @@ export const CompanyType = new GraphQLObjectType({
     hidden: { type: GraphQLBoolean },
     branches: {
       type: new GraphQLList(BranchType),
-      resolve(_: any, obj: any) {
+      resolve(obj: any) {
         return Branch.find({ company: obj.id });
       },
     },
