@@ -6,8 +6,8 @@ const CustomerSchema = new Schema({
   countryCode: { type: String, maxLength: 4 },
   phone: { type: Number, required: true },
   email: String,
-  promotions: Boolean,
-  hidden: Boolean,
+  promotions: { type: Boolean, default: false },
+  hidden: { type: Boolean, default: false },
 });
 
 CustomerSchema.virtual("url").get(function () {

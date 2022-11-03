@@ -1,44 +1,29 @@
 query Companies($recordsToGet: String!) {
   companies(recordsToGet: $recordsToGet) {
-    id
-    name
-    location
-    website
-    url
-    hidden
-    branches {
-      id
-      name
-    }
+    ...CompanyData
   }
 }
 
 query Company($id: ID) {
   company(id: $id) {
-    id
-    name
-    location
-    website
-    url
-    hidden
-    branches {
-      id
-      name
-    }
+    ...CompanyData
   }
 }
 
 mutation addCompany($name: String!, $location: String!, $website: String!) {
   addCompany(name: $name, location: $location, website: $website) {
+    ...CompanyData
+  }
+}
+
+fragment CompanyData on Company {
+  id
+  name
+  location
+  website
+  url
+  hidden
+  branches {
     id
-    name
-    location
-    website
-    url
-    hidden
-    branches {
-      id
-      name
-    }
   }
 }

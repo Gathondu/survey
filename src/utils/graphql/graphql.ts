@@ -103,14 +103,14 @@ export type BranchesQueryVariables = Exact<{
 }>;
 
 
-export type BranchesQuery = { __typename?: 'RootQueryType', branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null> | null };
+export type BranchesQuery = { __typename?: 'RootQueryType', branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null> | null };
 
 export type BranchQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type BranchQuery = { __typename?: 'RootQueryType', branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null };
+export type BranchQuery = { __typename?: 'RootQueryType', branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null };
 
 export type AddBranchMutationVariables = Exact<{
   name: Scalars['String'];
@@ -119,21 +119,23 @@ export type AddBranchMutationVariables = Exact<{
 }>;
 
 
-export type AddBranchMutation = { __typename?: 'Mutation', addBranch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null };
+export type AddBranchMutation = { __typename?: 'Mutation', addBranch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null } | null };
+
+export type BranchDataFragment = { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullname?: string | null } | null> | null };
 
 export type CompaniesQueryVariables = Exact<{
   recordsToGet: Scalars['String'];
 }>;
 
 
-export type CompaniesQuery = { __typename?: 'RootQueryType', companies?: Array<{ __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null } | null> | null } | null> | null };
+export type CompaniesQuery = { __typename?: 'RootQueryType', companies?: Array<{ __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null> | null };
 
 export type CompanyQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CompanyQuery = { __typename?: 'RootQueryType', company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null } | null> | null } | null };
+export type CompanyQuery = { __typename?: 'RootQueryType', company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null };
 
 export type AddCompanyMutationVariables = Exact<{
   name: Scalars['String'];
@@ -142,28 +144,46 @@ export type AddCompanyMutationVariables = Exact<{
 }>;
 
 
-export type AddCompanyMutation = { __typename?: 'Mutation', addCompany?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null } | null> | null } | null };
+export type AddCompanyMutation = { __typename?: 'Mutation', addCompany?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null };
 
+export type CompanyDataFragment = { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null };
 
-export const BranchesDocument = `
-    query Branches($recordsToGet: String!) {
-  branches(recordsToGet: $recordsToGet) {
+export const CompanyDataFragmentDoc = `
+    fragment CompanyData on Company {
+  id
+  name
+  location
+  website
+  url
+  hidden
+  branches {
     id
-    name
-    location
-    url
-    hidden
-    company {
-      id
-      name
-    }
-    employees {
-      id
-      fullname
-    }
   }
 }
     `;
+export const BranchDataFragmentDoc = `
+    fragment BranchData on Branch {
+  id
+  name
+  location
+  url
+  hidden
+  company {
+    ...CompanyData
+  }
+  employees {
+    id
+    fullname
+  }
+}
+    ${CompanyDataFragmentDoc}`;
+export const BranchesDocument = `
+    query Branches($recordsToGet: String!) {
+  branches(recordsToGet: $recordsToGet) {
+    ...BranchData
+  }
+}
+    ${BranchDataFragmentDoc}`;
 export const useBranchesQuery = <
       TData = BranchesQuery,
       TError = unknown
@@ -179,22 +199,10 @@ export const useBranchesQuery = <
 export const BranchDocument = `
     query Branch($id: ID) {
   branch(id: $id) {
-    id
-    name
-    location
-    url
-    hidden
-    company {
-      id
-      name
-    }
-    employees {
-      id
-      fullname
-    }
+    ...BranchData
   }
 }
-    `;
+    ${BranchDataFragmentDoc}`;
 export const useBranchQuery = <
       TData = BranchQuery,
       TError = unknown
@@ -210,22 +218,10 @@ export const useBranchQuery = <
 export const AddBranchDocument = `
     mutation addBranch($name: String!, $location: String!, $company: ID!) {
   addBranch(name: $name, location: $location, company: $company) {
-    id
-    name
-    location
-    url
-    hidden
-    company {
-      id
-      name
-    }
-    employees {
-      id
-      fullname
-    }
+    ...BranchData
   }
 }
-    `;
+    ${BranchDataFragmentDoc}`;
 export const useAddBranchMutation = <
       TError = unknown,
       TContext = unknown
@@ -238,19 +234,10 @@ export const useAddBranchMutation = <
 export const CompaniesDocument = `
     query Companies($recordsToGet: String!) {
   companies(recordsToGet: $recordsToGet) {
-    id
-    name
-    location
-    website
-    url
-    hidden
-    branches {
-      id
-      name
-    }
+    ...CompanyData
   }
 }
-    `;
+    ${CompanyDataFragmentDoc}`;
 export const useCompaniesQuery = <
       TData = CompaniesQuery,
       TError = unknown
@@ -266,19 +253,10 @@ export const useCompaniesQuery = <
 export const CompanyDocument = `
     query Company($id: ID) {
   company(id: $id) {
-    id
-    name
-    location
-    website
-    url
-    hidden
-    branches {
-      id
-      name
-    }
+    ...CompanyData
   }
 }
-    `;
+    ${CompanyDataFragmentDoc}`;
 export const useCompanyQuery = <
       TData = CompanyQuery,
       TError = unknown
@@ -294,19 +272,10 @@ export const useCompanyQuery = <
 export const AddCompanyDocument = `
     mutation addCompany($name: String!, $location: String!, $website: String!) {
   addCompany(name: $name, location: $location, website: $website) {
-    id
-    name
-    location
-    website
-    url
-    hidden
-    branches {
-      id
-      name
-    }
+    ...CompanyData
   }
 }
-    `;
+    ${CompanyDataFragmentDoc}`;
 export const useAddCompanyMutation = <
       TError = unknown,
       TContext = unknown

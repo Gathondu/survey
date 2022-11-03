@@ -2,8 +2,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Field } from "@components/Form";
 import { Button } from "@mui/material";
-import { useAddCompanyMutation } from "@utils/Graphql";
+import { useAddCompanyMutation, useCompaniesQuery } from "@utils/Graphql";
 import { useSnackbar } from "notistack";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import {
   GpsFixedOutlined,
   AddBusinessOutlined,
@@ -18,15 +20,30 @@ const validationSchema = yup.object({
 
 const CompanyForm = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  useCompaniesQuery({
+    recordsToGet: "all",
+  });
   const { mutate: addCompany } = useAddCompanyMutation({
     onSuccess: (data: any, error: any) => {
       const { addCompany: company } = data;
+      queryClient.setQueryData(
+        ["Companies", { recordsToGet: "all" }],
+        (oldData: any = {}) => {
+          if (oldData.companies) {
+            return oldData.companies.push(company);
+          }
+        }
+      );
 
       if (company) {
         enqueueSnackbar(`${company.name} created sucessfully`, {
           variant: "success",
         });
       }
+
+      navigate(`/company/${company.id}`);
     },
   });
 

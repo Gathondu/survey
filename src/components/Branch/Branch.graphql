@@ -1,53 +1,32 @@
 query Branches($recordsToGet: String!) {
   branches(recordsToGet: $recordsToGet) {
-    id
-    name
-    location
-    url
-    hidden
-    company {
-      id
-      name
-    }
-    employees {
-      id
-      fullname
-    }
+    ...BranchData
   }
 }
 
 query Branch($id: ID) {
   branch(id: $id) {
-    id
-    name
-    location
-    url
-    hidden
-    company {
-      id
-      name
-    }
-    employees {
-      id
-      fullname
-    }
+    ...BranchData
   }
 }
 
 mutation addBranch($name: String!, $location: String!, $company: ID!) {
   addBranch(name: $name, location: $location, company: $company) {
+    ...BranchData
+  }
+}
+
+fragment BranchData on Branch {
+  id
+  name
+  location
+  url
+  hidden
+  company {
+    ...CompanyData
+  }
+  employees {
     id
-    name
-    location
-    url
-    hidden
-    company {
-      id
-      name
-    }
-    employees {
-      id
-      fullname
-    }
+    fullname
   }
 }

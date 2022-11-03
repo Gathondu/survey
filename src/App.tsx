@@ -44,7 +44,6 @@ const App = () => {
           gridArea: "Content",
           backgroundColor: "#E7EBF0",
           padding: "3rem",
-          height: "100vh",
         }}
       >
         <Routes>

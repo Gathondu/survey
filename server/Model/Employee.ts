@@ -1,4 +1,3 @@
-// import { CompanyType, Company } from "./Company";
 import { Schema, InferSchemaType, model } from "mongoose";
 
 const EmployeeSchema = new Schema({
@@ -6,7 +5,7 @@ const EmployeeSchema = new Schema({
   lastName: { type: String, required: true, maxLength: 20 },
   employeeId: { type: String, required: true },
   branch: { type: Schema.Types.ObjectId, ref: "Branch", required: true },
-  hidden: Boolean,
+  hidden: { type: Boolean, default: false },
 });
 
 EmployeeSchema.virtual("fullName").get(function () {

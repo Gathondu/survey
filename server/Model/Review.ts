@@ -15,7 +15,7 @@ const ReviewSchema = new Schema({
   },
   customer: { type: Schema.Types.ObjectId, ref: "Customer" },
   reviewedOn: { type: Date, default: Date.now() },
-  hidden: Boolean,
+  hidden: { type: Boolean, default: false },
 });
 
 ReviewSchema.virtual("url").get(function () {
