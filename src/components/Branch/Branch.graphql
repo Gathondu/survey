@@ -4,7 +4,7 @@ query Branches($recordsToGet: String!) {
   }
 }
 
-query Branch($id: ID) {
+query Branch($id: ID!) {
   branch(id: $id) {
     ...BranchData
   }
@@ -27,6 +27,6 @@ fragment BranchData on Branch {
   }
   employees {
     id
-    fullname
+    fullName
   }
 }

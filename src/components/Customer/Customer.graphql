@@ -1,0 +1,44 @@
+query Customers($recordsToGet: String!) {
+  customers(recordsToGet: $recordsToGet) {
+    ...CustomerData
+  }
+}
+
+query Customer($id: ID!) {
+  customer(id: $id) {
+    ...CustomerData
+  }
+}
+
+mutation addCustomer(
+  $firstName: String!
+  $lastName: String!
+  $countryCode: String!
+  $phone: Int!
+  $promotions: Boolean!
+  $email: String!
+) {
+  addCustomer(
+    firstName: $firstName
+    lastName: $lastName
+    countryCode: $countryCode
+    phone: $phone
+    email: $email
+    promotions: $promotions
+  ) {
+    ...CustomerData
+  }
+}
+
+fragment CustomerData on Customer {
+  id
+  firstName
+  lastName
+  email
+  phoneNumber
+  promotions
+  url
+  hidden
+  fullName
+  fullDetails
+}

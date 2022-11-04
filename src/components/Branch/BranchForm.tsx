@@ -75,7 +75,7 @@ const BranchForm = () => {
           variant: "success",
         });
       }
-      navigate(companyId ? `/company/${companyId}` : "/branches");
+      navigate(companyId ? companyData?.company?.url : branch.url);
     },
   });
 

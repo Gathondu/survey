@@ -16,7 +16,7 @@ const uri: string = process.env.DB_STRING || "";
 
 const app = express();
 
-const domains = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
+const domains = process.env.ALLOWED_ORIGINS || "";
 const whitelist = domains.split(",").map((domain) => domain.trim());
 
 const corsOptions = {

@@ -1,0 +1,49 @@
+query Employees($recordsToGet: String!) {
+  employees(recordsToGet: $recordsToGet) {
+    ...EmployeeData
+  }
+}
+
+query Employee($id: ID!) {
+  employee(id: $id) {
+    ...EmployeeData
+  }
+}
+
+mutation addEmployee(
+  $firstName: String!
+  $lastName: String!
+  $branch: ID!
+  $countryCode: String!
+  $phone: Int!
+  $employeeId: String!
+  $email: String!
+) {
+  addEmployee(
+    firstName: $firstName
+    lastName: $lastName
+    countryCode: $countryCode
+    phone: $phone
+    email: $email
+    employeeId: $employeeId
+    branch: $branch
+  ) {
+    ...EmployeeData
+  }
+}
+
+fragment EmployeeData on Employee {
+  id
+  firstName
+  lastName
+  email
+  phoneNumber
+  employeeId
+  fullName
+  fullId
+  url
+  hidden
+  branch {
+    ...BranchData
+  }
+}

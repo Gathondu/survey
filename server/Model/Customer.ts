@@ -4,8 +4,8 @@ const CustomerSchema = new Schema({
   firstName: { type: String, required: true, maxLength: 20 },
   lastName: { type: String, maxLength: 20 },
   countryCode: { type: String, maxLength: 4 },
-  phone: { type: Number, required: true },
-  email: String,
+  phone: { type: Number, required: true, maxLength: 12 },
+  email: { type: String, maxLength: 50 },
   promotions: { type: Boolean, default: false },
   hidden: { type: Boolean, default: false },
 });
@@ -20,7 +20,7 @@ CustomerSchema.virtual("fullName").get(function () {
     : `${this.firstName}`;
 });
 CustomerSchema.virtual("phoneNumber").get(function () {
-  return `${this.countryCode}${this.phone}`;
+  return `${this.countryCode} ${this.phone}`;
 });
 
 CustomerSchema.virtual("fullDetails").get(function () {
@@ -38,4 +38,4 @@ CustomerSchema.virtual("fullDetails").get(function () {
 
 export type CustomerType = InferSchemaType<typeof CustomerSchema>;
 
-export const Customer = model("Customer", CustomerSchema);
+export const Customer = model("Customer", CustomerSchema, "customers");

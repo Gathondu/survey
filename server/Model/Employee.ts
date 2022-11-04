@@ -3,9 +3,16 @@ import { Schema, InferSchemaType, model } from "mongoose";
 const EmployeeSchema = new Schema({
   firstName: { type: String, required: true, maxLength: 20 },
   lastName: { type: String, required: true, maxLength: 20 },
+  email: { type: String, required: true, maxLength: 50 },
+  countryCode: { type: String, required: true, maxLength: 4 },
+  phone: { type: Number, required: true, maxLength: 12 },
   employeeId: { type: String, required: true },
   branch: { type: Schema.Types.ObjectId, ref: "Branch", required: true },
   hidden: { type: Boolean, default: false },
+});
+
+EmployeeSchema.virtual("phoneNumber").get(function () {
+  return `${this.countryCode} ${this.phone}`;
 });
 
 EmployeeSchema.virtual("fullName").get(function () {
@@ -13,7 +20,8 @@ EmployeeSchema.virtual("fullName").get(function () {
 });
 
 EmployeeSchema.virtual("fullId").get(function () {
-  return `${this.firstName} ${this.lastName} ${this.employeeId}`;
+  // @ts-ignore
+  return `${this.fullName} ${this.email} ${this.phoneNumber} ${this.employeeId}`;
 });
 
 EmployeeSchema.virtual("url").get(function () {
@@ -22,4 +30,4 @@ EmployeeSchema.virtual("url").get(function () {
 
 export type EmployeeType = InferSchemaType<typeof EmployeeSchema>;
 
-export const Employee = model("Employee", EmployeeSchema);
+export const Employee = model("Employee", EmployeeSchema, "employees");

@@ -1,0 +1,42 @@
+query Reviews($recordsToGet: String!) {
+  reviews(recordsToGet: $recordsToGet) {
+    ...ReviewData
+  }
+}
+
+query Review($id: ID!) {
+  review(id: $id) {
+    ...ReviewData
+  }
+}
+
+mutation addReview(
+  $rating: Int!
+  $comment: String!
+  $employee: ID!
+  $customer: ID!
+) {
+  addReview(
+    rating: $rating
+    comment: $comment
+    employee: $employee
+    customer: $customer
+  ) {
+    ...ReviewData
+  }
+}
+
+fragment ReviewData on Review {
+  id
+  rating
+  comment
+  employee {
+    ...EmployeeData
+  }
+  customer {
+    ...CustomerData
+  }
+  reviewedOn
+  hidden
+  url
+}

@@ -43,7 +43,7 @@ const CompanyForm = () => {
         });
       }
 
-      navigate(`/company/${company.id}`);
+      navigate(company.url);
     },
   });
 

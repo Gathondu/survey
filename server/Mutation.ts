@@ -6,7 +6,13 @@ import {
   ReviewType,
 } from "./Type/index.js";
 import { Branch, Company, Customer, Employee, Review } from "./Model/index.js";
-import { GraphQLID, GraphQLNonNull, GraphQLString } from "graphql";
+import {
+  GraphQLBoolean,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLNonNull,
+  GraphQLString,
+} from "graphql";
 
 const models: any = {
   branch: Branch,
@@ -34,6 +40,29 @@ const args: any = {
     name: { type: new GraphQLNonNull(GraphQLString) },
     location: { type: new GraphQLNonNull(GraphQLString) },
     company: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  employee: {
+    firstName: { type: new GraphQLNonNull(GraphQLString) },
+    lastName: { type: new GraphQLNonNull(GraphQLString) },
+    branch: { type: new GraphQLNonNull(GraphQLID) },
+    countryCode: { type: new GraphQLNonNull(GraphQLString) },
+    phone: { type: new GraphQLNonNull(GraphQLInt) },
+    employeeId: { type: new GraphQLNonNull(GraphQLString) },
+    email: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  customer: {
+    firstName: { type: new GraphQLNonNull(GraphQLString) },
+    lastName: { type: new GraphQLNonNull(GraphQLString) },
+    countryCode: { type: new GraphQLNonNull(GraphQLString) },
+    phone: { type: new GraphQLNonNull(GraphQLInt) },
+    email: { type: new GraphQLNonNull(GraphQLString) },
+    promotions: { type: new GraphQLNonNull(GraphQLBoolean) },
+  },
+  review: {
+    rating: { type: new GraphQLNonNull(GraphQLInt) },
+    comment: { type: new GraphQLNonNull(GraphQLString) },
+    employee: { type: new GraphQLNonNull(GraphQLID) },
+    customer: { type: new GraphQLNonNull(GraphQLID) },
   },
 };
 

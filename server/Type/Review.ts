@@ -26,7 +26,7 @@ export const ReviewType = new GraphQLObjectType({
         Customer.findById(obj.customer);
       },
     },
-    reviewedOn: { type: Date },
+    reviewedOn: { type: GraphQLString },
     url: { type: GraphQLString },
     hidden: { type: GraphQLBoolean },
   }),

@@ -11,10 +11,9 @@ const ReviewSchema = new Schema({
   employee: {
     type: Schema.Types.ObjectId,
     ref: "Employee",
-    required: [true, "Please let us know who served you. Thanks!"],
   },
   customer: { type: Schema.Types.ObjectId, ref: "Customer" },
-  reviewedOn: { type: Date, default: Date.now() },
+  reviewDate: { type: String, default: Date.now().toString() },
   hidden: { type: Boolean, default: false },
 });
 
@@ -24,4 +23,4 @@ ReviewSchema.virtual("url").get(function () {
 
 export type ReviewType = InferSchemaType<typeof ReviewSchema>;
 
-export const Review = model("Review", ReviewSchema);
+export const Review = model("Review", ReviewSchema, "reviews");

@@ -1,17 +1,21 @@
 import {
   GraphQLBoolean,
   GraphQLID,
+  GraphQLInt,
   GraphQLObjectType,
   GraphQLString,
 } from "graphql";
+import { Person } from "./Interface.js";
 
 export const CustomerType = new GraphQLObjectType({
   name: "Customer",
+  interfaces: [Person],
   fields: () => ({
     id: { type: GraphQLID },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
-    phoneNumber: { type: GraphQLString },
+    countryCode: { type: GraphQLString },
+    phoneNumber: { type: GraphQLInt },
     email: { type: GraphQLString },
     url: { type: GraphQLString },
     fullName: { type: GraphQLString },
