@@ -5,6 +5,7 @@ import { Branch, BranchForm, Branches } from "@components/Branch";
 import { Customer, Customers, CustomerForm } from "@components/Customer";
 import { SideNavRoutes } from "@utils/Routes";
 import { SideNav } from "@components/Navigation";
+import { Employee, EmployeeForm, Employees } from "@components/Employee";
 
 const App = () => {
   return (
@@ -56,11 +57,16 @@ const App = () => {
             path="/company/:companyId/branch/new"
             element={<BranchForm />}
           />
-
           <Route path="/branch/:id" element={<Branch />} />
           <Route path="/branches" element={<Branches />} />
-          <Route path="/branch/new" element={<BranchForm />} />
-
+          <Route path="/branch/new" element={<BranchForm />} />{" "}
+          <Route
+            path="/branch/:branchId/employee/new"
+            element={<EmployeeForm />}
+          />
+          <Route path="/employee/:id" element={<Employee />} />
+          <Route path="/employees" element={<Employees />} />
+          <Route path="/employee/new" element={<EmployeeForm />} />
           <Route path="/customer/:id" element={<Customer />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/customer/new" element={<CustomerForm />} />

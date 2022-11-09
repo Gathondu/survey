@@ -8,7 +8,8 @@ import {
 } from "@mui/material";
 
 const SelectField = ({ ...props }: any) => {
-  const { variant, name, formik, data, selected, disabled, Icon }: any = props;
+  const { variant, name, formik, data, selected, disabled, Icon, label }: any =
+    props;
 
   const { errors, values, touched, handleBlur, handleChange } = formik;
 
@@ -22,7 +23,7 @@ const SelectField = ({ ...props }: any) => {
     >
       <Icon sx={{ mr: 2 }} />
       <FormControl disabled={disabled} variant={variant} fullWidth>
-        <InputLabel id={`select-${name}`}>Company</InputLabel>
+        <InputLabel id={`select-${name}`}>{label}</InputLabel>
         <Select
           fullWidth
           name={name}

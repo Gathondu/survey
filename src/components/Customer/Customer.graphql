@@ -14,7 +14,7 @@ mutation addCustomer(
   $firstName: String!
   $lastName: String!
   $countryCode: String!
-  $phone: Int!
+  $phone: String!
   $promotions: Boolean!
   $email: String!
 ) {

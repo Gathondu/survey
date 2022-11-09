@@ -1,7 +1,6 @@
 import {
   GraphQLBoolean,
   GraphQLID,
-  GraphQLInt,
   GraphQLObjectType,
   GraphQLString,
 } from "graphql";
@@ -15,7 +14,7 @@ export const CustomerType = new GraphQLObjectType({
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     countryCode: { type: GraphQLString },
-    phoneNumber: { type: GraphQLInt },
+    phoneNumber: { type: GraphQLString },
     email: { type: GraphQLString },
     url: { type: GraphQLString },
     fullName: { type: GraphQLString },

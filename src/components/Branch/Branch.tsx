@@ -9,14 +9,14 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { QrCodeOutlined } from "@mui/icons-material";
+import { SupportAgentOutlined, QrCodeOutlined } from "@mui/icons-material";
+import QrCode from "qr-code";
+import { useState } from "react";
 
 const Branch = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading, isError, error } = useBranchQuery({ id: id! });
-  //@ts-ignore
-  const QRC = qrcodegen.QrCode;
 
   if (isLoading || !data) {
     return <Typography>Loading</Typography>;
@@ -25,6 +25,12 @@ const Branch = () => {
     return <Typography>{`${error}`}</Typography>;
   }
   const { branch } = data;
+  const { QrCode: QRC } = QrCode;
+
+  const generateQR = () => {
+    const qr = QRC.encodeText(JSON.stringify(branch), QRC.Ecc.MEDIUM);
+    console.log(qr);
+  };
 
   return (
     <>
@@ -43,9 +49,19 @@ const Branch = () => {
         </Card>
       </Box>
       <Button
+        sx={{
+          mr: 2,
+        }}
+        variant="contained"
+        startIcon={<SupportAgentOutlined />}
+        onClick={() => navigate(`/branch/${id}/employee/new`)}
+      >
+        Add Employee
+      </Button>
+      <Button
         variant="contained"
         startIcon={<QrCodeOutlined />}
-        onClick={() => console.log(QRC.encodeText(branch, QRC.Ecc.MEDIUM))}
+        onClick={generateQR}
       >
         Generate QR Code
       </Button>

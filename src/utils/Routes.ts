@@ -49,12 +49,12 @@ export const SideNavRoutes: Routes[] = [
       {
         title: "New",
         icon: SupportAgentOutlined,
-        link: "/company/new",
+        link: "/employee/new",
       },
       {
         title: "All",
         icon: BadgeOutlined,
-        link: "/companies",
+        link: "/employees",
       },
     ],
   },

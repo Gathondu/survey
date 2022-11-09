@@ -3,7 +3,6 @@ import {
   GraphQLString,
   GraphQLID,
   GraphQLBoolean,
-  GraphQLInt,
 } from "graphql";
 import { Branch } from "../Model/Branch.js";
 import { BranchType, Person } from "./index.js";
@@ -16,10 +15,10 @@ export const EmployeeType = new GraphQLObjectType({
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     employeeId: { type: GraphQLString },
-    phoneNumber: { type: GraphQLInt },
+    phoneNumber: { type: GraphQLString },
     countryCode: { type: GraphQLString },
     email: { type: GraphQLString },
-    phone: { type: GraphQLInt },
+    phone: { type: GraphQLString },
     branch: {
       type: BranchType,
       resolve(obj: any) {

@@ -1,4 +1,4 @@
-import { GraphQLInt, GraphQLInterfaceType, GraphQLString } from "graphql";
+import { GraphQLInterfaceType, GraphQLString } from "graphql";
 
 export const Person = new GraphQLInterfaceType({
   name: "Person",
@@ -6,7 +6,7 @@ export const Person = new GraphQLInterfaceType({
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     countryCode: { type: GraphQLString },
-    phoneNumber: { type: GraphQLInt },
+    phoneNumber: { type: GraphQLString },
     email: { type: GraphQLString },
     fullName: { type: GraphQLString },
   }),

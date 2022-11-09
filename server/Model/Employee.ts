@@ -5,7 +5,7 @@ const EmployeeSchema = new Schema({
   lastName: { type: String, required: true, maxLength: 20 },
   email: { type: String, required: true, maxLength: 50 },
   countryCode: { type: String, required: true, maxLength: 4 },
-  phone: { type: Number, required: true, maxLength: 12 },
+  phone: { type: String, required: true, maxLength: 12 },
   employeeId: { type: String, required: true },
   branch: { type: Schema.Types.ObjectId, ref: "Branch", required: true },
   hidden: { type: Boolean, default: false },

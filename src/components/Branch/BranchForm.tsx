@@ -150,6 +150,7 @@ const BranchForm = () => {
         />
         <Select
           name="company"
+          label="Company"
           variant="standard"
           formik={formik}
           data={companies}
