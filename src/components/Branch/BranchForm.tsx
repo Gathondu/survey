@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field, Select } from "@components/Form";
+import { Field, Select } from "components/Form";
 import { Button } from "@mui/material";
 import {
   Company,
@@ -10,7 +10,7 @@ import {
   useCompaniesQuery,
   useCompanyQuery,
   useBranchesQuery,
-} from "@utils/Graphql";
+} from "utils/Graphql";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import {

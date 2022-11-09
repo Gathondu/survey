@@ -1,14 +1,14 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field, PhoneInput, Select } from "@components/Form";
+import { Field, PhoneInput, Select } from "components/Form";
 import { Button, Box, FormControlLabel } from "@mui/material";
 import {
   Branch,
   useAddEmployeeMutation,
   useBranchesQuery,
   useBranchQuery,
-} from "@utils/Graphql";
+} from "utils/Graphql";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";

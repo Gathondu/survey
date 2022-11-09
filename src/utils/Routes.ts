@@ -1,12 +1,17 @@
-import type { Routes } from "@utils/Types";
+import type { Routes } from "utils/Types";
 import {
   AddBusinessOutlined,
   StoreOutlined,
-  BusinessOutlined,
   BadgeOutlined,
   SupportAgentOutlined,
   PeopleAltOutlined,
   ReviewsOutlined,
+  DomainAddOutlined,
+  DomainOutlined,
+  PersonAddAlt1Outlined,
+  GroupsOutlined,
+  PersonAddAltOutlined,
+  RateReviewOutlined,
 } from "@mui/icons-material";
 
 export const SideNavRoutes: Routes[] = [
@@ -21,34 +26,34 @@ export const SideNavRoutes: Routes[] = [
       },
       {
         title: "All",
-        icon: AddBusinessOutlined,
+        icon: StoreOutlined,
         link: "/companies",
       },
     ],
   },
   {
     header: "Branches",
-    icon: BusinessOutlined,
+    icon: DomainOutlined,
     links: [
       {
         title: "New",
-        icon: AddBusinessOutlined,
+        icon: DomainAddOutlined,
         link: "/branch/new",
       },
       {
         title: "All",
-        icon: AddBusinessOutlined,
+        icon: DomainOutlined,
         link: "/branches",
       },
     ],
   },
   {
     header: "Employees",
-    icon: StoreOutlined,
+    icon: SupportAgentOutlined,
     links: [
       {
         title: "New",
-        icon: SupportAgentOutlined,
+        icon: PersonAddAlt1Outlined,
         link: "/employee/new",
       },
       {
@@ -60,34 +65,26 @@ export const SideNavRoutes: Routes[] = [
   },
   {
     header: "Customers",
-    icon: StoreOutlined,
+    icon: GroupsOutlined,
     links: [
       {
         title: "New",
-        icon: PeopleAltOutlined,
+        icon: PersonAddAltOutlined,
         link: "/customer/new",
       },
       {
         title: "All",
-        icon: AddBusinessOutlined,
+        icon: PeopleAltOutlined,
         link: "/customers",
       },
     ],
   },
   {
-    header: "Review",
+    header: "Reviews",
     icon: ReviewsOutlined,
-    links: [
-      {
-        title: "New",
-        icon: AddBusinessOutlined,
-        link: "/company/new",
-      },
-      {
-        title: "All",
-        icon: AddBusinessOutlined,
-        link: "/companies",
-      },
-    ],
+    link: {
+      icon: RateReviewOutlined,
+      link: "/reviews",
+    },
   },
 ];

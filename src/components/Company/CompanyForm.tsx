@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field } from "@components/Form";
+import { Field } from "components/Form";
 import { Button } from "@mui/material";
-import { useAddCompanyMutation, useCompaniesQuery } from "@utils/Graphql";
+import { useAddCompanyMutation, useCompaniesQuery } from "utils/Graphql";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";

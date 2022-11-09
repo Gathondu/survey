@@ -4,7 +4,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from "graphql";
-import { Person } from "./Interface.js";
+import { Person } from "../types/index.js";
 
 export const CustomerType = new GraphQLObjectType({
   name: "Customer",

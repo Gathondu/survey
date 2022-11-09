@@ -5,8 +5,8 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from "graphql";
-import { Customer, Employee } from "../Model/index.js";
-import { CustomerType, EmployeeType } from "./index.js";
+import { Customer, Employee } from "../models/index.js";
+import { CustomerType, EmployeeType } from "../types/index.js";
 
 export const ReviewType = new GraphQLObjectType({
   name: "Review",

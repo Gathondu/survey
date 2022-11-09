@@ -4,8 +4,14 @@ import {
   CustomerType,
   EmployeeType,
   ReviewType,
-} from "./Type/index.js";
-import { Branch, Company, Customer, Employee, Review } from "./Model/index.js";
+} from "../types/index.js";
+import {
+  Branch,
+  Company,
+  Customer,
+  Employee,
+  Review,
+} from "../models/index.js";
 import { GraphQLID, GraphQLList, GraphQLNonNull, GraphQLString } from "graphql";
 
 const models: any = {
@@ -27,22 +33,31 @@ const types: any = {
 export const Record = (model: string) => ({
   type: types[model],
   args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-  resolve(_: any, args: { id: string }) {
-    return models[model].findById(args.id);
+  async resolve(_: any, args: { id: string }) {
+    let res = await models[model].findById(args.id);
+    if (res) return res;
+    return `Error fetching ${models[model]} from the database.`;
   },
 });
 
 export const Records = (model: string) => ({
   type: new GraphQLList(types[model]),
   args: { recordsToGet: { type: new GraphQLNonNull(GraphQLString) } },
-  resolve(_: any, args: any) {
+  async resolve(_: any, args: any) {
+    const errorMessage = `Error fetching ${models[model]}s from the database.`;
     switch (args.recordsToGet) {
       case "active":
-        return models[model].find({ hidden: false });
+        let resActive = await models[model].find({ hidden: false });
+        if (resActive) return resActive;
+        return errorMessage;
       case "deleted":
-        return models[model].find({ hidden: true });
+        let resDeleted = await models[model].find({ hidden: true });
+        if (resDeleted) return resDeleted;
+        return errorMessage;
       default:
-        return models[model].find({});
+        let all = await models[model].find({});
+        if (all) return all;
+        return errorMessage;
     }
   },
 });

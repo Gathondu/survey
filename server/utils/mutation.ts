@@ -4,8 +4,14 @@ import {
   CustomerType,
   EmployeeType,
   ReviewType,
-} from "./Type/index.js";
-import { Branch, Company, Customer, Employee, Review } from "./Model/index.js";
+} from "../types/index.js";
+import {
+  Branch,
+  Company,
+  Customer,
+  Employee,
+  Review,
+} from "../models/index.js";
 import {
   GraphQLBoolean,
   GraphQLID,
@@ -69,8 +75,7 @@ const args: any = {
 export const AddRecord = (model: string) => ({
   type: types[model],
   args: args[model],
-  resolve(_: any, args: any) {
-    let res = new models[model](args);
-    return res.save();
+  async resolve(_: any, args: any) {
+    return await models[model].create(args);
   },
 });

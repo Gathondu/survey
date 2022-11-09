@@ -4,8 +4,8 @@ import {
   GraphQLID,
   GraphQLBoolean,
 } from "graphql";
-import { Branch } from "../Model/Branch.js";
-import { BranchType, Person } from "./index.js";
+import { Branch } from "../models/index.js";
+import { BranchType, Person } from "../types/index.js";
 
 export const EmployeeType = new GraphQLObjectType({
   name: "Employee",

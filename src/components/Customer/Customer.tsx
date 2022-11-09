@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useCustomerQuery } from "@utils/Graphql";
+import { useCustomerQuery } from "utils/Graphql";
 import {
   Box,
   Card,

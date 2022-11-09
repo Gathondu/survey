@@ -7,7 +7,7 @@ import {
   ToggleButtonGroup,
   ToggleButton,
 } from "@mui/material";
-import { useCustomersQuery } from "@utils/Graphql";
+import { useCustomersQuery } from "utils/Graphql";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 

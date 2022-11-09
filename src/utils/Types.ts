@@ -1,7 +1,7 @@
 import { ElementType } from "react";
 
 export interface Route {
-  title: Capitalize<string>;
+  title?: Capitalize<string>;
   icon?: ElementType;
   readonly link: string;
 }
@@ -9,5 +9,6 @@ export interface Route {
 export interface Routes {
   header: Capitalize<string>;
   icon?: ElementType;
-  readonly links: Route[];
+  readonly links?: Route[];
+  readonly link?: Route;
 }

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
-import { fetchData } from '@utils/Graphql/Graphql-Fetcher';
+import { fetchData } from 'utils/Graphql/Graphql-Fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };

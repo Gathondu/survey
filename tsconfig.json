@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "moduleResolution": "node",
     "target": "esnext",
@@ -19,9 +18,10 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "baseUrl": "src"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "src/**/*.spec.ts"],
+  "exclude": ["node_modules", "src/**/*.spec.ts", "build"],
   "types": ["react/next", "react-dom/next"]
 }

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useBranchQuery } from "@utils/Graphql";
+import { useBranchQuery } from "utils/Graphql";
 import {
   Box,
   Card,
@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { SupportAgentOutlined } from "@mui/icons-material";
-import QRCode from "@components/QRCode";
+import QRCode from "components/QRCode";
 
 const Branch = () => {
   const navigate = useNavigate();

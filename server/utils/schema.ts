@@ -1,5 +1,5 @@
-import { Record, Records } from "./Query.js";
-import { AddRecord } from "./Mutation.js";
+import { Record, Records } from "./query.js";
+import { AddRecord } from "./mutation.js";
 import { GraphQLObjectType, GraphQLSchema } from "graphql";
 
 const RootQuery = new GraphQLObjectType({
@@ -29,7 +29,9 @@ const Mutation = new GraphQLObjectType({
   },
 });
 
-export default new GraphQLSchema({
+const schema = new GraphQLSchema({
   query: RootQuery,
   mutation: Mutation,
 });
+
+export default schema;

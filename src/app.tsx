@@ -1,11 +1,11 @@
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
-import { Companies, CompanyForm, Company } from "@components/Company";
-import { Branch, BranchForm, Branches } from "@components/Branch";
-import { Customer, Customers, CustomerForm } from "@components/Customer";
-import { SideNavRoutes } from "@utils/Routes";
-import { SideNav } from "@components/Navigation";
-import { Employee, EmployeeForm, Employees } from "@components/Employee";
+import { Companies, CompanyForm, Company } from "components/Company";
+import { Branch, BranchForm, Branches } from "components/Branch";
+import { Customer, Customers, CustomerForm } from "components/Customer";
+import { SideNavRoutes } from "utils/Routes";
+import { SideNav } from "components/Navigation";
+import { Employee, EmployeeForm, Employees } from "components/Employee";
 
 const App = () => {
   return (
@@ -70,6 +70,7 @@ const App = () => {
           <Route path="/customer/:id" element={<Customer />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/customer/new" element={<CustomerForm />} />
+          <Route path="/reviews" element={<Customers />} />
         </Routes>
       </Box>
     </Box>

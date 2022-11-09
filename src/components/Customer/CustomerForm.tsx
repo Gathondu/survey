@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field, PhoneInput } from "@components/Form";
+import { Field, PhoneInput } from "components/Form";
 import { Button, Box, FormControlLabel } from "@mui/material";
-import { useAddCustomerMutation, useCustomersQuery } from "@utils/Graphql";
+import { useAddCustomerMutation, useCustomersQuery } from "utils/Graphql";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -53,14 +53,18 @@ const CustomerForm = () => {
     initialValues: {
       firstName: "",
       lastName: "",
-      email: "",
-      phone: "",
       countryCode: "",
-      promotions: [],
+      phone: "",
+      promotions: "",
+      email: "",
     },
     validationSchema,
     onSubmit: (values) => {
-      Object.assign(values, { phone, countryCode });
+      Object.assign(values, {
+        phone,
+        countryCode,
+        promotions: !!values.promotions,
+      });
       //@ts-ignore
       addCustomer(values);
     },
@@ -116,7 +120,7 @@ const CustomerForm = () => {
           <FormControlLabel
             control={
               <input
-                value={formik.values.promotions ? "promotions" : ""}
+                value={formik.values.promotions}
                 onChange={formik.handleChange}
                 type="checkbox"
                 name="promotions"

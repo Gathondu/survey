@@ -8,7 +8,7 @@ import {
   Collapse,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import type { Routes, Route } from "@utils/Type";
+import type { Routes, Route } from "utils/Types";
 
 const SideNav: FC<{ routes: Routes[] }> = ({ routes }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<string[]>([]);
@@ -34,23 +34,35 @@ const SideNav: FC<{ routes: Routes[] }> = ({ routes }): JSX.Element => {
       component="nav"
     >
       {routes.map((route: Routes, parentIndex: number) => {
-        const { header, icon: Icon, links } = route;
+        const { header, icon: Icon, links, link } = route;
         return (
           <div key={`${parentIndex}-${header}`}>
-            <ListItemButton onClick={() => handleClick(parentIndex, header)}>
-              <ListItemIcon>
-                {/* @ts-ignore */}
-                <Icon />
-              </ListItemIcon>
-              <ListItemText primary={header} />
-              {links.length > 0 &&
-              isOpen.includes(`${parentIndex}-${header}`) ? (
-                <ExpandLess />
-              ) : (
-                <ExpandMore />
-              )}
-            </ListItemButton>
-            {links.length > 0 &&
+            {links ? (
+              <ListItemButton onClick={() => handleClick(parentIndex, header)}>
+                <ListItemIcon>
+                  {/* @ts-ignore */}
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={header} />
+                {links &&
+                  (links!.length > 0 &&
+                  isOpen.includes(`${parentIndex}-${header}`) ? (
+                    <ExpandLess />
+                  ) : (
+                    <ExpandMore />
+                  ))}
+              </ListItemButton>
+            ) : (
+              <ListItemButton onClick={() => handleNavigation(link!.link)}>
+                <ListItemIcon>
+                  {/* @ts-ignore */}
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={header} />
+              </ListItemButton>
+            )}
+            {links &&
+              links!.length > 0 &&
               links?.map((link: Route, index: number) => {
                 const { title, icon: Icon, link: url } = link;
                 return (
