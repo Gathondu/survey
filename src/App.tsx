@@ -2,6 +2,7 @@ import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { Companies, CompanyForm, Company } from "@components/Company";
 import { Branch, BranchForm, Branches } from "@components/Branch";
+import { Customer, Customers, CustomerForm } from "@components/Customer";
 import { SideNavRoutes } from "@utils/Routes";
 import { SideNav } from "@components/Navigation";
 
@@ -55,9 +56,14 @@ const App = () => {
             path="/company/:companyId/branch/new"
             element={<BranchForm />}
           />
+
           <Route path="/branch/:id" element={<Branch />} />
           <Route path="/branches" element={<Branches />} />
           <Route path="/branch/new" element={<BranchForm />} />
+
+          <Route path="/customer/:id" element={<Customer />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/customer/new" element={<CustomerForm />} />
         </Routes>
       </Box>
     </Box>

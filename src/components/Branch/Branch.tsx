@@ -14,7 +14,7 @@ import { QrCodeOutlined } from "@mui/icons-material";
 const Branch = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, isLoading, isError, error } = useBranchQuery({ id });
+  const { data, isLoading, isError, error } = useBranchQuery({ id: id! });
   //@ts-ignore
   const QRC = qrcodegen.QrCode;
 
@@ -22,8 +22,7 @@ const Branch = () => {
     return <Typography>Loading</Typography>;
   }
   if (isError) {
-    console.error(error);
-    return <Typography>Error</Typography>;
+    return <Typography>{`${error}`}</Typography>;
   }
   const { branch } = data;
 

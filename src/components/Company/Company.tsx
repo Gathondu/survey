@@ -14,14 +14,13 @@ import { AddBusinessOutlined } from "@mui/icons-material";
 const Company = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, isLoading, isError, error } = useCompanyQuery({ id });
+  const { data, isLoading, isError, error } = useCompanyQuery({ id: id! });
 
   if (isLoading || !data) {
     return <Typography>Loading</Typography>;
   }
   if (isError) {
-    console.error(error);
-    return <Typography>Error</Typography>;
+    return <Typography>{`${error}`}</Typography>;
   }
   const { company } = data;
   return (

@@ -32,7 +32,7 @@ const CompanyForm = () => {
         ["Companies", { recordsToGet: "all" }],
         (oldData: any = {}) => {
           if (oldData.companies) {
-            return oldData.companies.push(company);
+            oldData.companies.push(company);
           }
         }
       );

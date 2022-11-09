@@ -1,8 +1,17 @@
 import { Box, TextField } from "@mui/material";
 
 const Field = ({ ...props }: any) => {
-  const { label, readOnly, fullWidth, Icon, variant, name, formik }: any =
-    props;
+  const {
+    label,
+    readOnly,
+    fullWidth,
+    Icon,
+    variant,
+    name,
+    formik,
+    placeholder,
+    type,
+  }: any = props;
 
   const { errors, touched, values, handleChange, handleBlur } = formik;
 
@@ -19,6 +28,8 @@ const Field = ({ ...props }: any) => {
         inputProps={{
           readOnly,
         }}
+        placeholder={placeholder}
+        type={type}
         fullWidth={fullWidth}
         name={name}
         label={label}

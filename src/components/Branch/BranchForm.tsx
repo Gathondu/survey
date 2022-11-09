@@ -40,7 +40,7 @@ const BranchForm = () => {
     recordsToGet: "all",
   });
   const { data: companyData } = useCompanyQuery(
-    { id: companyId },
+    { id: companyId! },
     { enabled: !!companyId }
   );
 
@@ -52,7 +52,6 @@ const BranchForm = () => {
         (oldData: any = {}) => {
           if (oldData?.branches) {
             oldData.branches.push(branch);
-            return oldData;
           }
         }
       );
@@ -60,7 +59,7 @@ const BranchForm = () => {
         ["Companies", { recordsToGet: "all" }],
         (oldData: any = {}) => {
           if (oldData.companies) {
-            return oldData.companies.map((company: Company) => {
+            oldData.companies.map((company: Company) => {
               if (company.id === branch.company.id) {
                 company?.branches?.push(branch);
               }

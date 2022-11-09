@@ -24,8 +24,7 @@ const Branches = () => {
     return <Typography>Loading</Typography>;
   }
   if (isError) {
-    console.error(error);
-    return <Typography>Error</Typography>;
+    return <Typography>{`${error}`}</Typography>;
   }
   const { branches } = data;
 
