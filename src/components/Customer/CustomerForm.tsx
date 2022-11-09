@@ -54,14 +54,15 @@ const CustomerForm = () => {
       firstName: "",
       lastName: "",
       email: "",
+      phone: "",
+      countryCode: "",
       promotions: [],
     },
     validationSchema,
     onSubmit: (values) => {
       Object.assign(values, { phone, countryCode });
-      console.log(values);
-
-      // addCustomer(inputs);
+      //@ts-ignore
+      addCustomer(values);
     },
   });
 

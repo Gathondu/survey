@@ -124,7 +124,6 @@ const EmployeeForm = () => {
     validationSchema,
     onSubmit: (values) => {
       Object.assign(values, { phone, countryCode });
-      // @ts-ignore
       addEmployee(values);
     },
   });

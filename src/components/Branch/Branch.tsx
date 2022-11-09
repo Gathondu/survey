@@ -9,9 +9,8 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { SupportAgentOutlined, QrCodeOutlined } from "@mui/icons-material";
-import QrCode from "qr-code";
-import { useState } from "react";
+import { SupportAgentOutlined } from "@mui/icons-material";
+import QRCode from "@components/QRCode";
 
 const Branch = () => {
   const navigate = useNavigate();
@@ -25,12 +24,6 @@ const Branch = () => {
     return <Typography>{`${error}`}</Typography>;
   }
   const { branch } = data;
-  const { QrCode: QRC } = QrCode;
-
-  const generateQR = () => {
-    const qr = QRC.encodeText(JSON.stringify(branch), QRC.Ecc.MEDIUM);
-    console.log(qr);
-  };
 
   return (
     <>
@@ -58,13 +51,7 @@ const Branch = () => {
       >
         Add Employee
       </Button>
-      <Button
-        variant="contained"
-        startIcon={<QrCodeOutlined />}
-        onClick={generateQR}
-      >
-        Generate QR Code
-      </Button>
+      <QRCode text={branch?.id!} title={branch?.name!} />
     </>
   );
 };

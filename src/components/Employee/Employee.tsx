@@ -7,10 +7,7 @@ import {
   CardActionArea,
   CardContent,
   Typography,
-  Button,
 } from "@mui/material";
-import { QrCodeOutlined } from "@mui/icons-material";
-import QrCode from "qr-code";
 
 const Employee = () => {
   const navigate = useNavigate();
@@ -24,7 +21,6 @@ const Employee = () => {
     return <Typography>{`${error}`}</Typography>;
   }
   const { employee } = data;
-  const { QrCode: QRC } = QrCode;
 
   return (
     <>
@@ -42,15 +38,6 @@ const Employee = () => {
           </CardActionArea>
         </Card>
       </Box>
-      <Button
-        variant="contained"
-        startIcon={<QrCodeOutlined />}
-        onClick={() =>
-          console.log(QRC.encodeText(JSON.stringify(employee), QRC.Ecc.MEDIUM))
-        }
-      >
-        Generate QR Code
-      </Button>
     </>
   );
 };
