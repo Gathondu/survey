@@ -11,15 +11,10 @@ import bodyParser from "body-parser";
 import { schema, db } from "./utils/index.js";
 
 const port: number | string = process.env.SERVER_PORT || 5000;
-
 const dbUri: string = process.env.DB_STRING || "";
-
 const app: Application = express();
-
-const domains: string = process.env.VERCEL
-  ? `https://${process.env.VERCEL_URL},http://${process.env.VERCEL_URL}` || ""
-  : process.env.ALLOWED_ORIGINS || "";
-
+const vercel_hosts = `https://${process.env.VERCEL_URL},http://${process.env.VERCEL_URL},https://${process.env.SITE_HOST}`;
+const domains: string = process.env.ALLOWED_ORIGINS || vercel_hosts || "";
 const whitelist: string[] = domains.split(",").map((domain) => domain.trim());
 
 const corsOptions = {
