@@ -4,12 +4,11 @@ import {
   CardActionArea,
   CardContent,
   Typography,
-  ToggleButtonGroup,
-  ToggleButton,
 } from "@mui/material";
 import { useBranchesQuery } from "utils/Graphql";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { RecordsToggle } from "components/Toggle";
 
 const Branches = () => {
   const navigate = useNavigate();
@@ -28,31 +27,9 @@ const Branches = () => {
   }
   const { branches } = data;
 
-  const handleToggle = (
-    event: React.MouseEvent<HTMLElement>,
-    records: string
-  ) => {
-    if (records !== null) {
-      setRecords(records);
-    }
-  };
-
   return (
     <>
-      <div style={{ textAlign: "end", marginBottom: 2 }}>
-        <ToggleButtonGroup
-          color="primary"
-          value={records}
-          exclusive
-          onChange={handleToggle}
-          aria-label="Platform"
-          size="small"
-        >
-          <ToggleButton value="all">All</ToggleButton>
-          <ToggleButton value="active">Active</ToggleButton>
-          <ToggleButton value="deleted">Deleted</ToggleButton>
-        </ToggleButtonGroup>
-      </div>
+      <RecordsToggle setRecord={records} updateRecords={setRecords} />
       <Box
         sx={{
           display: "flex",
