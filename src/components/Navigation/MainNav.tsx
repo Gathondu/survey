@@ -17,7 +17,7 @@ import { Menu, ChevronLeft } from "@mui/icons-material";
 import SideNav from "./SideNav";
 import { SideNavRoutes, useMobileContext } from "utils";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
