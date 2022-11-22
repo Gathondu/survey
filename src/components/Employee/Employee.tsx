@@ -42,4 +42,11 @@ const Employee = () => {
   );
 };
 
+/*
+TODO: Employee Specific QR Code:
+
+Create a specific QR code tied to the employee that can provide more
+specific reviews with employee details
+**/
+
 export default Employee;

@@ -1,15 +1,18 @@
 import { Schema, InferSchemaType, model } from "mongoose";
 
-const EmployeeSchema = new Schema({
-  firstName: { type: String, required: true, maxLength: 20 },
-  lastName: { type: String, required: true, maxLength: 20 },
-  email: { type: String, required: true, maxLength: 50 },
-  countryCode: { type: String, required: true, maxLength: 4 },
-  phone: { type: String, required: true, maxLength: 12 },
-  employeeId: { type: String, required: true },
-  branch: { type: Schema.Types.ObjectId, ref: "Branch", required: true },
-  hidden: { type: Boolean, default: false },
-});
+const EmployeeSchema = new Schema(
+  {
+    firstName: { type: String, required: true, maxLength: 20 },
+    lastName: { type: String, required: true, maxLength: 20 },
+    email: { type: String, required: true, maxLength: 50 },
+    countryCode: { type: String, required: true, maxLength: 4 },
+    phone: { type: String, required: true, maxLength: 12 },
+    employeeId: { type: String, required: true },
+    branch: { type: Schema.Types.ObjectId, ref: "Branch", required: true },
+    hidden: { type: Boolean, default: false },
+  },
+  { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+);
 
 EmployeeSchema.virtual("phoneNumber").get(function () {
   return `${this.countryCode} ${this.phone}`;

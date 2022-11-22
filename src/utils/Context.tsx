@@ -1,6 +1,11 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import { FC, createContext, ReactNode, useContext } from "react";
 
+/*
+
+is Moblie Context and Provider
+
+**/
 export const MobileContext = createContext<boolean>(false);
 
 export const useMobileContext = () => {
@@ -11,6 +16,7 @@ export const useMobileContext = () => {
 
   return context;
 };
+
 interface MPProps {
   children: ReactNode;
 }

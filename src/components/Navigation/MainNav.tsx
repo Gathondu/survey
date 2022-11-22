@@ -8,7 +8,6 @@ import {
   Toolbar,
   Typography,
   Drawer as MuiDrawer,
-  Divider,
   styled,
   Theme,
   CSSObject,
@@ -27,6 +26,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
+  border: "none",
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -39,13 +39,15 @@ const closedMixin = (theme: Theme): CSSObject => ({
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
+  border: "none",
 });
 
 export const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(0, 0),
+  backgroundColor: "#1976d2",
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
@@ -110,7 +112,7 @@ const MainNav: FC<MainNavProps> = ({ children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar elevation={0} position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -141,7 +143,6 @@ const MainNav: FC<MainNavProps> = ({ children }) => {
             <ChevronLeft />
           </IconButton>
         </DrawerHeader>
-        <Divider />
         <SideNav routes={SideNavRoutes} />
       </Drawer>
       {children}

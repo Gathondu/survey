@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from "@mui/material";
+import { Box } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { Companies, CompanyForm, Company } from "components/Company";
 import { Branch, BranchForm, Branches } from "components/Branch";
@@ -10,7 +10,6 @@ import { MobileProvider } from "utils";
 const App = () => {
   return (
     <MobileProvider>
-      <CssBaseline />
       <Box className="App">
         <MainNav>
           <DrawerHeader />
@@ -22,7 +21,7 @@ const App = () => {
               mr: 2,
               backgroundColor: "#E7EBF0",
               padding: "3rem",
-              mt: 10,
+              mt: 8,
             }}
           >
             <Routes>

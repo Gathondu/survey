@@ -1,14 +1,17 @@
 import { Schema, InferSchemaType, model } from "mongoose";
 
-const CustomerSchema = new Schema({
-  firstName: { type: String, required: true, maxLength: 20 },
-  lastName: { type: String, maxLength: 20 },
-  countryCode: { type: String, maxLength: 4 },
-  phone: { type: String, required: true, maxLength: 12 },
-  email: { type: String, maxLength: 50 },
-  promotions: { type: Boolean, default: false },
-  hidden: { type: Boolean, default: false },
-});
+const CustomerSchema = new Schema(
+  {
+    firstName: { type: String, required: true, maxLength: 20 },
+    lastName: { type: String, maxLength: 20 },
+    countryCode: { type: String, maxLength: 4 },
+    phone: { type: String, required: true, maxLength: 12 },
+    email: { type: String, maxLength: 50 },
+    promotions: { type: Boolean, default: false },
+    hidden: { type: Boolean, default: false },
+  },
+  { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+);
 
 CustomerSchema.virtual("url").get(function () {
   return `/customer/${this._id}`;

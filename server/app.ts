@@ -50,7 +50,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 await db.connectToServer(dbUri, function (err: string): void {
-  if (err) console.log(`MONGODB ERROR: ${err}`);
+  if (err) {
+    console.log(`MONGODB ERROR: ${err}`);
+    process.exit(1);
+  }
 });
 
 app.all("/api", createHandler({ schema }));
