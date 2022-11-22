@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field } from "components/Form";
+import { Field, Form } from "components/Form";
 import { Button } from "@mui/material";
 import { useAddCompanyMutation, useCompaniesQuery } from "utils/Graphql";
 import { useSnackbar } from "notistack";
@@ -63,47 +63,42 @@ const CompanyForm = () => {
   });
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <form
-        style={{ width: "50%", display: "inline-block" }}
-        onSubmit={formik.handleSubmit}
+    <Form submit={formik.handleSubmit}>
+      <Field
+        name="name"
+        label="Name"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={AddBusinessOutlined}
+      />
+      <Field
+        name="location"
+        label="Location"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={GpsFixedOutlined}
+      />
+      <Field
+        name="website"
+        label="Website"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={HttpOutlined}
+      />
+      <Button
+        sx={{
+          mt: 2,
+        }}
+        color="primary"
+        variant="contained"
+        type="submit"
       >
-        <Field
-          name="name"
-          label="Name"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={AddBusinessOutlined}
-        />
-        <Field
-          name="location"
-          label="Location"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={GpsFixedOutlined}
-        />
-        <Field
-          name="website"
-          label="Website"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={HttpOutlined}
-        />
-        <Button
-          sx={{
-            mt: 2,
-          }}
-          color="primary"
-          variant="contained"
-          type="submit"
-        >
-          Add Company
-        </Button>
-      </form>
-    </div>
+        Add Company
+      </Button>
+    </Form>
   );
 };
 

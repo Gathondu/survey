@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field, Select } from "components/Form";
+import { Field, Form, Select } from "components/Form";
 import { Button } from "@mui/material";
 import {
   Company,
@@ -127,50 +127,45 @@ const BranchForm = () => {
   });
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <form
-        style={{ width: "50%", display: "inline-block" }}
-        onSubmit={formik.handleSubmit}
+    <Form submit={formik.handleSubmit}>
+      <Field
+        name="name"
+        label="Name"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={AddBusinessOutlined}
+      />
+      <Field
+        name="location"
+        label="Location"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={GpsFixedOutlined}
+      />
+      <Select
+        name="company"
+        label="Company"
+        variant="standard"
+        formik={formik}
+        data={companies}
+        selected={selectedCompany}
+        disabled={disabled}
+        Icon={StoreOutlined}
+        handleChange={formik.handleChange}
+      />
+      <Button
+        sx={{
+          mt: 2,
+        }}
+        color="primary"
+        variant="contained"
+        type="submit"
       >
-        <Field
-          name="name"
-          label="Name"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={AddBusinessOutlined}
-        />
-        <Field
-          name="location"
-          label="Location"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={GpsFixedOutlined}
-        />
-        <Select
-          name="company"
-          label="Company"
-          variant="standard"
-          formik={formik}
-          data={companies}
-          selected={selectedCompany}
-          disabled={disabled}
-          Icon={StoreOutlined}
-          handleChange={formik.handleChange}
-        />
-        <Button
-          sx={{
-            mt: 2,
-          }}
-          color="primary"
-          variant="contained"
-          type="submit"
-        >
-          Add Branch
-        </Button>
-      </form>
-    </div>
+        Add Branch
+      </Button>
+    </Form>
   );
 };
 

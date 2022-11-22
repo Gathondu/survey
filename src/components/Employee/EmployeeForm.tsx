@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field, PhoneInput, Select } from "components/Form";
+import { Field, PhoneInput, Select, Form } from "components/Form";
 import { Button, Box, FormControlLabel } from "@mui/material";
 import {
   Branch,
@@ -139,73 +139,68 @@ const EmployeeForm = () => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <form
-        style={{ width: "50%", display: "inline-block" }}
-        onSubmit={formik.handleSubmit}
+    <Form submit={formik.handleSubmit}>
+      <Field
+        name="firstName"
+        label="First Name"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={AddBusinessOutlined}
+      />
+      <Field
+        name="lastName"
+        label="Last Name"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={AddBusinessOutlined}
+      />
+      <Field
+        type="email"
+        name="email"
+        label="Email"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={AddBusinessOutlined}
+      />
+      <Field
+        name="employeeId"
+        label="Employee ID"
+        variant="standard"
+        formik={formik}
+        fullWidth
+        Icon={AddBusinessOutlined}
+      />
+      <Box>
+        <FormControlLabel
+          control={<PhoneInput handlePhoneChange={handlePhoneChange} />}
+          label=""
+        />
+      </Box>
+      <Select
+        name="branch"
+        label="Branch"
+        variant="standard"
+        formik={formik}
+        data={branches}
+        selected={selectedBranch}
+        disabled={disabled}
+        Icon={AddBusinessOutlined}
+        handleChange={formik.handleChange}
+      />
+      <Button
+        sx={{
+          mt: 2,
+        }}
+        color="primary"
+        variant="contained"
+        type="submit"
       >
-        <Field
-          name="firstName"
-          label="First Name"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={AddBusinessOutlined}
-        />
-        <Field
-          name="lastName"
-          label="Last Name"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={AddBusinessOutlined}
-        />
-        <Field
-          type="email"
-          name="email"
-          label="Email"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={AddBusinessOutlined}
-        />
-        <Field
-          name="employeeId"
-          label="Employee ID"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={AddBusinessOutlined}
-        />
-        <Box>
-          <FormControlLabel
-            control={<PhoneInput handlePhoneChange={handlePhoneChange} />}
-            label=""
-          />
-        </Box>
-        <Select
-          name="branch"
-          label="Branch"
-          variant="standard"
-          formik={formik}
-          data={branches}
-          selected={selectedBranch}
-          disabled={disabled}
-          Icon={AddBusinessOutlined}
-          handleChange={formik.handleChange}
-        />
-        <Button
-          sx={{
-            mt: 2,
-          }}
-          color="primary"
-          variant="contained"
-          type="submit"
-        >
-          Add Employee
-        </Button>
-      </form>
-    </div>
+        Add Employee
+      </Button>
+    </Form>
   );
 };
 
