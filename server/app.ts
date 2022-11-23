@@ -2,18 +2,24 @@
 import * as dotenv from "dotenv";
 dotenv.config({ path: "../.env.local" });
 
-import express, { Application, Request, Response, NextFunction } from "express";
+import express, {
+  Application,
+  Request,
+  Response,
+  NextFunction,
+  json,
+  urlencoded,
+} from "express";
 
 import { createHandler } from "graphql-http/lib/use/express";
 import cors, { CorsOptions } from "cors";
-import bodyParser from "body-parser";
 
 import { schema, db } from "./utils/index.js";
 
 const port: number | string = process.env.SERVER_PORT || 5000;
 const dbUri: string = process.env.DB_STRING || "";
 const app: Application = express();
-const vercel_hosts = `https://${process.env.VERCEL_URL},http://${process.env.VERCEL_URL},https://${process.env.SITE_HOST}`;
+const vercel_hosts = `https://${process.env.VERCEL_URL},http://${process.env.VERCEL_URL},${process.env.BASE_URL}`;
 const domains: string = process.env.ALLOWED_ORIGINS || vercel_hosts || "";
 const whitelist: string[] = domains.split(",").map((domain) => domain.trim());
 
@@ -46,8 +52,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 await db.connectToServer(dbUri, function (err: string): void {
   if (err) {
