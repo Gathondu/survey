@@ -1,15 +1,18 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { Companies, CompanyForm, Company } from "components/Company";
 import { Branch, BranchForm, Branches } from "components/Branch";
 import { Customer, Customers, CustomerForm } from "components/Customer";
 import { Employee, EmployeeForm, Employees } from "components/Employee";
 import { MainNav, DrawerHeader } from "components/Navigation";
-import { MobileProvider } from "utils";
+import { ScreenSizeProvider } from "utils";
 
 const App = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <MobileProvider>
+    <ScreenSizeProvider>
       <Box className="App">
         <MainNav>
           <DrawerHeader />
@@ -21,7 +24,7 @@ const App = () => {
               mr: 2,
               backgroundColor: "#E7EBF0",
               padding: "3rem",
-              mt: 8,
+              mt: isMobile ? 7 : 8,
             }}
           >
             <Routes>
@@ -51,7 +54,7 @@ const App = () => {
           </Box>
         </MainNav>
       </Box>
-    </MobileProvider>
+    </ScreenSizeProvider>
   );
 };
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { useMobileContext } from "utils";
+import { useScreenSizeContext } from "utils";
 
 interface IProps {
   records?: { value: string; label: string }[];
@@ -24,7 +24,7 @@ const RecordsToggle: FC<IProps> = ({
     updateRecords(record);
   };
 
-  const isMobile = useMobileContext();
+  const { isMobile } = useScreenSizeContext();
 
   return (
     <div

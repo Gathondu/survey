@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Menu, ChevronLeft } from "@mui/icons-material";
 import SideNav from "./SideNav";
-import { SideNavRoutes, useMobileContext } from "utils";
+import { SideNavRoutes, useScreenSizeContext } from "utils";
 
 const drawerWidth = 200;
 
@@ -96,7 +96,7 @@ interface MainNavProps {
 }
 
 const MainNav: FC<MainNavProps> = ({ children }) => {
-  const isMobile = useMobileContext();
+  const { isMobile } = useScreenSizeContext();
   const [open, setOpen] = useState(isMobile ? false : true);
 
   useEffect(() => setOpen(!isMobile), [isMobile, setOpen]);
