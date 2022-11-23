@@ -4,6 +4,7 @@ import { Companies, CompanyForm, Company } from "components/Company";
 import { Branch, BranchForm, Branches } from "components/Branch";
 import { Customer, Customers, CustomerForm } from "components/Customer";
 import { Employee, EmployeeForm, Employees } from "components/Employee";
+import { ReviewForm } from "components/Review";
 import { MainNav, DrawerHeader } from "components/Navigation";
 import { ScreenSizeProvider } from "utils";
 
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/customers" element={<Customers />} />
               <Route path="/customer/new" element={<CustomerForm />} />
               <Route path="/reviews" element={<Customers />} />
+              <Route path="/review/:urlId" element={<ReviewForm />} />
             </Routes>
           </Box>
         </MainNav>

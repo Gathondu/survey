@@ -164,6 +164,7 @@ export type RootQueryType = {
   review?: Maybe<Review>;
   reviews?: Maybe<Array<Maybe<Review>>>;
   url?: Maybe<Url>;
+  urlRecord?: Maybe<Url>;
   urls?: Maybe<Array<Maybe<Url>>>;
 };
 
@@ -220,6 +221,11 @@ export type RootQueryTypeReviewsArgs = {
 
 export type RootQueryTypeUrlArgs = {
   id: Scalars['ID'];
+};
+
+
+export type RootQueryTypeUrlRecordArgs = {
+  urlId: Scalars['String'];
 };
 
 
@@ -385,6 +391,13 @@ export type UrlQueryVariables = Exact<{
 
 
 export type UrlQuery = { __typename?: 'RootQueryType', url?: { __typename?: 'Url', id?: string | null, urlId?: string | null, originalUrl?: string | null, clicks?: number | null, hidden?: boolean | null, createdAt?: string | null, updatedAt?: string | null } | null };
+
+export type UrlIdQueryVariables = Exact<{
+  urlId: Scalars['String'];
+}>;
+
+
+export type UrlIdQuery = { __typename?: 'RootQueryType', urlRecord?: { __typename?: 'Url', id?: string | null, urlId?: string | null, originalUrl?: string | null, clicks?: number | null, hidden?: boolean | null, createdAt?: string | null, updatedAt?: string | null } | null };
 
 export type AddUrlMutationVariables = Exact<{
   urlId: Scalars['String'];
@@ -811,6 +824,25 @@ export const useUrlQuery = <
     useQuery<UrlQuery, TError, TData>(
       ['Url', variables],
       fetchData<UrlQuery, UrlQueryVariables>(UrlDocument, variables),
+      options
+    );
+export const UrlIdDocument = `
+    query UrlId($urlId: String!) {
+  urlRecord(urlId: $urlId) {
+    ...UrlData
+  }
+}
+    ${UrlDataFragmentDoc}`;
+export const useUrlIdQuery = <
+      TData = UrlIdQuery,
+      TError = unknown
+    >(
+      variables: UrlIdQueryVariables,
+      options?: UseQueryOptions<UrlIdQuery, TError, TData>
+    ) =>
+    useQuery<UrlIdQuery, TError, TData>(
+      ['UrlId', variables],
+      fetchData<UrlIdQuery, UrlIdQueryVariables>(UrlIdDocument, variables),
       options
     );
 export const AddUrlDocument = `

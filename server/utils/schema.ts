@@ -1,6 +1,7 @@
 import { Record, Records } from "./query.js";
 import { AddRecord } from "./mutation.js";
 import { GraphQLObjectType, GraphQLSchema } from "graphql";
+import { UrlRecord } from "./url-query.js";
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -16,6 +17,7 @@ const RootQuery = new GraphQLObjectType({
     review: Record("review"),
     reviews: Records("review"),
     url: Record("url"),
+    urlRecord: UrlRecord(),
     urls: Records("url"),
   },
 });
