@@ -15,6 +15,8 @@ const RootQuery = new GraphQLObjectType({
     customers: Records("customer"),
     review: Record("review"),
     reviews: Records("review"),
+    url: Record("url"),
+    urls: Records("url"),
   },
 });
 
@@ -26,6 +28,7 @@ const Mutation = new GraphQLObjectType({
     addEmployee: AddRecord("employee"),
     addCustomer: AddRecord("customer"),
     addReview: AddRecord("review"),
+    addUrl: AddRecord("url"),
   },
 });
 

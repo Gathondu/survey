@@ -4,6 +4,7 @@ import {
   CustomerType,
   EmployeeType,
   ReviewType,
+  UrlType,
 } from "../types/index.js";
 import {
   Branch,
@@ -11,6 +12,7 @@ import {
   Customer,
   Employee,
   Review,
+  Url,
 } from "../models/index.js";
 import { GraphQLID, GraphQLList, GraphQLNonNull, GraphQLString } from "graphql";
 
@@ -20,6 +22,7 @@ const models: any = {
   customer: Customer,
   employee: Employee,
   review: Review,
+  url: Url,
 };
 
 const types: any = {
@@ -28,6 +31,7 @@ const types: any = {
   customer: CustomerType,
   employee: EmployeeType,
   review: ReviewType,
+  url: UrlType,
 };
 
 export const Record = (model: string) => ({

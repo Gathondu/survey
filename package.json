@@ -23,6 +23,7 @@
     "formik": "^2.2.9",
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
+    "nanoid": "^4.0.0",
     "node-fetch": "2.6.6",
     "notistack": "^2.0.8",
     "prop-types": "^15.8.1",

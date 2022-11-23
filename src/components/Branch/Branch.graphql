@@ -10,8 +10,18 @@ query Branch($id: ID!) {
   }
 }
 
-mutation addBranch($name: String!, $location: String!, $company: ID!) {
-  addBranch(name: $name, location: $location, company: $company) {
+mutation addBranch(
+  $name: String!
+  $location: String!
+  $company: ID!
+  $urlId: String!
+) {
+  addBranch(
+    name: $name
+    location: $location
+    company: $company
+    urlId: $urlId
+  ) {
     ...BranchData
   }
 }
@@ -21,6 +31,7 @@ fragment BranchData on Branch {
   name
   location
   url
+  urlId
   hidden
   company {
     ...CompanyData

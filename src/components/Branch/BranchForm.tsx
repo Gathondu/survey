@@ -10,6 +10,7 @@ import {
   useCompaniesQuery,
   useCompanyQuery,
   useBranchesQuery,
+  useAddUrlMutation,
 } from "utils/Graphql";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
@@ -18,6 +19,7 @@ import {
   AddBusinessOutlined,
   StoreOutlined,
 } from "@mui/icons-material";
+import { nanoid } from "nanoid";
 
 const validationSchema = yup.object({
   name: yup.string().required("Branch name is required"),
@@ -33,6 +35,7 @@ const BranchForm = () => {
   const [companies, setCompanies] = useState<any>([]);
   const [selectedCompany, setSelectedCompany] = useState<any>("");
   const [disabled, setDisabled] = useState(true);
+  const [urlId, setUrlId] = useState<string>("");
   const { data: companiesData, refetch: refreshCompanies } = useCompaniesQuery({
     recordsToGet: "all",
   });
@@ -52,6 +55,8 @@ const BranchForm = () => {
         (oldData: any = {}) => {
           if (oldData?.branches) {
             oldData.branches.push(branch);
+          } else {
+            oldData.branches = [branch];
           }
         }
       );
@@ -73,12 +78,37 @@ const BranchForm = () => {
         enqueueSnackbar(`${branch.name} created sucessfully`, {
           variant: "success",
         });
+        addUrl({ urlId, originalUrl: branch.url });
       }
       navigate(companyId ? companyData?.company?.url : branch.url);
     },
   });
 
+  const { mutate: addUrl } = useAddUrlMutation({
+    onSuccess: (data: any, error: any) => {
+      const { addUrl: url } = data;
+      queryClient.setQueryData(
+        ["Urls", { recordsToGet: "all" }],
+        (oldData: any = {}) => {
+          if (oldData?.urls) {
+            oldData.urls.push(url);
+          } else {
+            oldData.urls = [url];
+          }
+        }
+      );
+
+      if (url) {
+        enqueueSnackbar("QR Url created sucessfully", {
+          variant: "success",
+        });
+      }
+    },
+  });
+
   useEffect(() => {
+    setUrlId(nanoid());
+
     if (companyId && companyData) {
       setSelectedCompany(companyData?.company?.id);
       setCompanies([
@@ -123,6 +153,7 @@ const BranchForm = () => {
         name: values.name,
         location: values.location,
         company: values.company,
+        urlId,
       }),
   });
 

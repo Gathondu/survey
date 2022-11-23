@@ -23,6 +23,7 @@ export type Branch = {
   location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
+  urlId?: Maybe<Scalars['String']>;
 };
 
 export type Company = {
@@ -76,6 +77,7 @@ export type Mutation = {
   addCustomer?: Maybe<Customer>;
   addEmployee?: Maybe<Employee>;
   addReview?: Maybe<Review>;
+  addUrl?: Maybe<Url>;
 };
 
 
@@ -83,6 +85,7 @@ export type MutationAddBranchArgs = {
   company: Scalars['ID'];
   location: Scalars['String'];
   name: Scalars['String'];
+  urlId: Scalars['String'];
 };
 
 
@@ -121,6 +124,12 @@ export type MutationAddReviewArgs = {
   rating: Scalars['Int'];
 };
 
+
+export type MutationAddUrlArgs = {
+  originalUrl: Scalars['String'];
+  urlId: Scalars['String'];
+};
+
 export type Person = {
   countryCode?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -154,6 +163,8 @@ export type RootQueryType = {
   employees?: Maybe<Array<Maybe<Employee>>>;
   review?: Maybe<Review>;
   reviews?: Maybe<Array<Maybe<Review>>>;
+  url?: Maybe<Url>;
+  urls?: Maybe<Array<Maybe<Url>>>;
 };
 
 
@@ -206,30 +217,52 @@ export type RootQueryTypeReviewsArgs = {
   recordsToGet: Scalars['String'];
 };
 
+
+export type RootQueryTypeUrlArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryTypeUrlsArgs = {
+  recordsToGet: Scalars['String'];
+};
+
+export type Url = {
+  __typename?: 'Url';
+  clicks?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['String']>;
+  hidden?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['ID']>;
+  originalUrl?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']>;
+  urlId?: Maybe<Scalars['String']>;
+};
+
 export type BranchesQueryVariables = Exact<{
   recordsToGet: Scalars['String'];
 }>;
 
 
-export type BranchesQuery = { __typename?: 'RootQueryType', branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null> | null };
+export type BranchesQuery = { __typename?: 'RootQueryType', branches?: Array<{ __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null> | null };
 
 export type BranchQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type BranchQuery = { __typename?: 'RootQueryType', branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null };
+export type BranchQuery = { __typename?: 'RootQueryType', branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null };
 
 export type AddBranchMutationVariables = Exact<{
   name: Scalars['String'];
   location: Scalars['String'];
   company: Scalars['ID'];
+  urlId: Scalars['String'];
 }>;
 
 
-export type AddBranchMutation = { __typename?: 'Mutation', addBranch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null };
+export type AddBranchMutation = { __typename?: 'Mutation', addBranch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null };
 
-export type BranchDataFragment = { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null };
+export type BranchDataFragment = { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null };
 
 export type CompaniesQueryVariables = Exact<{
   recordsToGet: Scalars['String'];
@@ -289,14 +322,14 @@ export type EmployeesQueryVariables = Exact<{
 }>;
 
 
-export type EmployeesQuery = { __typename?: 'RootQueryType', employees?: Array<{ __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null> | null };
+export type EmployeesQuery = { __typename?: 'RootQueryType', employees?: Array<{ __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null> | null };
 
 export type EmployeeQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type EmployeeQuery = { __typename?: 'RootQueryType', employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null };
+export type EmployeeQuery = { __typename?: 'RootQueryType', employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null };
 
 export type AddEmployeeMutationVariables = Exact<{
   firstName: Scalars['String'];
@@ -309,23 +342,23 @@ export type AddEmployeeMutationVariables = Exact<{
 }>;
 
 
-export type AddEmployeeMutation = { __typename?: 'Mutation', addEmployee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null };
+export type AddEmployeeMutation = { __typename?: 'Mutation', addEmployee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null };
 
-export type EmployeeDataFragment = { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null };
+export type EmployeeDataFragment = { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null };
 
 export type ReviewsQueryVariables = Exact<{
   recordsToGet: Scalars['String'];
 }>;
 
 
-export type ReviewsQuery = { __typename?: 'RootQueryType', reviews?: Array<{ __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null } | null> | null };
+export type ReviewsQuery = { __typename?: 'RootQueryType', reviews?: Array<{ __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null } | null> | null };
 
 export type ReviewQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type ReviewQuery = { __typename?: 'RootQueryType', review?: { __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null } | null };
+export type ReviewQuery = { __typename?: 'RootQueryType', review?: { __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null } | null };
 
 export type AddReviewMutationVariables = Exact<{
   rating: Scalars['Int'];
@@ -335,9 +368,33 @@ export type AddReviewMutationVariables = Exact<{
 }>;
 
 
-export type AddReviewMutation = { __typename?: 'Mutation', addReview?: { __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null } | null };
+export type AddReviewMutation = { __typename?: 'Mutation', addReview?: { __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null } | null };
 
-export type ReviewDataFragment = { __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null };
+export type ReviewDataFragment = { __typename?: 'Review', id?: string | null, rating?: number | null, comment?: string | null, reviewedOn?: string | null, hidden?: boolean | null, url?: string | null, employee?: { __typename?: 'Employee', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, employeeId?: string | null, fullName?: string | null, fullId?: string | null, url?: string | null, hidden?: boolean | null, branch?: { __typename?: 'Branch', id?: string | null, name?: string | null, location?: string | null, url?: string | null, urlId?: string | null, hidden?: boolean | null, company?: { __typename?: 'Company', id?: string | null, name?: string | null, location?: string | null, website?: string | null, url?: string | null, hidden?: boolean | null, branches?: Array<{ __typename?: 'Branch', id?: string | null } | null> | null } | null, employees?: Array<{ __typename?: 'Employee', id?: string | null, fullName?: string | null } | null> | null } | null } | null, customer?: { __typename?: 'Customer', id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, phoneNumber?: string | null, promotions?: boolean | null, url?: string | null, hidden?: boolean | null, fullName?: string | null, fullDetails?: string | null } | null };
+
+export type UrlsQueryVariables = Exact<{
+  recordsToGet: Scalars['String'];
+}>;
+
+
+export type UrlsQuery = { __typename?: 'RootQueryType', urls?: Array<{ __typename?: 'Url', id?: string | null, urlId?: string | null, originalUrl?: string | null, clicks?: number | null, hidden?: boolean | null, createdAt?: string | null, updatedAt?: string | null } | null> | null };
+
+export type UrlQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type UrlQuery = { __typename?: 'RootQueryType', url?: { __typename?: 'Url', id?: string | null, urlId?: string | null, originalUrl?: string | null, clicks?: number | null, hidden?: boolean | null, createdAt?: string | null, updatedAt?: string | null } | null };
+
+export type AddUrlMutationVariables = Exact<{
+  urlId: Scalars['String'];
+  originalUrl: Scalars['String'];
+}>;
+
+
+export type AddUrlMutation = { __typename?: 'Mutation', addUrl?: { __typename?: 'Url', id?: string | null, urlId?: string | null, originalUrl?: string | null, clicks?: number | null, hidden?: boolean | null, createdAt?: string | null, updatedAt?: string | null } | null };
+
+export type UrlDataFragment = { __typename?: 'Url', id?: string | null, urlId?: string | null, originalUrl?: string | null, clicks?: number | null, hidden?: boolean | null, createdAt?: string | null, updatedAt?: string | null };
 
 export const CompanyDataFragmentDoc = `
     fragment CompanyData on Company {
@@ -358,6 +415,7 @@ export const BranchDataFragmentDoc = `
   name
   location
   url
+  urlId
   hidden
   company {
     ...CompanyData
@@ -416,6 +474,17 @@ export const ReviewDataFragmentDoc = `
 }
     ${EmployeeDataFragmentDoc}
 ${CustomerDataFragmentDoc}`;
+export const UrlDataFragmentDoc = `
+    fragment UrlData on Url {
+  id
+  urlId
+  originalUrl
+  clicks
+  hidden
+  createdAt
+  updatedAt
+}
+    `;
 export const BranchesDocument = `
     query Branches($recordsToGet: String!) {
   branches(recordsToGet: $recordsToGet) {
@@ -455,8 +524,8 @@ export const useBranchQuery = <
       options
     );
 export const AddBranchDocument = `
-    mutation addBranch($name: String!, $location: String!, $company: ID!) {
-  addBranch(name: $name, location: $location, company: $company) {
+    mutation addBranch($name: String!, $location: String!, $company: ID!, $urlId: String!) {
+  addBranch(name: $name, location: $location, company: $company, urlId: $urlId) {
     ...BranchData
   }
 }
@@ -704,5 +773,59 @@ export const useAddReviewMutation = <
     useMutation<AddReviewMutation, TError, AddReviewMutationVariables, TContext>(
       ['addReview'],
       (variables?: AddReviewMutationVariables) => fetchData<AddReviewMutation, AddReviewMutationVariables>(AddReviewDocument, variables)(),
+      options
+    );
+export const UrlsDocument = `
+    query Urls($recordsToGet: String!) {
+  urls(recordsToGet: $recordsToGet) {
+    ...UrlData
+  }
+}
+    ${UrlDataFragmentDoc}`;
+export const useUrlsQuery = <
+      TData = UrlsQuery,
+      TError = unknown
+    >(
+      variables: UrlsQueryVariables,
+      options?: UseQueryOptions<UrlsQuery, TError, TData>
+    ) =>
+    useQuery<UrlsQuery, TError, TData>(
+      ['Urls', variables],
+      fetchData<UrlsQuery, UrlsQueryVariables>(UrlsDocument, variables),
+      options
+    );
+export const UrlDocument = `
+    query Url($id: ID!) {
+  url(id: $id) {
+    ...UrlData
+  }
+}
+    ${UrlDataFragmentDoc}`;
+export const useUrlQuery = <
+      TData = UrlQuery,
+      TError = unknown
+    >(
+      variables: UrlQueryVariables,
+      options?: UseQueryOptions<UrlQuery, TError, TData>
+    ) =>
+    useQuery<UrlQuery, TError, TData>(
+      ['Url', variables],
+      fetchData<UrlQuery, UrlQueryVariables>(UrlDocument, variables),
+      options
+    );
+export const AddUrlDocument = `
+    mutation addUrl($urlId: String!, $originalUrl: String!) {
+  addUrl(urlId: $urlId, originalUrl: $originalUrl) {
+    ...UrlData
+  }
+}
+    ${UrlDataFragmentDoc}`;
+export const useAddUrlMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddUrlMutation, TError, AddUrlMutationVariables, TContext>) =>
+    useMutation<AddUrlMutation, TError, AddUrlMutationVariables, TContext>(
+      ['addUrl'],
+      (variables?: AddUrlMutationVariables) => fetchData<AddUrlMutation, AddUrlMutationVariables>(AddUrlDocument, variables)(),
       options
     );

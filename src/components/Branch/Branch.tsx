@@ -24,7 +24,6 @@ const Branch = () => {
     return <Typography>{`${error}`}</Typography>;
   }
   const { branch } = data;
-
   return (
     <>
       <Box sx={{ mb: 2 }}>
@@ -51,7 +50,10 @@ const Branch = () => {
       >
         Add Employee
       </Button>
-      <QRCode text={branch?.id!} title={branch?.name!} />
+      <QRCode
+        text={`${process.env.REACT_APP_BASE_URL}/${branch?.urlId}`}
+        title={branch?.name!}
+      />
     </>
   );
 };

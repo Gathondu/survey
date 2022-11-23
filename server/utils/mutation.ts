@@ -4,6 +4,7 @@ import {
   CustomerType,
   EmployeeType,
   ReviewType,
+  UrlType,
 } from "../types/index.js";
 import {
   Branch,
@@ -11,6 +12,7 @@ import {
   Customer,
   Employee,
   Review,
+  Url,
 } from "../models/index.js";
 import {
   GraphQLBoolean,
@@ -26,6 +28,7 @@ const models: any = {
   customer: Customer,
   employee: Employee,
   review: Review,
+  url: Url,
 };
 
 const types: any = {
@@ -34,6 +37,7 @@ const types: any = {
   customer: CustomerType,
   employee: EmployeeType,
   review: ReviewType,
+  url: UrlType,
 };
 
 const args: any = {
@@ -46,6 +50,7 @@ const args: any = {
     name: { type: new GraphQLNonNull(GraphQLString) },
     location: { type: new GraphQLNonNull(GraphQLString) },
     company: { type: new GraphQLNonNull(GraphQLID) },
+    urlId: { type: new GraphQLNonNull(GraphQLString) },
   },
   employee: {
     firstName: { type: new GraphQLNonNull(GraphQLString) },
@@ -69,6 +74,10 @@ const args: any = {
     comment: { type: new GraphQLNonNull(GraphQLString) },
     employee: { type: new GraphQLNonNull(GraphQLID) },
     customer: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  url: {
+    urlId: { type: new GraphQLNonNull(GraphQLString) },
+    originalUrl: { type: new GraphQLNonNull(GraphQLString) },
   },
 };
 

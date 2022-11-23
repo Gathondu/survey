@@ -1,0 +1,27 @@
+query Urls($recordsToGet: String!) {
+  urls(recordsToGet: $recordsToGet) {
+    ...UrlData
+  }
+}
+
+query Url($id: ID!) {
+  url(id: $id) {
+    ...UrlData
+  }
+}
+
+mutation addUrl($urlId: String!, $originalUrl: String!) {
+  addUrl(urlId: $urlId, originalUrl: $originalUrl) {
+    ...UrlData
+  }
+}
+
+fragment UrlData on Url {
+  id
+  urlId
+  originalUrl
+  clicks
+  hidden
+  createdAt
+  updatedAt
+}
