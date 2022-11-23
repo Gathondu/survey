@@ -25,6 +25,7 @@ const App = () => {
               backgroundColor: "#E7EBF0",
               padding: "3rem",
               mt: isMobile ? 7 : 8,
+              height: "100vh",
             }}
           >
             <Routes>
