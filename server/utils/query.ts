@@ -38,7 +38,7 @@ export const Record = (model: string) => ({
   type: types[model],
   args: { id: { type: new GraphQLNonNull(GraphQLID) } },
   async resolve(_: any, args: { id: string }) {
-    let res = await models[model].findById(args.id);
+    let res = await models[model].findById(args.id).exec();
     if (res) return res;
     return `Error fetching ${models[model]} from the database.`;
   },

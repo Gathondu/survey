@@ -16,7 +16,7 @@ const ReviewSchema = new Schema(
     customer: { type: Schema.Types.ObjectId, ref: "Customer" },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: { createdAt: "reviewed_on", updatedAt: "updated_at" } }
+  { timestamps: { createdAt: "reviewedOn" } }
 );
 
 ReviewSchema.virtual("url").get(function () {

@@ -26,4 +26,6 @@ fragment CompanyData on Company {
   branches {
     id
   }
+  createdAt
+  updatedAt
 }

@@ -9,5 +9,7 @@ export const Person = new GraphQLInterfaceType({
     phoneNumber: { type: GraphQLString },
     email: { type: GraphQLString },
     fullName: { type: GraphQLString },
+    createdAt: { type: GraphQLString },
+    updatedAt: { type: GraphQLString },
   }),
 });

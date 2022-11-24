@@ -7,7 +7,7 @@ const UrlSchema = new Schema(
     clicks: { type: Number, required: true, default: 0 },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+  { timestamps: true }
 );
 
 export type UrlType = InferSchemaType<typeof UrlSchema>;

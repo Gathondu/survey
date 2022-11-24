@@ -29,5 +29,7 @@ export const BranchType = new GraphQLObjectType({
     url: { type: GraphQLString },
     urlId: { type: GraphQLString },
     hidden: { type: GraphQLBoolean },
+    createdAt: { type: GraphQLString },
+    updatedAt: { type: GraphQLString },
   }),
 });

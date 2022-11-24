@@ -37,6 +37,7 @@ fragment ReviewData on Review {
     ...CustomerData
   }
   reviewedOn
+  updatedAt
   hidden
   url
 }

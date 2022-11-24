@@ -7,7 +7,7 @@ const CompanySchema = new Schema(
     website: { type: String },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+  { timestamps: true }
 );
 
 CompanySchema.virtual("url").get(function () {

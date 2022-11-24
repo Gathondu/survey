@@ -40,4 +40,6 @@ fragment BranchData on Branch {
     id
     fullName
   }
+  createdAt
+  updatedAt
 }

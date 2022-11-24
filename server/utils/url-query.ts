@@ -6,7 +6,7 @@ export const UrlRecord = () => ({
   type: UrlType,
   args: { urlId: { type: new GraphQLNonNull(GraphQLString) } },
   async resolve(_: any, args: { urlId: string }) {
-    let res = await Url.find({ urlId: args.urlId });
+    let res = await Url.findOne({ urlId: args.urlId }).exec();
     if (res) return res;
     return `Error fetching Url from the database.`;
   },

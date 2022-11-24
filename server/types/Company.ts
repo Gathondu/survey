@@ -23,5 +23,7 @@ export const CompanyType = new GraphQLObjectType({
         return Branch.find({ company: obj.id });
       },
     },
+    createdAt: { type: GraphQLString },
+    updatedAt: { type: GraphQLString },
   }),
 });

@@ -9,7 +9,7 @@ const BranchSchema = new Schema(
     urlId: { type: String, required: true },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+  { timestamps: true }
 );
 
 BranchSchema.virtual("url").get(function () {

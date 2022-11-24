@@ -41,4 +41,6 @@ fragment CustomerData on Customer {
   hidden
   fullName
   fullDetails
+  createdAt
+  updatedAt
 }

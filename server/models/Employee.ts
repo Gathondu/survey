@@ -11,7 +11,7 @@ const EmployeeSchema = new Schema(
     branch: { type: Schema.Types.ObjectId, ref: "Branch", required: true },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+  { timestamps: true }
 );
 
 EmployeeSchema.virtual("phoneNumber").get(function () {

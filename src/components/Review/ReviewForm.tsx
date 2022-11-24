@@ -40,16 +40,18 @@ const ReviewForm = () => {
 
   return (
     <AppModal isModalOpen={isOpen} closeModal={handleCloseModal}>
-      <Form submit={formik.handleSubmit}>
-        <Field
-          name="name"
-          label="Name"
-          variant="standard"
-          formik={formik}
-          fullWidth
-          Icon={AddBusinessOutlined}
-        />
-      </Form>
+      <>
+        <Form submit={formik.handleSubmit}>
+          <Field
+            name="name"
+            label="Name"
+            variant="standard"
+            formik={formik}
+            fullWidth
+            Icon={AddBusinessOutlined}
+          />
+        </Form>
+      </>
     </AppModal>
   );
 };

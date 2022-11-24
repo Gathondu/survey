@@ -27,6 +27,7 @@ export const ReviewType = new GraphQLObjectType({
       },
     },
     reviewedOn: { type: GraphQLString },
+    updatedAt: { type: GraphQLString },
     url: { type: GraphQLString },
     hidden: { type: GraphQLBoolean },
   }),

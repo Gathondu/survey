@@ -21,5 +21,7 @@ export const CustomerType = new GraphQLObjectType({
     fullDetails: { type: GraphQLString },
     promotions: { type: GraphQLBoolean },
     hidden: { type: GraphQLBoolean },
+    createdAt: { type: GraphQLString },
+    updatedAt: { type: GraphQLString },
   }),
 });

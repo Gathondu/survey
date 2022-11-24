@@ -35,5 +35,7 @@ export const EmployeeType = new GraphQLObjectType({
         return `${obj.branch.company.name}: ${obj.branch.name}`;
       },
     },
+    createdAt: { type: GraphQLString },
+    updatedAt: { type: GraphQLString },
   }),
 });

@@ -10,7 +10,7 @@ const CustomerSchema = new Schema(
     promotions: { type: Boolean, default: false },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+  { timestamps: true }
 );
 
 CustomerSchema.virtual("url").get(function () {
