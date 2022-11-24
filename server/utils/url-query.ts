@@ -12,7 +12,7 @@ export const UrlRecord = () => ({
     let res = await Url.findOne({ urlId: args.urlId }).exec();
     if (res) {
       if (!args.test) {
-        await res.update({ $inc: { clicks: 1 } });
+        await res.updateOne({ $inc: { clicks: 1 } });
       }
       return res;
     }
