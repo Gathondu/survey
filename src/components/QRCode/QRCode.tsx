@@ -1,20 +1,20 @@
 import { FC, useState } from "react";
 import QrCode from "qrcode";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import { saveAs } from "file-saver";
 import { QrCodeOutlined } from "@mui/icons-material";
 
 interface Props {
-  text: string;
+  url: string;
   title: string;
 }
-const QRCode: FC<Props> = ({ text, title }) => {
+const QRCode: FC<Props> = ({ url, title }) => {
   const [src, setSrc] = useState("");
 
   const downloadImg = () => {
     saveAs(src, `${title}.png`);
   };
-  QrCode.toDataURL(text).then(setSrc);
+  QrCode.toDataURL(url).then(setSrc);
   return (
     <Box
       sx={{
@@ -27,6 +27,17 @@ const QRCode: FC<Props> = ({ text, title }) => {
       <Button onClick={downloadImg} startIcon={<QrCodeOutlined />}>
         Download QR
       </Button>
+      {process.env.NODE_ENV === "development" && (
+        <Link
+          style={{ marginLeft: "2px" }}
+          href={`${url}?test=true`}
+          underline="hover"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Test Review Form
+        </Link>
+      )}
     </Box>
   );
 };

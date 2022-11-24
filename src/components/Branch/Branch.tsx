@@ -52,7 +52,7 @@ const Branch = () => {
         Add Employee
       </Button>
       <QRCode
-        text={`${process.env.REACT_APP_BASE_URL}/review/${branch?.urlId}`}
+        url={`${process.env.REACT_APP_BASE_URL}/review/${branch?.urlId}`}
         title={branch?.name!}
       />
     </>

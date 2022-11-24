@@ -3,15 +3,19 @@ import { Field, Form } from "components/Form";
 import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { AddBusinessOutlined } from "@mui/icons-material";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useUrlIdQuery } from "utils";
 import Typography from "@mui/material/Typography/Typography";
 
 const ReviewForm = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { urlId } = useParams();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams();
+  const test = searchParams.get("test");
   const { data, isLoading, isError, error } = useUrlIdQuery({
     urlId: urlId!,
+    test: !!test,
   });
   const handleCloseModal = () => setIsOpen(false);
   const formik = useFormik({
@@ -22,6 +26,7 @@ const ReviewForm = () => {
     onSubmit: (values) => {
       console.log(values);
       console.log(data);
+      console.log(test);
     },
   });
 

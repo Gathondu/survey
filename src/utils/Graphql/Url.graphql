@@ -10,8 +10,8 @@ query Url($id: ID!) {
   }
 }
 
-query UrlId($urlId: String!) {
-  urlRecord(urlId: $urlId) {
+query UrlId($urlId: String!, $test: Boolean!) {
+  urlRecord(urlId: $urlId, test: $test) {
     ...UrlData
   }
 }

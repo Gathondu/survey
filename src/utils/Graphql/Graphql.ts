@@ -236,6 +236,7 @@ export type RootQueryTypeUrlArgs = {
 
 
 export type RootQueryTypeUrlRecordArgs = {
+  test: Scalars['Boolean'];
   urlId: Scalars['String'];
 };
 
@@ -405,6 +406,7 @@ export type UrlQuery = { __typename?: 'RootQueryType', url?: { __typename?: 'Url
 
 export type UrlIdQueryVariables = Exact<{
   urlId: Scalars['String'];
+  test: Scalars['Boolean'];
 }>;
 
 
@@ -847,8 +849,8 @@ export const useUrlQuery = <
       options
     );
 export const UrlIdDocument = `
-    query UrlId($urlId: String!) {
-  urlRecord(urlId: $urlId) {
+    query UrlId($urlId: String!, $test: Boolean!) {
+  urlRecord(urlId: $urlId, test: $test) {
     ...UrlData
   }
 }
