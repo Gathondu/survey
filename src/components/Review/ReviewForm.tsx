@@ -1,14 +1,21 @@
 import AppModal from "components/Modal";
 import { Field, Form } from "components/Form";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useFormik } from "formik";
-import { AddBusinessOutlined } from "@mui/icons-material";
+import { AddBusinessOutlined, Radio } from "@mui/icons-material";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useUrlIdQuery } from "utils";
 import Typography from "@mui/material/Typography/Typography";
+import {
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+} from "@mui/material";
 
 const ReviewForm = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [service, setService] = useState<number>(0);
   const { urlId } = useParams();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,20 +50,27 @@ const ReviewForm = () => {
     return <Typography>{`${error}`}</Typography>;
   }
 
+  const handleServiceReview = (event: ChangeEvent<HTMLInputElement>) => {
+    setService(parseInt((event.target as HTMLInputElement).value));
+  };
+
   return (
     <AppModal isModalOpen={isOpen} closeModal={handleCloseModal}>
-      <>
-        <Form submit={formik.handleSubmit}>
-          <Field
-            name="name"
-            label="Name"
-            variant="standard"
-            formik={formik}
-            fullWidth
-            Icon={AddBusinessOutlined}
-          />
-        </Form>
-      </>
+      <FormControl>
+        <FormLabel>Service</FormLabel>
+        <RadioGroup
+          row
+          name="service"
+          value={service}
+          onChange={handleServiceReview}
+        >
+          <FormControlLabel value={1} control={<Radio />} label="😒" />
+          <FormControlLabel value={2} control={<Radio />} label="😒" />
+          <FormControlLabel value={3} control={<Radio />} label="😒" />
+          <FormControlLabel value={4} control={<Radio />} label="😒" />
+          <FormControlLabel value={5} control={<Radio />} label="😒" />
+        </RadioGroup>
+      </FormControl>
     </AppModal>
   );
 };
