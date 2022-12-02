@@ -67,3 +67,17 @@ yarn-error.log
 build
 .vercel
 *.deploy
+
+# next.js
+.next/
+out/
+
+# misc
+*.pem
+
+# debug
+.pnpm-debug.log*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
