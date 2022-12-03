@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build": "npx tsc",
-    "start": "node build/app.js",
+    "start": "yarn node build/app.js",
     "dev": "concurrently \"yarn build --watch\" \"nodemon -q build/app.js\""
-  }
+  },
+  "packageManager": "yarn@3.3.0"
 }
