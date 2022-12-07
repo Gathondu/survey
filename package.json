@@ -10,5 +10,10 @@
   "packageManager": "yarn@3.3.0",
   "devDependencies": {
     "turbo": "^1.6.3"
-  }
+  },
+  "workspaces": [
+    "apps/*",
+    "ui",
+    "utils"
+  ]
 }

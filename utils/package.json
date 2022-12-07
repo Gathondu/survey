@@ -1,0 +1,17 @@
+{
+  "name": "@survey/utils",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "yarn@3.3.0",
+  "scripts": {
+    "codegen": "graphql-codegen --config graphql.config.yaml --errors-only"
+  },
+  "dependencies": {
+    "graphql": "^16.6.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.13.8",
+    "@graphql-codegen/typescript-operations": "^2.5.5",
+    "@graphql-codegen/typescript-react-query": "^4.0.3"
+  }
+}
