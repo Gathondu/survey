@@ -1,18 +1,17 @@
 import { FC, ReactNode, FormEventHandler } from "react";
-import { useScreenSizeContext } from "@utils/Context";
 
 interface FProps {
   children: ReactNode;
   submit: FormEventHandler<HTMLFormElement>;
+  styles: {
+    width: string;
+  };
 }
-const Form: FC<FProps> = ({ children, submit }) => {
-  const { isMobile } = useScreenSizeContext();
+const Form: FC<FProps> = ({ children, submit, styles }) => {
+  const { width } = styles;
   return (
     <div style={{ textAlign: "center" }}>
-      <form
-        style={{ width: isMobile ? "100%" : "50%", display: "inline-block" }}
-        onSubmit={submit}
-      >
+      <form style={{ width, display: "inline-block" }} onSubmit={submit}>
         {children}
       </form>
     </div>

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useCustomerQuery } from "@survey/utils/graphql";
+import { useCustomerQuery } from "@utils/graphql";
 import {
   Box,
   Card,

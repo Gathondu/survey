@@ -10,7 +10,7 @@ import {
   useCompanyQuery,
   useBranchesQuery,
   useAddUrlMutation,
-} from "@survey/utils/graphql";
+} from "@utils/graphql";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import {
@@ -20,6 +20,7 @@ import {
 } from "@mui/icons-material";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
+import { useScreenSizeContext } from "@utils/Context";
 
 const validationSchema = yup.object({
   name: yup.string().required("Branch name is required"),
@@ -36,6 +37,7 @@ const BranchForm = () => {
   const [selectedCompany, setSelectedCompany] = useState<any>("");
   const [disabled, setDisabled] = useState(true);
   const [urlId, setUrlId] = useState<string>("");
+  const { isMobile } = useScreenSizeContext();
   const { data: companiesData, refetch: refreshCompanies } = useCompaniesQuery({
     recordsToGet: "all",
   });
@@ -158,7 +160,10 @@ const BranchForm = () => {
   });
 
   return (
-    <Form submit={formik.handleSubmit}>
+    <Form
+      submit={formik.handleSubmit}
+      styles={{ width: isMobile ? "100%" : "50%" }}
+    >
       <Field
         name="name"
         label="Name"

@@ -1,4 +1,4 @@
-import { useCompanyQuery } from "@survey/utils/graphql";
+import { useCompanyQuery } from "@utils/graphql";
 import {
   Box,
   Card,

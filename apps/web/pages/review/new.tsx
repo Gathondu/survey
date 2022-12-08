@@ -1,9 +1,9 @@
-import AppModal from "@@survey/ui/Modal";
-import { Field, Form } from "@@survey/ui/Form";
+import AppModal from "@survey/ui/Modal";
+import { Field, Form } from "@survey/ui/Form";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useFormik } from "formik";
 import { AddBusinessOutlined, Radio } from "@mui/icons-material";
-import { useUrlIdQuery } from "@survey/utils/graphql";
+import { useUrlIdQuery } from "@utils/graphql";
 import Typography from "@mui/material/Typography/Typography";
 import {
   FormControl,

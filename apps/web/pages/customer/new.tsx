@@ -1,17 +1,15 @@
 import { ChangeEvent, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field, PhoneInput, Form } from "@@survey/ui/Form";
+import { Field, PhoneInput, Form } from "@survey/ui/Form";
 import { Button, Box, FormControlLabel } from "@mui/material";
-import {
-  useAddCustomerMutation,
-  useCustomersQuery,
-} from "@survey/utils/graphql";
+import { useAddCustomerMutation, useCustomersQuery } from "@utils/graphql";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
 import { AddBusinessOutlined } from "@mui/icons-material";
 import { CountryData } from "react-phone-input-2";
 import { useRouter } from "next/router";
+import { useScreenSizeContext } from "@utils/Context";
 
 const validationSchema = yup.object({
   firstName: yup.string().required("First name is required"),
@@ -26,6 +24,7 @@ const CustomerForm = () => {
   const router = useRouter();
   const [countryCode, setCountryCode] = useState("");
   const [phone, setPhone] = useState("");
+  const { isMobile } = useScreenSizeContext();
   useCustomersQuery({
     recordsToGet: "all",
   });
@@ -84,7 +83,10 @@ const CustomerForm = () => {
   };
 
   return (
-    <Form submit={formik.handleSubmit}>
+    <Form
+      submit={formik.handleSubmit}
+      styles={{ width: isMobile ? "100%" : "50%" }}
+    >
       <Field
         name="firstName"
         label="First Name"

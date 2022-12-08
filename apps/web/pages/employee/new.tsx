@@ -1,19 +1,20 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Field, PhoneInput, Select, Form } from "@@survey/ui/Form";
+import { Field, PhoneInput, Select, Form } from "@survey/ui/Form";
 import { Button, Box, FormControlLabel } from "@mui/material";
 import {
   Branch,
   useAddEmployeeMutation,
   useBranchesQuery,
   useBranchQuery,
-} from "@survey/utils/graphql";
+} from "@utils/graphql";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "@tanstack/react-query";
 import { AddBusinessOutlined } from "@mui/icons-material";
 import { CountryData } from "react-phone-input-2";
 import { useRouter } from "next/router";
+import { useScreenSizeContext } from "@utils/Context";
 
 const validationSchema = yup.object({
   firstName: yup.string().required("First name is required"),
@@ -33,6 +34,7 @@ const EmployeeForm = () => {
   const [branches, setBranches] = useState<any>([]);
   const [selectedBranch, setSelectedBranch] = useState<any>("");
   const [disabled, setDisabled] = useState(true);
+  const { isMobile } = useScreenSizeContext();
   const { data: branchesData, refetch: refreshBranches } = useBranchesQuery({
     recordsToGet: "all",
   });
@@ -139,7 +141,10 @@ const EmployeeForm = () => {
   };
 
   return (
-    <Form submit={formik.handleSubmit}>
+    <Form
+      submit={formik.handleSubmit}
+      styles={{ width: isMobile ? "100%" : "50%" }}
+    >
       <Field
         name="firstName"
         label="First Name"

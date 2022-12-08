@@ -1,11 +1,13 @@
 import { FC } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { useScreenSizeContext } from "@utils/Context";
 
 interface IProps {
   records?: { value: string; label: string }[];
   setRecord: string;
   updateRecords: Function;
+  styles: {
+    textAlign: CanvasTextAlign;
+  };
 }
 
 const RecordsToggle: FC<IProps> = ({
@@ -16,6 +18,7 @@ const RecordsToggle: FC<IProps> = ({
   ],
   setRecord,
   updateRecords,
+  styles,
 }) => {
   const handleToggle = (
     event: React.MouseEvent<HTMLElement>,
@@ -24,12 +27,12 @@ const RecordsToggle: FC<IProps> = ({
     updateRecords(record);
   };
 
-  const { isMobile } = useScreenSizeContext();
+  const { textAlign } = styles;
 
   return (
     <div
       style={{
-        textAlign: isMobile ? "start" : "end",
+        textAlign,
         marginBottom: 2,
       }}
     >

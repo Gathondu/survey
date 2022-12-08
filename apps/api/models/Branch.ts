@@ -12,7 +12,7 @@ const BranchSchema = new Schema(
   { timestamps: true }
 );
 
-BranchSchema.virtual("url").get(function () {
+BranchSchema.virtual("url").get(function (this: BranchType) {
   return `/branch/${this._id}`;
 });
 

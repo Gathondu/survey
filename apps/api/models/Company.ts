@@ -10,7 +10,7 @@ const CompanySchema = new Schema(
   { timestamps: true }
 );
 
-CompanySchema.virtual("url").get(function () {
+CompanySchema.virtual("url").get(function (this: CompanyType) {
   return `/company/${this._id}`;
 });
 

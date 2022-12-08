@@ -15,8 +15,7 @@ import {
 } from "@mui/material";
 import { Menu, ChevronLeft } from "@mui/icons-material";
 import SideNav from "./SideNav";
-import { useScreenSizeContext } from "@utils/Context";
-import { SideNavRoutes } from "@utils/Routes";
+import { NextRouter } from "next/router";
 
 const drawerWidth = 240 - 38;
 
@@ -94,10 +93,17 @@ const Drawer = styled(MuiDrawer, {
 
 interface MainNavProps {
   children: ReactNode;
+  isMobile: boolean;
+  sideNavRoutes: any;
+  router: NextRouter;
 }
 
-const MainNav: FC<MainNavProps> = ({ children }) => {
-  const { isMobile } = useScreenSizeContext();
+const MainNav: FC<MainNavProps> = ({
+  children,
+  isMobile,
+  sideNavRoutes,
+  router,
+}) => {
   const [open, setOpen] = useState(isMobile ? false : true);
 
   useEffect(() => setOpen(!isMobile), [isMobile, setOpen]);
@@ -144,7 +150,7 @@ const MainNav: FC<MainNavProps> = ({ children }) => {
             <ChevronLeft />
           </IconButton>
         </DrawerHeader>
-        <SideNav routes={SideNavRoutes} />
+        <SideNav routes={sideNavRoutes} router={router} />
       </Drawer>
       {children}
     </Box>

@@ -4,6 +4,9 @@ const { parsed: surveyEnvs } = require("dotenv").config({
 });
 const webpack = require("webpack");
 const nextConfig = {
+  experimental: {
+    externalDir: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config) => {

@@ -1,4 +1,4 @@
-import { useEmployeeQuery } from "@survey/utils/graphql";
+import { useEmployeeQuery } from "@utils/graphql";
 import {
   Box,
   Card,

@@ -6,13 +6,15 @@ import {
   Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { useCompaniesQuery } from "@survey/utils/graphql";
-import RecordsToggle from "@@survey/ui/RecordsToggle";
+import { useCompaniesQuery } from "@utils/graphql";
+import RecordsToggle from "@survey/ui/RecordsToggle";
 import { useRouter } from "next/router";
+import { useScreenSizeContext } from "@utils/Context";
 
 const Companies = () => {
   const router = useRouter();
   const [records, setRecords] = useState("all");
+  const { isMobile } = useScreenSizeContext();
   const { data, isLoading, isError, error, refetch } = useCompaniesQuery({
     recordsToGet: records,
   });
@@ -29,7 +31,11 @@ const Companies = () => {
 
   return (
     <>
-      <RecordsToggle setRecord={records} updateRecords={setRecords} />
+      <RecordsToggle
+        setRecord={records}
+        updateRecords={setRecords}
+        styles={{ textAlign: isMobile ? "start" : "end" }}
+      />
       <Box
         sx={{
           display: "flex",

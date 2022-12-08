@@ -1,6 +1,5 @@
 import { ChangeEvent, FC } from "react";
 import PhoneInput, { CountryData } from "react-phone-input-2";
-import "react-phone-input-2/lib/material.css";
 
 interface PhoneProps {
   handlePhoneChange: (

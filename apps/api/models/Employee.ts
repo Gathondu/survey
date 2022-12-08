@@ -1,5 +1,7 @@
 import { Schema, InferSchemaType, model } from "mongoose";
 
+export type EmployeeType = InferSchemaType<typeof EmployeeSchema>;
+
 const EmployeeSchema = new Schema(
   {
     firstName: { type: String, required: true, maxLength: 20 },
@@ -14,23 +16,20 @@ const EmployeeSchema = new Schema(
   { timestamps: true }
 );
 
-EmployeeSchema.virtual("phoneNumber").get(function () {
+EmployeeSchema.virtual("phoneNumber").get(function (this: EmployeeType) {
   return `${this.countryCode} ${this.phone}`;
 });
 
-EmployeeSchema.virtual("fullName").get(function () {
+EmployeeSchema.virtual("fullName").get(function (this: EmployeeType) {
   return `${this.firstName} ${this.lastName}`;
 });
 
-EmployeeSchema.virtual("fullId").get(function () {
-  // @ts-ignore
+EmployeeSchema.virtual("fullId").get(function (this: EmployeeType) {
   return `${this.fullName} ${this.email} ${this.phoneNumber} ${this.employeeId}`;
 });
 
-EmployeeSchema.virtual("url").get(function () {
+EmployeeSchema.virtual("url").get(function (this: EmployeeType) {
   return `/employee/${this._id}`;
 });
-
-export type EmployeeType = InferSchemaType<typeof EmployeeSchema>;
 
 export const Employee = model("Employee", EmployeeSchema, "employees");

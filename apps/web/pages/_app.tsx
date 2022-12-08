@@ -1,12 +1,15 @@
 import "../styles/globals.css";
+import "react-phone-input-2/lib/material.css";
 import "../styles/phone-input.css";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SnackbarProvider } from "notistack";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
-import { MainNav, DrawerHeader } from "@@survey/ui/Navigation";
+import { MainNav, DrawerHeader } from "@survey/ui/Navigation";
 import { ScreenSizeProvider } from "@utils/Context";
+import { SideNavRoutes } from "@utils/Routes";
+import { useRouter } from "next/router";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -21,12 +24,17 @@ const client = new QueryClient({
 export default function App({ Component, pageProps }: AppProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const router = useRouter();
   return (
     <QueryClientProvider client={client}>
       <SnackbarProvider maxSnack={5}>
         <ScreenSizeProvider>
           <Box className="App">
-            <MainNav>
+            <MainNav
+              sideNavRoutes={SideNavRoutes}
+              isMobile={isMobile}
+              router={router}
+            >
               <DrawerHeader />
               <Box
                 component="main"

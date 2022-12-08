@@ -86,3 +86,5 @@ out/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+dist
+.turbo

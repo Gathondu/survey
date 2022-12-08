@@ -7,12 +7,13 @@ import {
   Collapse,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import type { Routes, Route } from "@utils/Types";
-import { useRouter } from "next/router";
+import { NextRouter } from "next/router";
 
-const SideNav: FC<{ routes: Routes[] }> = ({ routes }): JSX.Element => {
+const SideNav: FC<{ routes: any[]; router: NextRouter }> = ({
+  routes,
+  router,
+}): JSX.Element => {
   const [isOpen, setIsOpen] = useState<string[]>([]);
-  const router = useRouter();
   const handleClick = (parentIndex: number, header: string) => {
     const index = `${parentIndex}-${header}`;
 
@@ -33,7 +34,7 @@ const SideNav: FC<{ routes: Routes[] }> = ({ routes }): JSX.Element => {
       }}
       component="nav"
     >
-      {routes.map((route: Routes, parentIndex: number) => {
+      {routes.map((route: any, parentIndex: number) => {
         const { header, icon: Icon, links, link } = route;
         return (
           <div key={`${parentIndex}-${header}`}>
@@ -63,7 +64,7 @@ const SideNav: FC<{ routes: Routes[] }> = ({ routes }): JSX.Element => {
             )}
             {links &&
               links!.length > 0 &&
-              links?.map((link: Route, index: number) => {
+              links?.map((link: any, index: number) => {
                 const { title, icon: Icon, link: url } = link;
                 return (
                   <Collapse

@@ -1,4 +1,4 @@
-import { useBranchQuery } from "@survey/utils/graphql";
+import { useBranchQuery } from "@utils/graphql";
 import {
   Box,
   Card,

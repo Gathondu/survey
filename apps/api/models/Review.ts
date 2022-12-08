@@ -19,7 +19,7 @@ const ReviewSchema = new Schema(
   { timestamps: { createdAt: "reviewedOn" } }
 );
 
-ReviewSchema.virtual("url").get(function () {
+ReviewSchema.virtual("url").get(function (this: ReviewType) {
   return `/review/${this._id}`;
 });
 

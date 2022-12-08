@@ -5,14 +5,16 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import { useCustomersQuery } from "@survey/utils/graphql";
+import { useCustomersQuery } from "@utils/graphql";
 import { useState, useEffect } from "react";
-import RecordsToggle from "@@survey/ui/RecordsToggle";
+import RecordsToggle from "@survey/ui/RecordsToggle";
 import { useRouter } from "next/router";
+import { useScreenSizeContext } from "@utils/Context";
 
 const Customers = () => {
   const router = useRouter();
   const [records, setRecords] = useState("all");
+  const { isMobile } = useScreenSizeContext();
   const { data, isLoading, isError, error, refetch } = useCustomersQuery({
     recordsToGet: records,
   });
@@ -29,7 +31,11 @@ const Customers = () => {
 
   return (
     <>
-      <RecordsToggle setRecord={records} updateRecords={setRecords} />
+      <RecordsToggle
+        setRecord={records}
+        updateRecords={setRecords}
+        styles={{ textAlign: isMobile ? "start" : "end" }}
+      />
       <Box
         sx={{
           display: "flex",

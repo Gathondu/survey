@@ -1,0 +1,13 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "api": {
+      "dependsOn": ["^api"],
+      "outputs": ["build/**"]
+    },
+    "web": {
+      "dependsOn": ["^web"],
+      "outputs": [".next/**"]
+    }
+  }
+}

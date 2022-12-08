@@ -13,20 +13,20 @@ const CustomerSchema = new Schema(
   { timestamps: true }
 );
 
-CustomerSchema.virtual("url").get(function () {
+CustomerSchema.virtual("url").get(function (this: CustomerType) {
   return `/customer/${this._id}`;
 });
 
-CustomerSchema.virtual("fullName").get(function () {
+CustomerSchema.virtual("fullName").get(function (this: CustomerType) {
   return this.lastName
     ? `${this.firstName} ${this.lastName}`
     : `${this.firstName}`;
 });
-CustomerSchema.virtual("phoneNumber").get(function () {
+CustomerSchema.virtual("phoneNumber").get(function (this: CustomerType) {
   return `${this.countryCode} ${this.phone}`;
 });
 
-CustomerSchema.virtual("fullDetails").get(function () {
+CustomerSchema.virtual("fullDetails").get(function (this: CustomerType) {
   if (this.lastName && this.email) {
     /* @ts-ignore */
     return `${this.firstName} ${this.lastName}: PhoneNumber ${this.phoneNumber} Email: ${this.email}`;
