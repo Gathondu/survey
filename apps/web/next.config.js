@@ -5,7 +5,7 @@ const { parsed: surveyEnvs } = require("dotenv").config({
 const webpack = require("webpack");
 const nextConfig = {
   experimental: {
-    externalDir: true,
+    transpilePackages: ["@survey/ui"],
   },
   reactStrictMode: true,
   swcMinify: true,
