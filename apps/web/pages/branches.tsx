@@ -4,45 +4,45 @@ import {
   CardActionArea,
   CardContent,
   Typography,
-} from "@mui/material";
-import { useBranchesQuery } from "@utils/graphql";
-import { useState, useEffect } from "react";
-import RecordsToggle from "@survey/ui/RecordsToggle";
-import { useRouter } from "next/router";
-import { useScreenSizeContext } from "@utils/Context";
+} from '@mui/material'
+import { useBranchesQuery } from '../utils/graphql'
+import { useState, useEffect } from 'react'
+import RecordsToggle from 'ui/RecordsToggle'
+import { useRouter } from 'next/router'
+import { useScreenSizeContext } from 'utils/Context'
 
 const Branches = () => {
-  const router = useRouter();
-  const [records, setRecords] = useState("all");
-  const { isMobile } = useScreenSizeContext();
+  const router = useRouter()
+  const [records, setRecords] = useState('all')
+  const { isMobile } = useScreenSizeContext()
   const { data, isLoading, isError, error, refetch } = useBranchesQuery({
     recordsToGet: records,
-  });
+  })
 
-  useEffect(() => {}, [refetch, records]);
+  useEffect(() => {}, [refetch, records])
 
   if (isLoading || !data) {
-    return <Typography>Loading</Typography>;
+    return <Typography>Loading</Typography>
   }
   if (isError) {
-    return <Typography>{`${error}`}</Typography>;
+    return <Typography>{`${error}`}</Typography>
   }
-  const { branches } = data;
+  const { branches } = data
 
   return (
     <>
       <RecordsToggle
         setRecord={records}
         updateRecords={setRecords}
-        styles={{ textAlign: isMobile ? "start" : "end" }}
+        styles={{ textAlign: isMobile ? 'start' : 'end' }}
       />
       <Box
         sx={{
-          display: "flex",
-          width: "90%",
-          flexWrap: "wrap",
-          backgroundColor: "##E7EBF0",
-          "& > :not(style)": {
+          display: 'flex',
+          width: '90%',
+          flexWrap: 'wrap',
+          backgroundColor: '##E7EBF0',
+          '& > :not(style)': {
             m: 1,
             width: 128,
             height: 128,
@@ -65,7 +65,7 @@ const Branches = () => {
         ))}
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default Branches;
+export default Branches

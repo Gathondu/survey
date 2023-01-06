@@ -4,52 +4,52 @@ import {
   CardActionArea,
   CardContent,
   Typography,
-} from "@mui/material";
-import { useState, useEffect } from "react";
-import { useCompaniesQuery } from "@utils/graphql";
-import RecordsToggle from "@survey/ui/RecordsToggle";
-import { useRouter } from "next/router";
-import { useScreenSizeContext } from "@utils/Context";
+} from '@mui/material'
+import { useState, useEffect } from 'react'
+import { useCompaniesQuery } from '../utils/graphql'
+import RecordsToggle from 'ui/RecordsToggle'
+import { useRouter } from 'next/router'
+import { useScreenSizeContext } from 'utils/Context'
 
 const Companies = () => {
-  const router = useRouter();
-  const [records, setRecords] = useState("all");
-  const { isMobile } = useScreenSizeContext();
+  const router = useRouter()
+  const [records, setRecords] = useState('all')
+  const { isMobile } = useScreenSizeContext()
   const { data, isLoading, isError, error, refetch } = useCompaniesQuery({
     recordsToGet: records,
-  });
+  })
 
-  useEffect(() => {}, [refetch, records]);
+  useEffect(() => {}, [refetch, records])
 
   if (isLoading || !data) {
-    return <Typography>Loading</Typography>;
+    return <Typography>Loading</Typography>
   }
   if (isError) {
-    return <Typography>{`${error}`}</Typography>;
+    return <Typography>{`${error}`}</Typography>
   }
-  const { companies } = data;
+  const { companies } = data
 
   return (
     <>
       <RecordsToggle
         setRecord={records}
         updateRecords={setRecords}
-        styles={{ textAlign: isMobile ? "start" : "end" }}
+        styles={{ textAlign: isMobile ? 'start' : 'end' }}
       />
       <Box
         sx={{
-          display: "flex",
-          width: "90%",
-          flexWrap: "wrap",
-          backgroundColor: "##E7EBF0",
-          "& > :not(style)": {
+          display: 'flex',
+          width: '90%',
+          flexWrap: 'wrap',
+          backgroundColor: '##E7EBF0',
+          '& > :not(style)': {
             m: 1,
             width: 128,
             height: 128,
           },
         }}
       >
-        {companies?.map((company) => (
+        {companies?.map(company => (
           <Card key={`${company?.id}`}>
             <CardActionArea onClick={() => router.push(`${company?.url}`)}>
               <CardContent>
@@ -65,7 +65,7 @@ const Companies = () => {
         ))}
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default Companies;
+export default Companies

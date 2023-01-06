@@ -1,4 +1,4 @@
-import { useBranchQuery } from "@utils/graphql";
+import { useBranchQuery } from '../../utils/graphql'
 import {
   Box,
   Card,
@@ -6,26 +6,26 @@ import {
   CardContent,
   Typography,
   Button,
-} from "@mui/material";
-import { SupportAgentOutlined } from "@mui/icons-material";
-import QRCode from "@survey/ui/QRCode";
-import { useRouter } from "next/router";
+} from '@mui/material'
+import { SupportAgentOutlined } from '@mui/icons-material'
+import QRCode from 'ui/QRCode'
+import { useRouter } from 'next/router'
 
 const Branch = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  const router = useRouter()
+  const { id } = router.query
 
   const { data, isLoading, isError, error } = useBranchQuery({
     id: id?.toString()!,
-  });
+  })
 
   if (isLoading || !data) {
-    return <Typography>Loading</Typography>;
+    return <Typography>Loading</Typography>
   }
   if (isError) {
-    return <Typography>{`${error}`}</Typography>;
+    return <Typography>{`${error}`}</Typography>
   }
-  const { branch } = data;
+  const { branch } = data
 
   return (
     <>
@@ -58,7 +58,7 @@ const Branch = () => {
         title={branch?.name!}
       />
     </>
-  );
-};
+  )
+}
 
-export default Branch;
+export default Branch

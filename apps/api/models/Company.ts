@@ -1,4 +1,4 @@
-import { Schema, InferSchemaType, model } from "mongoose";
+import { Schema, InferSchemaType, model } from 'mongoose'
 
 const CompanySchema = new Schema(
   {
@@ -7,13 +7,15 @@ const CompanySchema = new Schema(
     website: { type: String },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-CompanySchema.virtual("url").get(function (this: CompanyType) {
-  return `/company/${this._id}`;
-});
+CompanySchema.virtual('url').get(function (this: CType) {
+  return `/company/${this._id}`
+})
 
-export type CompanyType = InferSchemaType<typeof CompanySchema>;
+export type CompanyType = InferSchemaType<typeof CompanySchema>
 
-export const Company = model("Company", CompanySchema, "companies");
+type CType = CompanyType & { _id: string }
+
+export const Company = model('Company', CompanySchema, 'companies')

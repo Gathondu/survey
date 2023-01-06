@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { Field, Form, Select } from "@survey/ui/Form";
-import { Button } from "@mui/material";
+import { useState, useEffect } from 'react'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { Field, Form, Select } from 'ui/Form'
+import { Button } from '@mui/material'
 import {
   Company,
   useAddBranchMutation,
@@ -10,127 +10,127 @@ import {
   useCompanyQuery,
   useBranchesQuery,
   useAddUrlMutation,
-} from "@utils/graphql";
-import { useQueryClient } from "@tanstack/react-query";
-import { useSnackbar } from "notistack";
+} from '../../utils/graphql'
+import { useQueryClient } from '@tanstack/react-query'
+import { useSnackbar } from 'notistack'
 import {
   GpsFixedOutlined,
   AddBusinessOutlined,
   StoreOutlined,
-} from "@mui/icons-material";
-import { nanoid } from "nanoid";
-import { useRouter } from "next/router";
-import { useScreenSizeContext } from "@utils/Context";
+} from '@mui/icons-material'
+import { nanoid } from 'nanoid'
+import { useRouter } from 'next/router'
+import { useScreenSizeContext } from 'utils/Context'
 
 const validationSchema = yup.object({
-  name: yup.string().required("Branch name is required"),
+  name: yup.string().required('Branch name is required'),
   location: yup.string(),
-  company: yup.string().required("Company is required"),
-});
+  company: yup.string().required('Company is required'),
+})
 
 const BranchForm = () => {
-  const router = useRouter();
-  const { cid: companyId } = router.query;
-  const { enqueueSnackbar } = useSnackbar();
-  const queryClient = useQueryClient();
-  const [companies, setCompanies] = useState<any>([]);
-  const [selectedCompany, setSelectedCompany] = useState<any>("");
-  const [disabled, setDisabled] = useState(true);
-  const [urlId, setUrlId] = useState<string>("");
-  const { isMobile } = useScreenSizeContext();
+  const router = useRouter()
+  const { cid: companyId } = router.query
+  const { enqueueSnackbar } = useSnackbar()
+  const queryClient = useQueryClient()
+  const [companies, setCompanies] = useState<any>([])
+  const [selectedCompany, setSelectedCompany] = useState<any>('')
+  const [disabled, setDisabled] = useState(true)
+  const [urlId, setUrlId] = useState<string>('')
+  const { isMobile } = useScreenSizeContext()
   const { data: companiesData, refetch: refreshCompanies } = useCompaniesQuery({
-    recordsToGet: "all",
-  });
+    recordsToGet: 'all',
+  })
   useBranchesQuery({
-    recordsToGet: "all",
-  });
+    recordsToGet: 'all',
+  })
   const { data: companyData } = useCompanyQuery(
     { id: companyId?.toString()! },
-    { enabled: !!companyId }
-  );
+    { enabled: !!companyId },
+  )
 
   const { mutate: addBranch } = useAddBranchMutation({
     onSuccess: (data: any, error: any) => {
-      const { addBranch: branch } = data;
+      const { addBranch: branch } = data
       queryClient.setQueryData(
-        ["Branches", { recordsToGet: "all" }],
+        ['Branches', { recordsToGet: 'all' }],
         (oldData: any = {}) => {
           if (oldData?.branches) {
-            oldData.branches.push(branch);
+            oldData.branches.push(branch)
           } else {
-            oldData.branches = [branch];
+            oldData.branches = [branch]
           }
-        }
-      );
+        },
+      )
       queryClient.setQueryData(
-        ["Companies", { recordsToGet: "all" }],
+        ['Companies', { recordsToGet: 'all' }],
         (oldData: any = {}) => {
           if (oldData.companies) {
             oldData.companies.map((company: Company) => {
               if (company.id === branch.company.id) {
-                company?.branches?.push(branch);
+                company?.branches?.push(branch)
               }
-              return company;
-            });
+              return company
+            })
           }
-        }
-      );
+        },
+      )
 
       if (branch) {
         enqueueSnackbar(`${branch.name} created sucessfully`, {
-          variant: "success",
-        });
-        addUrl({ urlId, originalUrl: branch.url });
+          variant: 'success',
+        })
+        addUrl({ urlId, originalUrl: branch.url })
       }
-      router.push(companyId ? companyData?.company?.url : branch.url);
+      router.push(companyId ? companyData?.company?.url : branch.url)
     },
-  });
+  })
 
   const { mutate: addUrl } = useAddUrlMutation({
     onSuccess: (data: any, error: any) => {
-      const { addUrl: url } = data;
+      const { addUrl: url } = data
       queryClient.setQueryData(
-        ["Urls", { recordsToGet: "all" }],
+        ['Urls', { recordsToGet: 'all' }],
         (oldData: any = {}) => {
           if (oldData?.urls) {
-            oldData.urls.push(url);
+            oldData.urls.push(url)
           } else {
-            oldData.urls = [url];
+            oldData.urls = [url]
           }
-        }
-      );
+        },
+      )
 
       if (url) {
-        enqueueSnackbar("QR Url created sucessfully", {
-          variant: "success",
-        });
+        enqueueSnackbar('QR Url created sucessfully', {
+          variant: 'success',
+        })
       }
     },
-  });
+  })
 
   useEffect(() => {
-    setUrlId(nanoid());
+    setUrlId(nanoid())
 
     if (companyId && companyData) {
-      setSelectedCompany(companyData?.company?.id);
+      setSelectedCompany(companyData?.company?.id)
       setCompanies([
         { name: companyData?.company?.name, value: companyData?.company?.id },
-      ]);
+      ])
     } else if (companiesData && companiesData.companies) {
-      setDisabled(false);
+      setDisabled(false)
 
       if (companiesData?.companies?.length > 0) {
         /**@ts-ignore */
-        setSelectedCompany(companiesData?.companies[0]?.id);
+        setSelectedCompany(companiesData?.companies[0]?.id)
         setCompanies(
           companiesData?.companies?.map((company: any) => ({
             name: company?.name,
             value: company?.id,
-          }))
-        );
+          })),
+        )
       }
     } else {
-      refreshCompanies();
+      refreshCompanies()
     }
   }, [
     setDisabled,
@@ -140,29 +140,29 @@ const BranchForm = () => {
     companyId,
     companiesData,
     refreshCompanies,
-  ]);
+  ])
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      name: "",
-      location: "",
+      name: '',
+      location: '',
       company: selectedCompany,
     },
     validationSchema,
-    onSubmit: (values) =>
+    onSubmit: values =>
       addBranch({
         name: values.name,
         location: values.location,
         company: values.company,
         urlId,
       }),
-  });
+  })
 
   return (
     <Form
       submit={formik.handleSubmit}
-      styles={{ width: isMobile ? "100%" : "50%" }}
+      styles={{ width: isMobile ? '100%' : '50%' }}
     >
       <Field
         name="name"
@@ -202,7 +202,7 @@ const BranchForm = () => {
         Add Branch
       </Button>
     </Form>
-  );
-};
+  )
+}
 
-export default BranchForm;
+export default BranchForm

@@ -1,13 +1,13 @@
 {
-  "name": "@survey/utils",
+  "name": "utils",
   "private": true,
   "version": "0.0.0",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "packageManager": "yarn@3.3.0",
   "scripts": {
     "codegen": "graphql-codegen --config graphql.config.yaml --errors-only",
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "eslint"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.16.1",
@@ -16,9 +16,9 @@
     "@graphql-codegen/typescript-react-query": "^4.0.6",
     "@types/node": "^18.11.11",
     "eslint": "^8.29.0",
-    "eslint-config-custom": "workspace:*",
+    "eslint-config-custom": "*",
     "graphql": "^16.6.0",
-    "tsconfig": "workspace:*",
+    "tsconfig": "*",
     "typescript": "^4.9.4"
   }
 }

@@ -1,56 +1,56 @@
-import AppModal from "@survey/ui/Modal";
-import { Field, Form } from "@survey/ui/Form";
-import { useState, useEffect, ChangeEvent } from "react";
-import { useFormik } from "formik";
-import { AddBusinessOutlined, Radio } from "@mui/icons-material";
-import { useUrlIdQuery } from "@utils/graphql";
-import Typography from "@mui/material/Typography/Typography";
+import AppModal from 'ui/Modal'
+import { Field, Form } from 'ui/Form'
+import { useState, useEffect, ChangeEvent } from 'react'
+import { useFormik } from 'formik'
+import { AddBusinessOutlined, Radio } from '@mui/icons-material'
+import { useUrlIdQuery } from '../../utils/graphql'
+import { Typography } from '@mui/material'
 import {
   FormControl,
   FormLabel,
   RadioGroup,
   FormControlLabel,
-} from "@mui/material";
-import { useRouter } from "next/router";
+} from '@mui/material'
+import { useRouter } from 'next/router'
 
 const ReviewForm = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [service, setService] = useState<number>(0);
-  const router = useRouter();
-  const { uid: urlId, test } = router.query;
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [service, setService] = useState<number>(0)
+  const router = useRouter()
+  const { uid: urlId, test } = router.query
   const { data, isLoading, isError, error } = useUrlIdQuery({
     urlId: urlId?.toString()!,
     test: !!test,
-  });
-  const handleCloseModal = () => setIsOpen(false);
+  })
+  const handleCloseModal = () => setIsOpen(false)
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      name: "",
+      name: '',
     },
-    onSubmit: (values) => {
-      console.log(values);
-      console.log(data);
-      console.log(test);
+    onSubmit: values => {
+      console.log(values)
+      console.log(data)
+      console.log(test)
     },
-  });
+  })
 
   useEffect(() => {
     if (!isLoading) {
-      setIsOpen(true);
+      setIsOpen(true)
     }
-  }, [isLoading]);
+  }, [isLoading])
 
   if (isLoading || !data) {
-    return <Typography>Loading</Typography>;
+    return <Typography>Loading</Typography>
   }
   if (isError) {
-    return <Typography>{`${error}`}</Typography>;
+    return <Typography>{`${error}`}</Typography>
   }
 
   const handleServiceReview = (event: ChangeEvent<HTMLInputElement>) => {
-    setService(parseInt((event.target as HTMLInputElement).value));
-  };
+    setService(parseInt((event.target as HTMLInputElement).value))
+  }
 
   return (
     <AppModal isModalOpen={isOpen} closeModal={handleCloseModal}>
@@ -70,7 +70,7 @@ const ReviewForm = () => {
         </RadioGroup>
       </FormControl>
     </AppModal>
-  );
-};
+  )
+}
 
-export default ReviewForm;
+export default ReviewForm

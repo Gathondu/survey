@@ -1,27 +1,27 @@
-import { useRouter } from "next/router";
-import { useCustomerQuery } from "@utils/graphql";
+import { useRouter } from 'next/router'
+import { useCustomerQuery } from '../../utils/graphql'
 import {
   Box,
   Card,
   CardActionArea,
   CardContent,
   Typography,
-} from "@mui/material";
+} from '@mui/material'
 
 const Customer = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  const router = useRouter()
+  const { id } = router.query
   const { data, isLoading, isError, error } = useCustomerQuery({
     id: id?.toString()!,
-  });
+  })
 
   if (isLoading || !data) {
-    return <Typography>Loading</Typography>;
+    return <Typography>Loading</Typography>
   }
   if (isError) {
-    return <Typography>{`${error}`}</Typography>;
+    return <Typography>{`${error}`}</Typography>
   }
-  const { customer } = data;
+  const { customer } = data
 
   return (
     <>
@@ -40,7 +40,7 @@ const Customer = () => {
         </Card>
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default Customer;
+export default Customer

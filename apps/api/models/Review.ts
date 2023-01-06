@@ -1,4 +1,4 @@
-import { Schema, InferSchemaType, model } from "mongoose";
+import { Schema, InferSchemaType, model } from 'mongoose'
 
 const ReviewSchema = new Schema(
   {
@@ -6,23 +6,24 @@ const ReviewSchema = new Schema(
       type: Number,
       min: 0,
       max: 5,
-      required: [true, "You must give a rating!"],
+      required: [true, 'You must give a rating!'],
     },
     comment: { type: String },
     employee: {
       type: Schema.Types.ObjectId,
-      ref: "Employee",
+      ref: 'Employee',
     },
-    customer: { type: Schema.Types.ObjectId, ref: "Customer" },
+    customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: { createdAt: "reviewedOn" } }
-);
+  { timestamps: { createdAt: 'reviewedOn' } },
+)
 
-ReviewSchema.virtual("url").get(function (this: ReviewType) {
-  return `/review/${this._id}`;
-});
+ReviewSchema.virtual('url').get(function (this: RType) {
+  return `/review/${this._id}`
+})
 
-export type ReviewType = InferSchemaType<typeof ReviewSchema>;
+export type ReviewType = InferSchemaType<typeof ReviewSchema>
+type RType = ReviewType & { _id: string }
 
-export const Review = model("Review", ReviewSchema, "reviews");
+export const Review = model('Review', ReviewSchema, 'reviews')

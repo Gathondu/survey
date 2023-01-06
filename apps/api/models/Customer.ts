@@ -1,4 +1,4 @@
-import { Schema, InferSchemaType, model } from "mongoose";
+import { Schema, InferSchemaType, model } from 'mongoose'
 
 const CustomerSchema = new Schema(
   {
@@ -10,35 +10,37 @@ const CustomerSchema = new Schema(
     promotions: { type: Boolean, default: false },
     hidden: { type: Boolean, default: false },
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-CustomerSchema.virtual("url").get(function (this: CustomerType) {
-  return `/customer/${this._id}`;
-});
+CustomerSchema.virtual('url').get(function (this: CUType) {
+  return `/customer/${this._id}`
+})
 
-CustomerSchema.virtual("fullName").get(function (this: CustomerType) {
+CustomerSchema.virtual('fullName').get(function (this: CustomerType) {
   return this.lastName
     ? `${this.firstName} ${this.lastName}`
-    : `${this.firstName}`;
-});
-CustomerSchema.virtual("phoneNumber").get(function (this: CustomerType) {
-  return `${this.countryCode} ${this.phone}`;
-});
+    : `${this.firstName}`
+})
+CustomerSchema.virtual('phoneNumber').get(function (this: CustomerType) {
+  return `${this.countryCode} ${this.phone}`
+})
 
-CustomerSchema.virtual("fullDetails").get(function (this: CustomerType) {
+CustomerSchema.virtual('fullDetails').get(function (this: CustomerType) {
   if (this.lastName && this.email) {
     /* @ts-ignore */
-    return `${this.firstName} ${this.lastName}: PhoneNumber ${this.phoneNumber} Email: ${this.email}`;
+    return `${this.firstName} ${this.lastName}: PhoneNumber ${this.phoneNumber} Email: ${this.email}`
   } else if (!this.lastName && this.email) {
     /* @ts-ignore */
-    return `${this.firstName}: PhoneNumber ${this.phoneNumber} Email: ${this.email}`;
+    return `${this.firstName}: PhoneNumber ${this.phoneNumber} Email: ${this.email}`
   } else {
     /* @ts-ignore */
-    return `${this.firstName}: PhoneNumber ${this.phoneNumber}`;
+    return `${this.firstName}: PhoneNumber ${this.phoneNumber}`
   }
-});
+})
 
-export type CustomerType = InferSchemaType<typeof CustomerSchema>;
+export type CustomerType = InferSchemaType<typeof CustomerSchema>
 
-export const Customer = model("Customer", CustomerSchema, "customers");
+type CUType = CustomerType & { _id: string }
+
+export const Customer = model('Customer', CustomerSchema, 'customers')

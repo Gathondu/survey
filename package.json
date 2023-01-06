@@ -1,6 +1,7 @@
 {
+  "name": "survey",
+  "version": "0.0.0",
   "private": true,
-  "packageManager": "yarn@3.3.0",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -9,12 +10,18 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "codegen": "yarn workspace @survey/utils codegen"
+    "codegen": "yarn workspace utils codegen",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "eslint": "8.29.0",
-    "eslint-config-custom": "workspace:*",
-    "prettier": "^2.8.1",
-    "turbo": "^1.6.3"
-  }
+    "eslint": "latest",
+    "eslint-config-custom": "*",
+    "prettier": "latest",
+    "turbo": "latest",
+    "typescript": "latest"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "yarn@3.3.0"
 }

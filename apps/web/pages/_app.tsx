@@ -6,9 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SnackbarProvider } from "notistack";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
-import { MainNav, DrawerHeader } from "@survey/ui/Navigation";
-import { ScreenSizeProvider } from "@utils/Context";
-import { SideNavRoutes } from "@utils/Routes";
+import { MainNav, DrawerHeader } from "ui/Navigation";
+import { ScreenSizeProvider } from "utils/Context";
+import { SideNavRoutes } from "utils/Routes";
 import { useRouter } from "next/router";
 
 const client = new QueryClient({

@@ -1,73 +1,73 @@
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { Field, Form } from "@survey/ui/Form";
-import { Button } from "@mui/material";
-import { useAddCompanyMutation, useCompaniesQuery } from "@utils/graphql";
-import { useSnackbar } from "notistack";
-import { useQueryClient } from "@tanstack/react-query";
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { Field, Form } from 'ui/Form'
+import { Button } from '@mui/material'
+import { useAddCompanyMutation, useCompaniesQuery } from '../../utils/graphql'
+import { useSnackbar } from 'notistack'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   GpsFixedOutlined,
   AddBusinessOutlined,
   HttpOutlined,
-} from "@mui/icons-material";
-import { useRouter } from "next/router";
-import { useScreenSizeContext } from "@utils/Context";
+} from '@mui/icons-material'
+import { useRouter } from 'next/router'
+import { useScreenSizeContext } from 'utils/Context'
 
 const validationSchema = yup.object({
-  name: yup.string().required("Company name is required"),
+  name: yup.string().required('Company name is required'),
   location: yup.string(),
   website: yup.string(),
-});
+})
 
 const CompanyForm = () => {
-  const { enqueueSnackbar } = useSnackbar();
-  const queryClient = useQueryClient();
-  const router = useRouter();
-  const { isMobile } = useScreenSizeContext();
+  const { enqueueSnackbar } = useSnackbar()
+  const queryClient = useQueryClient()
+  const router = useRouter()
+  const { isMobile } = useScreenSizeContext()
   useCompaniesQuery({
-    recordsToGet: "all",
-  });
+    recordsToGet: 'all',
+  })
   const { mutate: addCompany } = useAddCompanyMutation({
     onSuccess: (data: any, error: any) => {
-      const { addCompany: company } = data;
+      const { addCompany: company } = data
       queryClient.setQueryData(
-        ["Companies", { recordsToGet: "all" }],
+        ['Companies', { recordsToGet: 'all' }],
         (oldData: any = {}) => {
           if (oldData.companies) {
-            oldData.companies.push(company);
+            oldData.companies.push(company)
           }
-        }
-      );
+        },
+      )
 
       if (company) {
         enqueueSnackbar(`${company.name} created sucessfully`, {
-          variant: "success",
-        });
+          variant: 'success',
+        })
       }
 
-      router.push(company.url);
+      router.push(company.url)
     },
-  });
+  })
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      location: "",
-      website: "",
+      name: '',
+      location: '',
+      website: '',
     },
     validationSchema,
-    onSubmit: (values) =>
+    onSubmit: values =>
       addCompany({
         name: values.name,
         location: values.location,
         website: values.website,
       }),
-  });
+  })
 
   return (
     <Form
       submit={formik.handleSubmit}
-      styles={{ width: isMobile ? "100%" : "50%" }}
+      styles={{ width: isMobile ? '100%' : '50%' }}
     >
       <Field
         name="name"
@@ -104,7 +104,7 @@ const CompanyForm = () => {
         Add Company
       </Button>
     </Form>
-  );
-};
+  )
+}
 
-export default CompanyForm;
+export default CompanyForm

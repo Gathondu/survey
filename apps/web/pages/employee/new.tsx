@@ -1,106 +1,106 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { Field, PhoneInput, Select, Form } from "@survey/ui/Form";
-import { Button, Box, FormControlLabel } from "@mui/material";
+import { ChangeEvent, useState, useEffect } from 'react'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { Field, PhoneInput, Select, Form } from 'ui/Form'
+import { Button, Box, FormControlLabel } from '@mui/material'
 import {
   Branch,
   useAddEmployeeMutation,
   useBranchesQuery,
   useBranchQuery,
-} from "@utils/graphql";
-import { useSnackbar } from "notistack";
-import { useQueryClient } from "@tanstack/react-query";
-import { AddBusinessOutlined } from "@mui/icons-material";
-import { CountryData } from "react-phone-input-2";
-import { useRouter } from "next/router";
-import { useScreenSizeContext } from "@utils/Context";
+} from '../../utils/graphql'
+import { useSnackbar } from 'notistack'
+import { useQueryClient } from '@tanstack/react-query'
+import { AddBusinessOutlined } from '@mui/icons-material'
+import { CountryData } from 'react-phone-input-2'
+import { useRouter } from 'next/router'
+import { useScreenSizeContext } from 'utils/Context'
 
 const validationSchema = yup.object({
-  firstName: yup.string().required("First name is required"),
+  firstName: yup.string().required('First name is required'),
   lastName: yup.string(),
-  email: yup.string().required("Please enter a valid email address"),
-  employeeId: yup.string().required("Please add employee id"),
-  branch: yup.string().required("Please select associated branch"),
-});
+  email: yup.string().required('Please enter a valid email address'),
+  employeeId: yup.string().required('Please add employee id'),
+  branch: yup.string().required('Please select associated branch'),
+})
 
 const EmployeeForm = () => {
-  const router = useRouter();
-  const { bid: branchId } = router.query;
-  const { enqueueSnackbar } = useSnackbar();
-  const queryClient = useQueryClient();
-  const [countryCode, setCountryCode] = useState("");
-  const [phone, setPhone] = useState("");
-  const [branches, setBranches] = useState<any>([]);
-  const [selectedBranch, setSelectedBranch] = useState<any>("");
-  const [disabled, setDisabled] = useState(true);
-  const { isMobile } = useScreenSizeContext();
+  const router = useRouter()
+  const { bid: branchId } = router.query
+  const { enqueueSnackbar } = useSnackbar()
+  const queryClient = useQueryClient()
+  const [countryCode, setCountryCode] = useState('')
+  const [phone, setPhone] = useState('')
+  const [branches, setBranches] = useState<any>([])
+  const [selectedBranch, setSelectedBranch] = useState<any>('')
+  const [disabled, setDisabled] = useState(true)
+  const { isMobile } = useScreenSizeContext()
   const { data: branchesData, refetch: refreshBranches } = useBranchesQuery({
-    recordsToGet: "all",
-  });
+    recordsToGet: 'all',
+  })
   useBranchesQuery({
-    recordsToGet: "all",
-  });
+    recordsToGet: 'all',
+  })
   const { data: branchData } = useBranchQuery(
     { id: branchId?.toString()! },
-    { enabled: !!branchId }
-  );
+    { enabled: !!branchId },
+  )
 
   const { mutate: addEmployee } = useAddEmployeeMutation({
     onSuccess: (data: any, error: any) => {
-      const { addEmployee: employee } = data;
+      const { addEmployee: employee } = data
       queryClient.setQueryData(
-        ["Employees", { recordsToGet: "all" }],
+        ['Employees', { recordsToGet: 'all' }],
         (oldData: any = {}) => {
           if (oldData?.employees) {
-            oldData.employees.push(employee);
+            oldData.employees.push(employee)
           }
-        }
-      );
+        },
+      )
       queryClient.setQueryData(
-        ["Branches", { recordsToGet: "all" }],
+        ['Branches', { recordsToGet: 'all' }],
         (oldData: any = {}) => {
           if (oldData.branches) {
             oldData.branches.map((branch: Branch) => {
               if (branch.id === employee.branch.id) {
-                branch?.employees?.push(employee);
+                branch?.employees?.push(employee)
               }
-              return branch;
-            });
+              return branch
+            })
           }
-        }
-      );
+        },
+      )
 
       if (employee) {
         enqueueSnackbar(`${employee.name} created sucessfully`, {
-          variant: "success",
-        });
+          variant: 'success',
+        })
       }
-      router.push(branchId ? branchData?.branch?.url : employee.url);
+      router.push(branchId ? branchData?.branch?.url : employee.url)
     },
-  });
+  })
 
   useEffect(() => {
     if (branchId && branchData) {
-      setSelectedBranch(branchData?.branch?.id);
+      setSelectedBranch(branchData?.branch?.id)
       setBranches([
         { name: branchData?.branch?.name, value: branchData?.branch?.id },
-      ]);
+      ])
     } else if (branchesData && branchesData.branches) {
-      setDisabled(false);
+      setDisabled(false)
 
       if (branchesData?.branches?.length > 0) {
         /**@ts-ignore */
-        setSelectedBranch(branchesData?.branches[0]?.id);
+        setSelectedBranch(branchesData?.branches[0]?.id)
         setBranches(
           branchesData?.branches?.map((branch: any) => ({
             name: branch?.name,
             value: branch?.id,
-          }))
-        );
+          })),
+        )
       }
     } else {
-      refreshBranches();
+      refreshBranches()
     }
   }, [
     setDisabled,
@@ -110,40 +110,40 @@ const EmployeeForm = () => {
     branchId,
     branchesData,
     refreshBranches,
-  ]);
+  ])
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstName: "",
-      lastName: "",
+      firstName: '',
+      lastName: '',
       branch: selectedBranch,
-      countryCode: "",
-      phone: "",
-      employeeId: "",
-      email: "",
+      countryCode: '',
+      phone: '',
+      employeeId: '',
+      email: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      Object.assign(values, { phone, countryCode });
-      addEmployee(values);
+    onSubmit: values => {
+      Object.assign(values, { phone, countryCode })
+      addEmployee(values)
     },
-  });
+  })
 
   const handlePhoneChange = (
     value: string,
     data: CountryData,
     event: ChangeEvent,
-    formattedValue: string
+    formattedValue: string,
   ): void => {
-    setPhone(value.slice(data.dialCode.length));
-    setCountryCode(`+${data.dialCode}`);
-  };
+    setPhone(value.slice(data.dialCode.length))
+    setCountryCode(`+${data.dialCode}`)
+  }
 
   return (
     <Form
       submit={formik.handleSubmit}
-      styles={{ width: isMobile ? "100%" : "50%" }}
+      styles={{ width: isMobile ? '100%' : '50%' }}
     >
       <Field
         name="firstName"
@@ -206,7 +206,7 @@ const EmployeeForm = () => {
         Add Employee
       </Button>
     </Form>
-  );
-};
+  )
+}
 
-export default EmployeeForm;
+export default EmployeeForm

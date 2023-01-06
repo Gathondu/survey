@@ -1,4 +1,4 @@
-import { useCompanyQuery } from "@utils/graphql";
+import { useCompanyQuery } from '../../utils/graphql'
 import {
   Box,
   Card,
@@ -6,24 +6,24 @@ import {
   CardContent,
   Button,
   Typography,
-} from "@mui/material";
-import { AddBusinessOutlined } from "@mui/icons-material";
-import { useRouter } from "next/router";
+} from '@mui/material'
+import { AddBusinessOutlined } from '@mui/icons-material'
+import { useRouter } from 'next/router'
 
 const Company = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  const router = useRouter()
+  const { id } = router.query
   const { data, isLoading, isError, error } = useCompanyQuery({
     id: id?.toString()!,
-  });
+  })
 
   if (isLoading || !data) {
-    return <Typography>Loading</Typography>;
+    return <Typography>Loading</Typography>
   }
   if (isError) {
-    return <Typography>{`${error}`}</Typography>;
+    return <Typography>{`${error}`}</Typography>
   }
-  const { company } = data;
+  const { company } = data
   return (
     <Box>
       <Card
@@ -51,7 +51,7 @@ const Company = () => {
         Add Branch
       </Button>
     </Box>
-  );
-};
+  )
+}
 
-export default Company;
+export default Company
