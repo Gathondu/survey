@@ -1,3 +1,3 @@
-import app from "../server/build/app.js";
+import app from '../apps/api/build/app'
 
-export default app;
+export default app

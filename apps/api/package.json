@@ -11,7 +11,7 @@
     "lint": "eslint",
     "build": "tsc",
     "start": "yarn node ./build/app.js",
-    "dev": "rm -rf build && concurrently \"yarn build --watch\" \"nodemon -q ./build/app.js\""
+    "dev": "concurrently \"yarn build --watch\" \"nodemon -q ./build/app.js\""
   },
   "dependencies": {
     "cors": "^2.8.5",
