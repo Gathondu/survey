@@ -1,7 +1,9 @@
 import { ChangeEvent, useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { Field, PhoneInput, Form } from 'ui/Form'
+import Form from 'ui/Form'
+import FormField from 'ui/FormField'
+import PhoneInput from 'ui/PhoneInput'
 import { Button, Box, FormControlLabel } from '@mui/material'
 import { useAddCustomerMutation, useCustomersQuery } from '../../utils/graphql'
 import { useSnackbar } from 'notistack'
@@ -9,7 +11,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { AddBusinessOutlined } from '@mui/icons-material'
 import { CountryData } from 'react-phone-input-2'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/Context'
+import { useScreenSizeContext } from 'utils/context'
 
 const validationSchema = yup.object({
   firstName: yup.string().required('First name is required'),
@@ -87,7 +89,7 @@ const CustomerForm = () => {
       submit={formik.handleSubmit}
       styles={{ width: isMobile ? '100%' : '50%' }}
     >
-      <Field
+      <FormField
         name="firstName"
         label="First Name"
         variant="standard"
@@ -95,7 +97,7 @@ const CustomerForm = () => {
         fullWidth
         Icon={AddBusinessOutlined}
       />
-      <Field
+      <FormField
         name="lastName"
         label="Last Name"
         variant="standard"
@@ -103,7 +105,7 @@ const CustomerForm = () => {
         fullWidth
         Icon={AddBusinessOutlined}
       />
-      <Field
+      <FormField
         type="email"
         name="email"
         label="Email"

@@ -9,7 +9,7 @@ import { useBranchesQuery } from '../utils/graphql'
 import { useState, useEffect } from 'react'
 import RecordsToggle from 'ui/RecordsToggle'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/Context'
+import { useScreenSizeContext } from 'utils/context'
 
 const Branches = () => {
   const router = useRouter()

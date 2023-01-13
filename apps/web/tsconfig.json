@@ -4,16 +4,6 @@
     "baseUrl": ".",
     "module": "esnext"
   },
-  "include": [
-    "src/**/*",
-    "next-env.d.ts",
-    "styles/**/*",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    ".turbo"
-  ]
+  "include": ["next-env.d.ts", "styles/**/*", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", ".next", ".turbo"]
 }

@@ -1,20 +1,20 @@
-import { FC } from "react";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { FC } from 'react'
+import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 interface IProps {
-  records?: { value: string; label: string }[];
-  setRecord: string;
-  updateRecords: Function;
+  records?: { value: string; label: string }[]
+  setRecord: string
+  updateRecords: Function
   styles: {
-    textAlign: CanvasTextAlign;
-  };
+    textAlign: 'start' | 'end'
+  }
 }
 
 const RecordsToggle: FC<IProps> = ({
   records = [
-    { value: "all", label: "All" },
-    { value: "active", label: "Active" },
-    { value: "deleted", label: "Deleted" },
+    { value: 'all', label: 'All' },
+    { value: 'active', label: 'Active' },
+    { value: 'deleted', label: 'Deleted' },
   ],
   setRecord,
   updateRecords,
@@ -22,12 +22,12 @@ const RecordsToggle: FC<IProps> = ({
 }) => {
   const handleToggle = (
     event: React.MouseEvent<HTMLElement>,
-    record: string
+    record: string,
   ) => {
-    updateRecords(record);
-  };
+    updateRecords(record)
+  }
 
-  const { textAlign } = styles;
+  const { textAlign } = styles
 
   return (
     <div
@@ -44,14 +44,14 @@ const RecordsToggle: FC<IProps> = ({
         aria-label="Platform"
         size="small"
       >
-        {records.map((rec) => (
+        {records.map(rec => (
           <ToggleButton key={rec.value} value={rec.value}>
             {rec.label}
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
     </div>
-  );
-};
+  )
+}
 
-export default RecordsToggle;
+export default RecordsToggle

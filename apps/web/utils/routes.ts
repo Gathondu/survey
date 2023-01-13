@@ -1,4 +1,4 @@
-import type { Routes } from "utils/Types";
+import type { Routes } from './types'
 import {
   AddBusinessOutlined,
   StoreOutlined,
@@ -12,79 +12,79 @@ import {
   GroupsOutlined,
   PersonAddAltOutlined,
   RateReviewOutlined,
-} from "@mui/icons-material";
+} from '@mui/icons-material'
 
 export const SideNavRoutes: Routes[] = [
   {
-    header: "Company",
+    header: 'Company',
     icon: StoreOutlined,
     links: [
       {
-        title: "New",
+        title: 'New',
         icon: AddBusinessOutlined,
-        link: "/company/new",
+        link: '/company/new',
       },
       {
-        title: "All",
+        title: 'All',
         icon: StoreOutlined,
-        link: "/companies",
+        link: '/companies',
       },
     ],
   },
   {
-    header: "Branches",
+    header: 'Branches',
     icon: DomainOutlined,
     links: [
       {
-        title: "New",
+        title: 'New',
         icon: DomainAddOutlined,
-        link: "/branch/new",
+        link: '/branch/new',
       },
       {
-        title: "All",
+        title: 'All',
         icon: DomainOutlined,
-        link: "/branches",
+        link: '/branches',
       },
     ],
   },
   {
-    header: "Employees",
+    header: 'Employees',
     icon: SupportAgentOutlined,
     links: [
       {
-        title: "New",
+        title: 'New',
         icon: PersonAddAlt1Outlined,
-        link: "/employee/new",
+        link: '/employee/new',
       },
       {
-        title: "All",
+        title: 'All',
         icon: BadgeOutlined,
-        link: "/employees",
+        link: '/employees',
       },
     ],
   },
   {
-    header: "Customers",
+    header: 'Customers',
     icon: GroupsOutlined,
     links: [
       {
-        title: "New",
+        title: 'New',
         icon: PersonAddAltOutlined,
-        link: "/customer/new",
+        link: '/customer/new',
       },
       {
-        title: "All",
+        title: 'All',
         icon: PeopleAltOutlined,
-        link: "/customers",
+        link: '/customers',
       },
     ],
   },
   {
-    header: "Reviews",
+    header: 'Reviews',
     icon: ReviewsOutlined,
     link: {
       icon: RateReviewOutlined,
-      link: "/reviews",
+      link: '/reviews',
     },
   },
-];
+]

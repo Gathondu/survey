@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { Field, Form } from 'ui/Form'
+import Form from 'ui/Form'
+import FormField from 'ui/FormField'
 import { Button } from '@mui/material'
 import { useAddCompanyMutation, useCompaniesQuery } from '../../utils/graphql'
 import { useSnackbar } from 'notistack'
@@ -11,7 +12,7 @@ import {
   HttpOutlined,
 } from '@mui/icons-material'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/Context'
+import { useScreenSizeContext } from 'utils/context'
 
 const validationSchema = yup.object({
   name: yup.string().required('Company name is required'),
@@ -69,7 +70,7 @@ const CompanyForm = () => {
       submit={formik.handleSubmit}
       styles={{ width: isMobile ? '100%' : '50%' }}
     >
-      <Field
+      <FormField
         name="name"
         label="Name"
         variant="standard"
@@ -77,7 +78,7 @@ const CompanyForm = () => {
         fullWidth
         Icon={AddBusinessOutlined}
       />
-      <Field
+      <FormField
         name="location"
         label="Location"
         variant="standard"
@@ -85,7 +86,7 @@ const CompanyForm = () => {
         fullWidth
         Icon={GpsFixedOutlined}
       />
-      <Field
+      <FormField
         name="website"
         label="Website"
         variant="standard"

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { Field, Form, Select } from 'ui/Form'
+import Form from 'ui/Form'
+import FormField from 'ui/FormField'
+import FormSelect from 'ui/FormSelect'
 import { Button } from '@mui/material'
 import {
   Company,
@@ -20,7 +22,7 @@ import {
 } from '@mui/icons-material'
 import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/Context'
+import { useScreenSizeContext } from 'utils/context'
 
 const validationSchema = yup.object({
   name: yup.string().required('Branch name is required'),
@@ -164,7 +166,7 @@ const BranchForm = () => {
       submit={formik.handleSubmit}
       styles={{ width: isMobile ? '100%' : '50%' }}
     >
-      <Field
+      <FormField
         name="name"
         label="Name"
         variant="standard"
@@ -172,7 +174,7 @@ const BranchForm = () => {
         fullWidth
         Icon={AddBusinessOutlined}
       />
-      <Field
+      <FormField
         name="location"
         label="Location"
         variant="standard"
@@ -180,7 +182,7 @@ const BranchForm = () => {
         fullWidth
         Icon={GpsFixedOutlined}
       />
-      <Select
+      <FormSelect
         name="company"
         label="Company"
         variant="standard"
