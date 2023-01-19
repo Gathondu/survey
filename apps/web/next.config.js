@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const { parsed: surveyEnvs } = require('dotenv').config({
-  path: '../../.env.local' || '../../.env',
+  path: '../../.env',
 })
 const webpack = require('webpack')
 const nextConfig = {

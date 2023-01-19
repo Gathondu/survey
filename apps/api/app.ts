@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 import * as dotenv from 'dotenv'
-dotenv.config({ path: '../../.env.local' })
+dotenv.config({ path: '../../.env' })
 
 import express, {
   Application,
