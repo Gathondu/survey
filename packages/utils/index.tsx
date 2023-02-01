@@ -1,1 +1,2 @@
-export * from './Fetcher/index'
+export * from './Fetcher'
+export * from './Routes'

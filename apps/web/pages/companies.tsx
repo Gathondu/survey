@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
 import { useCompaniesQuery } from '../utils/graphql'
 import RecordsToggle from 'ui/RecordsToggle'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/context'
+import { useScreenSizeContext } from 'ui'
 
 const Companies = () => {
   const router = useRouter()

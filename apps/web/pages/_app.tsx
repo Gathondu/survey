@@ -2,14 +2,21 @@ import '../styles/globals.css'
 import 'react-phone-input-2/lib/material.css'
 import '../styles/phone-input.css'
 import type { AppProps } from 'next/app'
+import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { SnackbarProvider } from 'notistack'
-import { Box, useMediaQuery, useTheme } from '@mui/material'
-import Navbar, { DrawerHeader } from 'ui/Navbar'
-import { ScreenSizeProvider } from 'utils/context'
-import { SideNavRoutes } from 'utils/routes'
+import { Box, useTheme, ThemeProvider, CssBaseline } from '@mui/material'
+import Navbar from 'ui/Navbar'
+import Sidebar from 'ui/Sidebar'
 import { useRouter } from 'next/router'
+import {
+  ColorModeContext,
+  useMode,
+  ScreenSizeProvider,
+  useScreenSizeContext,
+} from 'ui'
+import { ProSidebarProvider } from 'react-pro-sidebar'
 
 const client = new QueryClient({
   defaultOptions: {
@@ -23,37 +30,32 @@ const client = new QueryClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const [colorTheme, colorMode] = useMode()
   const router = useRouter()
+  const [mode, setMode] = useState<string>('dark')
+  const { isMobile } = useScreenSizeContext()
   return (
     <QueryClientProvider client={client}>
-      <SnackbarProvider maxSnack={5}>
-        <ScreenSizeProvider>
-          <Box className="app">
-            <Navbar
-              sideNavRoutes={SideNavRoutes}
-              isMobile={isMobile}
-              router={router}
-            >
-              <DrawerHeader />
-              <Box
-                component="main"
-                sx={{
-                  flexGrow: 1,
-                  flexShrink: 1,
-                  mr: 2,
-                  backgroundColor: '#E7EBF0',
-                  padding: '3rem',
-                  mt: isMobile ? 7 : 8,
-                  height: '100vh',
-                }}
-              >
-                <Component {...pageProps} />
-              </Box>
-            </Navbar>
-          </Box>
-        </ScreenSizeProvider>
-      </SnackbarProvider>
+      {/* @ts-ignore next-line */}
+      <ColorModeContext.Provider value={colorMode}>
+        {/* @ts-ignore next-line */}
+        <ThemeProvider theme={colorTheme}>
+          <SnackbarProvider maxSnack={5}>
+            <ProSidebarProvider>
+              <ScreenSizeProvider>
+                <Box className="app">
+                  <CssBaseline />
+                  <Sidebar />
+                  <Box component="main" className="content">
+                    <Navbar />
+                    <Component {...pageProps} />
+                  </Box>
+                </Box>
+              </ScreenSizeProvider>
+            </ProSidebarProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )

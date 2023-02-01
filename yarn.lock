@@ -6834,7 +6834,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.2.6":
+"classnames@npm:^2.2.6, classnames@npm:^2.3.2":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
@@ -14658,6 +14658,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-pro-sidebar@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-pro-sidebar@npm:1.0.0"
+  dependencies:
+    "@emotion/react": ^11.10.5
+    "@emotion/styled": ^11.10.5
+    "@popperjs/core": ^2.11.6
+    classnames: ^2.3.2
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: a98dffd1f78f1c91cb713bdbff87b4dbb3c4dbd88eb425852eae777e7e5226c822fad6a4e8bec6c5484f915dcda90d96ae3ebc065a8d3513664c660aadfd94e5
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.11.0":
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
@@ -16800,8 +16815,10 @@ __metadata:
     qrcode: ^1.5.1
     react: ^18.2.0
     react-phone-input-2: ^2.15.1
+    react-pro-sidebar: ^1.0.0
     tsconfig: "*"
     typescript: ^4.5.2
+    utils: "*"
   languageName: unknown
   linkType: soft
 
@@ -17043,6 +17060,7 @@ __metadata:
     "@graphql-codegen/typescript": ^2.8.5
     "@graphql-codegen/typescript-operations": ^2.5.10
     "@graphql-codegen/typescript-react-query": ^4.0.6
+    "@mui/icons-material": ^5.10.16
     "@types/node": ^18.11.11
     eslint: ^8.29.0
     eslint-config-custom: "*"
@@ -17213,6 +17231,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-phone-input-2: ^2.15.1
+    react-pro-sidebar: ^1.0.0
     react-scripts: 5.0.1
     tsconfig: "*"
     typescript: ^4.5.3

@@ -22,7 +22,7 @@ import {
 } from '@mui/icons-material'
 import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/context'
+import { useScreenSizeContext } from 'ui'
 
 const validationSchema = yup.object({
   name: yup.string().required('Branch name is required'),

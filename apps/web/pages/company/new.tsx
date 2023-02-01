@@ -12,7 +12,7 @@ import {
   HttpOutlined,
 } from '@mui/icons-material'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/context'
+import { useScreenSizeContext } from 'ui'
 
 const validationSchema = yup.object({
   name: yup.string().required('Company name is required'),

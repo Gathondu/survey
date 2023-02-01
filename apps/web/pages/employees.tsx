@@ -9,7 +9,7 @@ import { useEmployeesQuery } from '../utils/graphql'
 import { useState, useEffect } from 'react'
 import RecordsToggle from 'ui/RecordsToggle'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/context'
+import { useScreenSizeContext } from 'ui'
 
 const Employees = () => {
   const router = useRouter()

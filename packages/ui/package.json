@@ -23,10 +23,14 @@
     "react": "^18.2.0",
     "react-phone-input-2": "^2.15.1",
     "tsconfig": "*",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "utils": "*"
   },
   "resolutions": {
     "@types/react": "18.0.22",
     "@types/react-dom": "18.0.7"
+  },
+  "dependencies": {
+    "react-pro-sidebar": "^1.0.0"
   }
 }

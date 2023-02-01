@@ -17,7 +17,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { AddBusinessOutlined } from '@mui/icons-material'
 import { CountryData } from 'react-phone-input-2'
 import { useRouter } from 'next/router'
-import { useScreenSizeContext } from 'utils/context'
+import { useScreenSizeContext } from 'ui'
 
 const validationSchema = yup.object({
   firstName: yup.string().required('First name is required'),
