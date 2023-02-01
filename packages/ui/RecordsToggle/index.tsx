@@ -1,5 +1,7 @@
 import { FC } from 'react'
-import { ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { ToggleButton, ToggleButtonGroup, useTheme } from '@mui/material'
+import { tokens } from '../Theme'
+import { useScreenSizeContext } from '../ScreenSize'
 
 interface IProps {
   records?: { value: string; label: string }[]
@@ -24,9 +26,14 @@ const RecordsToggle: FC<IProps> = ({
     event: React.MouseEvent<HTMLElement>,
     record: string,
   ) => {
-    updateRecords(record)
+    if (record !== null) {
+      updateRecords(record)
+    }
   }
 
+  const theme = useTheme()
+  const colors = tokens(theme.palette.mode)
+  const { isMobile } = useScreenSizeContext()
   const { textAlign } = styles
 
   return (
@@ -34,6 +41,8 @@ const RecordsToggle: FC<IProps> = ({
       style={{
         textAlign,
         marginBottom: 2,
+        marginRight: isMobile ? 0 : 20,
+        marginLeft: isMobile ? 20 : 0,
       }}
     >
       <ToggleButtonGroup
@@ -41,11 +50,26 @@ const RecordsToggle: FC<IProps> = ({
         value={setRecord}
         exclusive
         onChange={handleToggle}
-        aria-label="Platform"
+        aria-label="records"
         size="small"
+        sx={{
+          '& .Mui-selected': {
+            color: `${colors.grey[400]}`,
+          },
+        }}
       >
         {records.map(rec => (
-          <ToggleButton key={rec.value} value={rec.value}>
+          <ToggleButton
+            key={rec.value}
+            value={rec.value}
+            sx={{
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[100],
+              fontSize: '14px',
+              fontWeight: 'bold',
+              padding: '10px 20px',
+            }}
+          >
             {rec.label}
           </ToggleButton>
         ))}

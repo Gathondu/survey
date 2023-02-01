@@ -57,6 +57,7 @@ const Sidebar: FC = (): JSX.Element => {
       sx={{
         '& .ps-menu-root': {
           background: `${colors.primary[400]} !important`,
+          padding: '10px 0',
         },
         '& .ps-menuitem-root:active': {
           backgroundColor: 'transparent !important',
