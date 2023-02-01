@@ -30,18 +30,18 @@ const Item = ({
   const colors = tokens(theme.palette.mode)
 
   return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Link href={to} legacyBehavior>
+    <Link href={to} legacyBehavior>
+      <MenuItem
+        active={selected === title}
+        style={{
+          color: colors.grey[100],
+        }}
+        onClick={() => setSelected(title)}
+        icon={icon}
+      >
         <Typography>{title}</Typography>
-      </Link>
-    </MenuItem>
+      </MenuItem>
+    </Link>
   )
 }
 
