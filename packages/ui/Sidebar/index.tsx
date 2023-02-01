@@ -6,9 +6,10 @@ import {
   MenuItem,
   useProSidebar,
 } from 'react-pro-sidebar'
-import { useTheme, Typography, Link, Box, IconButton } from '@mui/material'
+import { useTheme, Typography, Box, IconButton } from '@mui/material'
 import { HomeOutlined, MenuOutlined } from '@mui/icons-material'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { Routes } from 'utils'
 import { tokens } from '../Theme'
 
@@ -37,7 +38,9 @@ const Item = ({
       onClick={() => setSelected(title)}
       icon={icon}
     >
-      <Typography>{title}</Typography>
+      <Link href={to} legacyBehavior>
+        <Typography>{title}</Typography>
+      </Link>
     </MenuItem>
   )
 }
